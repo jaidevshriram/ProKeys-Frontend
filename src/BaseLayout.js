@@ -14,10 +14,11 @@ export default class BaseLayout extends React.Component {
 				<Title title="ProKeys Tools"/>
 				<Options/>
 
-				<Route path="/" component={SnippetOptions}/>
+				<Route exact path="/" component={SnippetOptions}/>
+				<Route exact path="/Snippet" component={SnippetOptions}/>
 
 				<Switch>
-					<Route path="/" component={Snippet}/>
+					<Route exact path="/" component={Snippet}/>
 					<Route path="/Snippet" component={Snippet}/>
 				</Switch>
 

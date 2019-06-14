@@ -11,7 +11,7 @@ export default class ButtonCircle extends React.Component {
 
 			<div className="pb-3">
 				<button Type="button" className="btn btn-circle btn-primary">
-					<Link to='{this.props.link}'>
+					<Link to={this.props.link}>
 						<FontAwesomeIcon icon={this.props.icon} size="4x" style={{ color: '#fff' }}/>
 					</Link>
 				</button>
