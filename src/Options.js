@@ -12,15 +12,15 @@ export default class Options extends React.Component {
 						<ButtonCircle iconclass="plus"/>
 						Setting
 					</div>
-					<div className="col">
+					<div className="col text-center">
 						<ButtonCircle iconclass="plus"/>
 						Setting
 					</div>
-					<div className="col">
+					<div className="col text-center">
 						<ButtonCircle iconclass="plus"/>
 						Setting
 					</div>
-					<div className="col">
+					<div className="col text-center">
 						<ButtonCircle iconclass="plus"/>
 						Setting
 					</div>

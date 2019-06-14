@@ -3,13 +3,22 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import 'bootstrap/dist/css/bootstrap.css';
 import * as serviceWorker from './serviceWorker';
+import { BrowserRouter } from 'react-router-dom';
 
 //Custom Imports
-import Title from './Title';
-import Options from './Options'
+import BaseLayout from './BaseLayout';
 
-// ReactDOM.render(<Title title="ProKeys Options"/>, document.getElementById('title-name'));
-ReactDOM.render(<Options/>, document.getElementById('button-options'));
+//Font Awesome Icons
+
+const App = () => {
+	return (
+		<BrowserRouter>
+			<BaseLayout/>
+		</BrowserRouter>
+	);
+}
+
+ReactDOM.render(<App/>, document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
