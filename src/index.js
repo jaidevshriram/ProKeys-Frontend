@@ -9,6 +9,11 @@ import { BrowserRouter } from 'react-router-dom';
 import BaseLayout from './BaseLayout';
 
 //Font Awesome Icons
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { faPlus, faQuestion, faCog, faInfo, faSearch } from '@fortawesome/free-solid-svg-icons';
+
+//Add to Font Awesome Icon Library
+library.add(faPlus, faQuestion, faCog, faInfo, faSearch);
 
 const App = () => {
 	return (

@@ -17,3 +17,38 @@ code {
   height: 7.5rem;
   border-radius: 50%!important;
 }
+
+.outer-searchbar{
+	border-radius: 30px;
+	height: 70px;
+	padding: 10px;
+}
+
+.inner-searchbar{
+	border-radius: 30px;
+}
+
+.light-searchbar {
+	background: #fff;
+}
+
+.light-search-input{
+	color: black;
+	border: 0;
+	outline: 0;
+	background: none;
+	line-height: 40px;
+	width: 80%;
+	padding-left: 20px;
+}
+
+.light-search-icon{
+	font-size: 125%;
+    color: rgba(0,53,81,1);
+}
+
+.push-input {
+	padding: 5px;
+	align-items: center;
+	vertical-align: middle;
+}

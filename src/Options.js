@@ -9,20 +9,20 @@ export default class Options extends React.Component {
 			<div className="container p-5">
 				<div className="row">
 					<div className="col text-center">
-						<ButtonCircle iconclass="plus"/>
+						<ButtonCircle icon="plus"/>
+						Snippet
+					</div>
+					<div className="col text-center">
+						<ButtonCircle icon="cog"/>
 						Setting
 					</div>
 					<div className="col text-center">
-						<ButtonCircle iconclass="plus"/>
-						Setting
+						<ButtonCircle icon="info"/>
+						About
 					</div>
 					<div className="col text-center">
-						<ButtonCircle iconclass="plus"/>
-						Setting
-					</div>
-					<div className="col text-center">
-						<ButtonCircle iconclass="plus"/>
-						Setting
+						<ButtonCircle icon="question"/>
+						Help
 					</div>
 				</div>
 			</div>
