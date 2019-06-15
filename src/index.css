@@ -115,6 +115,24 @@ code {
 	}
 }
 
+.w-r-lg-100 {
+	width: 100%!important;
+}
+
+@media screen and (min-width: 992px) {
+	.w-r-lg-100 {
+		width: unset!important;
+	}
+}
+
 .light-bg-inner {
 	background: #ffffff!important;
+}
+
+.no-border {
+	border: none!important;
+}
+
+.no-outline {
+	outline: none!important;
 }

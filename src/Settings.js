@@ -76,21 +76,27 @@ export default class SnippetOptions extends React.Component {
 									<div className="row">
 										<div className="col-12 col-md-6">
 											<p className="pt-2 text-justified">Some characters like '(' and ')' belong together. Decide your own pairs.</p>
-											<div className="form-check">
-											  <input className="form-check-input" type="radio" value=""/>
-											  <label className="form-check-label">
-											    Local Storage - <span className="text-italic text-muted">Offers more storage than the other options</span>
-											  </label>
-											</div>
-											<div className="form-check">
-											  <input className="form-check-input" type="radio" value=""/>
-											  <label className="form-check-label">
-											    Sync - <span className="text-italic text-muted">Let's you sync your Snippets across your PC's</span>
-											  </label>
-											</div>
+											
+											<form>
+											  	<div className="form-row">
+											    	<div className="col-lg-5 mb-3">
+											      		<input type="text" className="form-control" id="validationDefault01" placeholder="First Character" required/>
+											    	</div>
+											    	<div className="col-lg-1 text-center">
+											    		<FontAwesomeIcon icon="plus" />
+											    	</div>
+											    	<div className="col-lg-5 mb-3">
+											      		<input type="text" className="form-control" id="validationDefault02" placeholder="Second Character" required/>
+											    	</div>
+											    	<div className="col-lg-1 text-center">
+											    		<button class="btn light-bg-gradient no-outline no-border w-r-lg-100" type="submit"><FontAwesomeIcon icon="check" style={{ color: '#ffffff' }}/></button>
+											    	</div>
+											  	</div>
+											</form>
+
 										</div>
 										<div className="col-12 col-md-6">
-											<p className="text-muted float-right text-right">It is always recommended to save and export your snippets to protect your data in the event of an unlikely failure.</p>
+											<p className="text-muted float-right text-right">On typing the first character, the second is automatically inserted and your cursor/caret is placed in-between automatically!</p>
 										</div>
 									</div>
 								</div>
