@@ -21,8 +21,13 @@ code {
 
 .light-outer-box, .dark-outer-box {
 	border-radius: 30px;
-	height: 70px;
-	padding: 10px;
+	padding: 15px;
+	background: linear-gradient(to right, #07CC8F, #004782);
+}
+
+.light-outer-box-thick, .dark-outer-box-thick {
+	border-radius: 30px;
+	padding: 25px;
 	background: linear-gradient(to right, #07CC8F, #004782);
 }
 
@@ -71,4 +76,18 @@ code {
 
 .light-border-grey, .dark-border-grey {
 	border: 1px solid #E3E3E3!important;
+}
+
+.light-border-secondary {
+	border: 1px solid rgba(0, 0, 0, 0.2)!important;
+}
+
+.light-snippet-preview {
+	color: rgba(0,0,0,0.5);
+}
+
+.remove-button-styling {
+	background: none;
+	border: none;
+	outline: none;
 }

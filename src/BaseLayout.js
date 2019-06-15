@@ -5,7 +5,7 @@ import { Route, Switch } from 'react-router-dom';
 import Title from './Title';
 import Options from './Options';
 import SnippetOptions from './SnippetOptions';
-import Snippet from './Snippet';
+import ManageSnippet from './ManageSnippet';
 
 export default class BaseLayout extends React.Component {
 	render() {
@@ -18,8 +18,8 @@ export default class BaseLayout extends React.Component {
 				<Route exact path="/Snippet" component={SnippetOptions}/>
 
 				<Switch>
-					<Route exact path="/" component={Snippet}/>
-					<Route path="/Snippet" component={Snippet}/>
+					<Route exact path="/" component={ManageSnippet}/>
+					<Route path="/Snippet" component={ManageSnippet}/>
 				</Switch>
 
 			</React.Fragment>
