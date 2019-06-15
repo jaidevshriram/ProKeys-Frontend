@@ -13,7 +13,7 @@ export default class ManageSnippet extends React.Component {
 				<div className="row">
 					<div className="col w-100">
 						<div className="light-outer-box-thick bg-primary">
-							<div className="light-inner-box bg-light p-4">
+							<div className="light-inner-box p-4">
 								<Snippet/>
 								<Snippet/>
 								<Snippet/>

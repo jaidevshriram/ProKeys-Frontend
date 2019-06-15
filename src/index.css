@@ -7,6 +7,10 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+light-body {
+	background: #ffffff;
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
@@ -39,6 +43,7 @@ code {
 	border-radius: 30px;
 	height: 100%;
 	padding: 10px;
+	background: #ffffff;
 }
 
 .light-inner-searchbar, .dark-inner-searchbar {
@@ -46,7 +51,7 @@ code {
 }
 
 .light-searchbar {
-	background: #fff;
+	background: #ffffff;
 }
 
 .light-search-input, .dark-search-input{
@@ -90,4 +95,26 @@ code {
 	background: none;
 	border: none;
 	outline: none;
+}
+
+.w-md-75 {
+	width: 75%!important;
+}
+
+.w-md-50 {
+	width: 50%!important;
+}
+
+@media screen and (max-width: 992px) {
+	.w-md-75 {
+		width: unset!important;
+	}
+
+	.w-md-50 {
+		width: unset!important;
+	}
+}
+
+.light-bg-inner {
+	background: #ffffff!important;
 }

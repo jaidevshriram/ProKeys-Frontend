@@ -7,7 +7,7 @@ export default class SnippetOptions extends React.Component {
 	render() {
 		return (
 			<React.Fragment>
-				<div className="container pt-5" id="options">
+				<div className="container pt-2" id="options">
 					<div className="row">
 						<div className="col">
 							<div className="float-left">
@@ -34,7 +34,7 @@ export default class SnippetOptions extends React.Component {
 
 					<div className="row py-3">
 						<div className="col">
-							<div className="light-outer-box bg-primary">
+							<div className="light-outer-box">
 						        <div className="light-inner-searchbar light-searchbar mx-auto my-auto h-100 w-100">
 						         	<div className="h-100 pl-3 light-push-input">
 						         		<FontAwesomeIcon icon="search" className="light-search-icon"/>
