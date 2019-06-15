@@ -11,7 +11,6 @@ export default class BaseLayout extends React.Component {
 	render() {
 		return (
 			<React.Fragment>
-				<Title title="ProKeys Tools"/>
 				<Options/>
 
 				<Route exact path="/" component={SnippetOptions}/>
