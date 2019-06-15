@@ -12,30 +12,31 @@ code {
     monospace;
 }
 
-.btn-circle {
+.light-btn-circle, .dark-btn-circle {
   width: 7.5rem;
   height: 7.5rem;
   border-radius: 50%!important;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.1);
 }
 
-.outer-box{
+.light-outer-box, .dark-outer-box {
 	border-radius: 30px;
 	height: 70px;
 	padding: 10px;
 	background: linear-gradient(to right, #07CC8F, #004782);
 }
 
-.bg-gradient{
+.light-bg-gradient, .dark-bg-gradient {
 	background: linear-gradient(to bottom right, #07CC8F, #004782);
 }
 
-.light-inner-box {
+.light-inner-box, .dark-inner-box {
 	border-radius: 30px;
 	height: 100%;
 	padding: 10px;
 }
 
-.inner-searchbar{
+.light-inner-searchbar, .dark-inner-searchbar {
 	border-radius: 30px;
 }
 
@@ -43,7 +44,7 @@ code {
 	background: #fff;
 }
 
-.light-search-input{
+.light-search-input, .dark-search-input{
 	color: black;
 	border: 0;
 	outline: 0;
@@ -53,21 +54,21 @@ code {
 	padding-left: 20px;
 }
 
-.light-search-icon{
+.light-search-icon, .dark-search-icon{
 	font-size: 125%;
     color: rgba(0,53,81,1);
 }
 
-.push-input {
+.light-push-input, .dark-push-input {
 	padding: 5px;
 	align-items: center;
 	vertical-align: middle;
 }
 
-.rounded-30 {
+.light-rounded-30, .dark-rounded-30 {
 	border-radius: 30px;
 }
 
-.border-grey {
+.light-border-grey, .dark-border-grey {
 	border: 1px solid #E3E3E3!important;
 }
