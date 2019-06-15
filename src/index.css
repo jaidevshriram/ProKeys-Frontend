@@ -5,6 +5,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background: #ffffff!important;
 }
 
 light-body {
@@ -21,6 +22,7 @@ code {
   height: 7.5rem;
   border-radius: 50%!important;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.1);
+  background: #ffffff;
 }
 
 .light-outer-box, .dark-outer-box {

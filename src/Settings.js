@@ -86,7 +86,7 @@ export default class SnippetOptions extends React.Component {
 											      		<input type="text" className="form-control" id="validationDefault01" placeholder="First Character" required/>
 											    	</div>
 											    	<div className="col-lg-1 text-center">
-											    		<FontAwesomeIcon icon="plus" />
+											    		<FontAwesomeIcon icon="plus"/>
 											    	</div>
 											    	<div className="col-lg-5 mb-3">
 											      		<input type="text" className="form-control" id="validationDefault02" placeholder="Second Character" required/>
