@@ -3,6 +3,9 @@ import React from 'react';
 //Font Awesome
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
+//Custom Imports
+import PairCharacterListItem from './PairCharacterListItem';
+
 export default class SnippetOptions extends React.Component {
 	render() {
 		return (
@@ -94,7 +97,26 @@ export default class SnippetOptions extends React.Component {
 											  	</div>
 											</form>
 
+											<ul class="list-group list-group-flush text-center">
+												<li class="list-group-item">
+													<PairCharacterListItem firstcharacter="(" secondcharacter=")" />
+												</li>
+												<li class="list-group-item">
+													<PairCharacterListItem firstcharacter="{" secondcharacter="}" />
+												</li>
+												<li class="list-group-item">
+													<PairCharacterListItem firstcharacter="[" secondcharacter="]" />
+												</li>
+												<li class="list-group-item">
+													<PairCharacterListItem firstcharacter="&#34;" secondcharacter="&#34;" />
+												</li>
+												<li class="list-group-item">
+													<PairCharacterListItem firstcharacter="&lsquo;" secondcharacter="&rsquo;" />
+												</li>
+											</ul>
+
 										</div>
+
 										<div className="col-12 col-md-6">
 											<p className="text-muted float-right text-right">On typing the first character, the second is automatically inserted and your cursor/caret is placed in-between automatically!</p>
 										</div>
