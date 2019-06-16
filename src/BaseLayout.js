@@ -7,6 +7,7 @@ import Options from './Options';
 import SnippetOptions from './SnippetOptions';
 import ManageSnippet from './ManageSnippet';
 import Settings from './Settings';
+import Compose from './Compose';
 
 export default class BaseLayout extends React.Component {
 	render() {
@@ -21,6 +22,7 @@ export default class BaseLayout extends React.Component {
 					<Route exact path="/" component={ManageSnippet}/>
 					<Route path="/Snippet" component={ManageSnippet}/>
 					<Route path="/Setting" component={Settings}/>
+					<Route path="/Test" component={Compose}/>
 				</Switch>
 
 			</React.Fragment>

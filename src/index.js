@@ -10,10 +10,10 @@ import BaseLayout from './BaseLayout';
 
 //Font Awesome Icons
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { faPlus, faQuestion, faCog, faInfo, faSearch, faPen, faTrash, faCopy, faCheck } from '@fortawesome/free-solid-svg-icons';
+import { faPlus, faQuestion, faCog, faInfo, faSearch, faPen, faTrash, faCopy, faCheck, faExpand, faMinus, faTimes } from '@fortawesome/free-solid-svg-icons';
 
 //Add to Font Awesome Icon Library
-library.add(faPlus, faQuestion, faCog, faInfo, faSearch, faPen, faTrash, faCopy, faCheck);
+library.add(faPlus, faQuestion, faCog, faInfo, faSearch, faPen, faTrash, faCopy, faCheck, faExpand, faMinus, faTimes);
 
 const App = () => {
 	return (
