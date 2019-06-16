@@ -245,3 +245,7 @@ input:checked + .light-slider:before {
 .light-slider.round:before {
 	border-radius: 50%;
 }
+
+textarea {
+  resize: none;
+}
