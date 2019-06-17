@@ -10,9 +10,9 @@ export default class Compose extends React.Component {
 
 	render() {
 		return (
-			<div class="container-fluid bg-primary">
-				<div class="row d-flex flex-row-reverse">
-					<div class="col">
+			<div className="container-fluid bg-primary">
+				<div className="row d-flex flex-row-reverse">
+					<div className="col">
 						<ComposeBox/>
 					</div>
 				</div>
