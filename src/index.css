@@ -153,10 +153,6 @@ code {
 	border-top-left-radius: 20px;
 }
 
-.light-compose-mini {
-	background: rgba(0, 71, 130, 1)!important;
-}
-
 .light-icons > button {
 	color: #ffffff!important;
 }
@@ -250,9 +246,7 @@ textarea {
   resize: none;
 }
 
-.compose-overlay {
-	position: unset;
+.light-snippet {
+	z-index: 100;
 	bottom: 0;
-	right: 0;
-	z-index: 1;
 }

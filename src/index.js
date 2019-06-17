@@ -7,6 +7,7 @@ import { BrowserRouter, HashRouter } from 'react-router-dom';
 
 //Custom Imports
 import BaseLayout from './BaseLayout';
+import Compose from './Compose';
 
 //Font Awesome Icons
 import { library } from '@fortawesome/fontawesome-svg-core';
@@ -24,6 +25,7 @@ const App = () => {
 }
 
 ReactDOM.render(<App/>, document.getElementById('root'));
+ReactDOM.render(<Compose/>, document.getElementById('compose'));
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

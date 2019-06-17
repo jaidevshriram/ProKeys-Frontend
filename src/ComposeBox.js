@@ -7,11 +7,11 @@ export default class Compose extends React.Component {
 
 	render() {
 		return (
-			<div className="light-snippet">
-				<div className="container-fluid w-33 light-compose float-right">
-					<div className="row invisible">
-						<div className="col">
-							<div className="light-compose-mini w-33">
+			<div className="light-snippet px-2">
+				<div className="container-fluid w-100 light-compose float-right">
+					<div className="row d-none">
+						<div className="col d-flex align-items-end">
+							<div className="light-compose-mini">
 								<div className="py-2 px-2 text-center text-white">
 									<span className="font-weight-bold">New Snippet</span>
 								</div>
@@ -47,7 +47,7 @@ export default class Compose extends React.Component {
 										</label>
 										<span className="text-white float-right pb-3 pr-2">Rich Text Editor</span>
 
-								    	<textarea className="form-control" rows="10" placeholder="This is the content of your snippet. Toggle the button above to switch between edit modes."></textarea>
+								    	<textarea className="form-control" rows="15" placeholder="This is the content of your snippet. Toggle the button above to switch between edit modes."></textarea>
 								  	</div>
 								  	<div className="form-group">
 								  		<button type="button" className="p-2 remove-button-styling btn light-compose-button">

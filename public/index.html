@@ -29,15 +29,16 @@
     <noscript>You need to enable JavaScript to run this app. For further queries, contact <a href="mailto:prokeys.feedback@gmail.com"></a></noscript>
     
     <div id="root"></div>
+    <div id="compose"></div>
 
     <script>
       $(document).ready ( () => {
           $('.minimize').click(function(e) {
             let $mini = $(this).closest('.light-snippet');
+            let $shrink = $mini.find('.container-fluid').removeClass('w-33').addClass('w-10');
             $mini = $mini.find('.light-compose-mini').closest('.row');
-            console.log($mini);
-            $mini.removeClass('invisible').addClass('visible');
-            $(this).closest('.light-compose').addClass('invisible');
+            $mini.removeClass('d-none');
+            $(this).closest('.row').addClass('d-none');
         });
       });
     </script>

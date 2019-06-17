@@ -17,7 +17,6 @@ export default class BaseLayout extends React.Component {
 
 				<Route exact path="/" component={SnippetOptions}/>
 				<Route exact path="/Snippet" component={SnippetOptions}/>
-				<Compose/>
 
 				<Switch>
 					<Route exact path="/" component={ManageSnippet}/>
