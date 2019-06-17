@@ -20,11 +20,27 @@
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
     <title>ProKeys Options</title>
+    <script
+            src="https://code.jquery.com/jquery-3.4.1.min.js"
+            integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+            crossorigin="anonymous"></script>
   </head>
   <body class="light-body">
     <noscript>You need to enable JavaScript to run this app. For further queries, contact <a href="mailto:prokeys.feedback@gmail.com"></a></noscript>
     
     <div id="root"></div>
+
+    <script>
+      $(document).ready ( () => {
+          $('.minimize').click(function(e) {
+            let $mini = $(this).closest('.light-snippet');
+            $mini = $mini.find('.light-compose-mini').closest('.row');
+            console.log($mini);
+            $mini.removeClass('invisible').addClass('visible');
+            $(this).closest('.light-compose').addClass('invisible');
+        });
+      });
+    </script>
 
   </body>
 </html>
