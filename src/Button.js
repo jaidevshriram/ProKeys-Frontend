@@ -10,11 +10,11 @@ export default class ButtonCircle extends React.Component {
 		return (
 
 			<div className="pb-3">
-				<button Type="button" className="btn light-btn-circle light-border-grey">
-					<Link to={this.props.link}>
+				<Link to={this.props.link}>
+					<button Type="button" className="btn light-btn-circle light-border-grey">
 						<FontAwesomeIcon icon={this.props.icon} size="4x" style={{ color: '#038D89' }}/>
-					</Link>
-				</button>
+					</button>
+				</Link>
 			</div>
 
 		);
