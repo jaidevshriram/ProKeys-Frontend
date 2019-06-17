@@ -249,3 +249,10 @@ input:checked + .light-slider:before {
 textarea {
   resize: none;
 }
+
+.compose-overlay {
+	position: unset;
+	bottom: 0;
+	right: 0;
+	z-index: 1;
+}
