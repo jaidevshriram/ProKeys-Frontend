@@ -7,7 +7,7 @@ export default class Compose extends React.Component {
 
 	render() {
 		return (
-			<div className="light-snippet align-self-end px-5">
+			<div className="light-snippet renable-pointer align-self-end px-5">
 				<div className="container-fluid w-130 light-compose float-right">
 					<div className="row d-none">
 						<div className="col d-flex align-items-end">

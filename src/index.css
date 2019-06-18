@@ -250,7 +250,11 @@ textarea {
   resize: none;
 }
 
-.light-snippet {
-	z-index: 100;
+.light-snippet, .dark-snippet {
 	bottom: 0;
+	pointer-events: none;
+}
+
+.renable-pointer {
+	pointer-events: all!important;
 }
