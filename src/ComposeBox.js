@@ -7,18 +7,18 @@ export default class Compose extends React.Component {
 
 	render() {
 		return (
-			<div className="light-snippet align-self-end px-2">
-				<div className="container-fluid w-100 light-compose float-right">
+			<div className="light-snippet align-self-end px-5">
+				<div className="container-fluid w-130 light-compose float-right">
 					<div className="row d-none">
 						<div className="col d-flex align-items-end">
-							<div className="light-compose-mini">
+							<div className="light-compose-mini maximize">
 								<div className="py-2 px-2 text-center text-white">
 									<span className="font-weight-bold">New Snippet</span>
 								</div>
 							</div>
 						</div>
 					</div>
-					<div className="row">
+					<div className="row light-compose-max">
 						<div className="col">
 							<div className="pl-1 pr-1 pb-2 pt-1 w-100">
 								<div className="light-icons float-right">
