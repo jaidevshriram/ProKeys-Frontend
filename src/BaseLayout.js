@@ -17,20 +17,20 @@ export class BaseLayout extends React.Component {
     }
 
     newCompose() {
-
-        let newbox = {
+        const newbox = {
             id: 1,
             name: "test",
-        }
+        };
 
         this.setState({
-            composeboxes: this.state.composeboxes.push(newbox)
+            composeboxes: this.state.composeboxes.concat(newbox),
         });
     }
 
-    componentWillUpdate(nextProps, nextState) {
-    	console.log(this.state.composeboxes);
-    }
+    // deprecated method, do not use
+    // componentWillUpdate(nextProps, nextState) {
+    //     console.log(this.state.composeboxes);
+    // }
 
     render() {
         return (
