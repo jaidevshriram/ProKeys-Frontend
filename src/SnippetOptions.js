@@ -12,13 +12,13 @@ export default class SnippetOptions extends React.Component {
 						<div className="col">
 							<div className="float-left">
 								<div className="d-inline pr-3">
-									<button className="btn rounded-pill light-border-secondary light-bg-inner">
+									<button className="btn rounded-pill light-border-secondary light-bg-inner light-snippet-option" onClick={this.props.onclick}>
 										<FontAwesomeIcon icon="plus" size="2x" className="pl-2"/>
 										<span className="pl-4 pr-2"><h4 className="d-inline align-item-center">Snippet</h4></span>
 									</button>
 								</div>
 								<div className="d-inline">
-								<button className="btn rounded-pill light-border-secondary light-bg-inner">
+								<button className="btn rounded-pill light-border-secondary light-bg-inner light-snippet-option">
 									<FontAwesomeIcon icon="plus" size="2x" className="pl-2"/>
 									<span className="pl-4 pr-2"><h4 className="d-inline align-item-center">Folder</h4></span>
 								</button>
