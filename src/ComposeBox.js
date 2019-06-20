@@ -5,11 +5,44 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export default class Compose extends React.Component {
 
+	constructor(props) {
+		super(props);
+
+		this.state = {
+			minimize : false,
+			maximize : true,
+			minclass : "row d-none",
+			maxclass : "row d-block",
+		}
+	}
+
+	minimize() {
+		this.setState((state, props) => {
+			return {
+				minimize : true,
+				maximize : false,
+				minclass : "row d-block",
+				maxclass : "row d-none",
+			}
+		});
+	}
+
+	maximize() {
+		this.setState((state, props) => {
+			return {
+				minimize: false,
+				maximize: true,
+				minclass : "row d-none",
+				maxclass : "row d-block",
+			}
+		});
+	}
+
 	render() {
 		return (
 			<div className="light-snippet renable-pointer align-self-end px-5">
 				<div className="container-fluid w-130 light-compose float-right">
-					<div className="row d-none">
+					<div className={this.state.minclass} onClick={this.maximize.bind(this)}>
 						<div className="col d-flex align-items-end">
 							<div className="light-compose-mini maximize">
 								<div className="py-2 px-2 text-center text-white">
@@ -18,17 +51,17 @@ export default class Compose extends React.Component {
 							</div>
 						</div>
 					</div>
-					<div className="row light-compose-max">
+					<div className={this.state.maxclass}>
 						<div className="col">
 							<div className="pl-1 pr-1 pb-2 pt-1 w-100">
 								<div className="light-icons float-right">
 									<button type="button" className= "close p-2" aria-label="Close">
 										<span aria-hidden="true"><FontAwesomeIcon icon="times"/></span>
 									</button>
-									<button type="button" className="close p-2" aria-label="Close">
+									<button type="button" className="close p-2" aria-label="expand">
 										<span aria-hidden="true"><FontAwesomeIcon icon="expand"/></span>
 									</button>								
-									<button type="button" className="close p-2 minimize" aria-label="Close">
+									<button type="button" className="close p-2 minimize" aria-label="minimize" onClick={this.minimize.bind(this)}>
 										<span aria-hidden="true"><FontAwesomeIcon icon="minus"/></span>
 									</button>
 								</div>

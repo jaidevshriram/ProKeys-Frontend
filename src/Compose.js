@@ -1,8 +1,5 @@
 import React from 'react';
 
-//Font Awesome
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-
 //Custom Imports
 import ComposeBox from './ComposeBox';
 
@@ -12,8 +9,10 @@ export default class Compose extends React.Component {
 			<div className="container-fluid position-fixed w-100 h-100 d-flex align-items-end flex-row-reverse light-snippet">
 				<div className="row">
 					{
-						this.props.boxes.map( box => <ComposeBox /> )
+						this.props.boxes.map( box => <ComposeBox key={box.id} /> )
 					}
+					<ComposeBox />
+					<ComposeBox />
 				</div>
 			</div>
 		);

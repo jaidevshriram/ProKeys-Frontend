@@ -31,22 +31,5 @@
     <div id="root"></div>
     <div id="compose"></div>
 
-    <script>
-      $(document).ready ( () => {
-          $('.minimize').click(function(e) {
-            let $mini = $(this).closest('.light-snippet');
-            let $shrink = $mini.find('.container-fluid').removeClass('w-33').addClass('w-10');
-            $mini = $mini.find('.light-compose-mini').closest('.row');
-            $mini.removeClass('d-none').addClass('d-block');
-            $(this).closest('.row').addClass('d-none').removeClass('d-block');
-        });
-
-        $('.maximize').click(function(e) {
-          $(this).closest('.light-snippet').find('.light-compose-max').addClass('d-block').removeClass('d-none');
-          $(this).closest('.light-snippet').find('.light-compose-mini').closest('.row').removeClass('d-block').addClass('d-none');
-        });
-      });
-    </script>
-
   </body>
 </html>

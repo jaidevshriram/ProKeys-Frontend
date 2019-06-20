@@ -1,8 +1,5 @@
 import React from 'react';
 
-//Font Awesome
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-
 //Custom Component
 import Snippet from './Snippet';
 

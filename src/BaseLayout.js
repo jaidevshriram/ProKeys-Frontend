@@ -30,7 +30,12 @@ export default class BaseLayout extends React.Component {
 
 		this.setState({ composeboxes : [{
 			"name" : "test",
+			"id" : "2"
 		}] });
+	}
+
+	componentWillUpdate(nextProps, nextState) {
+
 	}
 
 	render() {
