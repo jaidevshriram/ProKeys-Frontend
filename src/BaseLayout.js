@@ -21,7 +21,7 @@ export default class BaseLayout extends React.Component {
 		if(this.state.composeboxes.length <=2 ) {
 			this.setState((state, props) => {
 				return {
-					composeboxes: state.composeboxes.append({
+					composeboxes: state.composeboxes.push({
 						name : "",
 						content : "",
 						id : "",
