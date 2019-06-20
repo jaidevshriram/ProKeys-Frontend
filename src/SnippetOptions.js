@@ -15,8 +15,8 @@ export default class SnippetOptions extends React.Component {
                                     <button
                                         className="btn rounded-pill light-border-secondary light-bg-inner light-snippet-option"
                                         // eslint-disable-next-line react/prop-types
-                                        onClick={this.props.onclick}
-                                    >
+                                        onClick={this.props.onclick}>
+                                        
                                         <FontAwesomeIcon icon="plus" size="2x" className="pl-2" />
                                         <span className="pl-4 pr-2">
                                             <h4 className="d-inline align-item-center">Snippet</h4>
