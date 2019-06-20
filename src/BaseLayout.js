@@ -38,8 +38,15 @@ export class BaseLayout extends React.Component {
         this.setState({composeboxes: newcomposeboxes});
     }
 
-    updateArray() {
+    updateArray = (newvalues) => {
+        let newcomposeboxes = this.state.composeboxes;
+        newcomposeboxes[newvalues.id] = {
+            name: newvalues.name,
+            content: newvalues.content,
+            ismax: newvalues.ismax
+        }
 
+        this.setState({composeboxes : newcomposeboxes});
     }
 
 

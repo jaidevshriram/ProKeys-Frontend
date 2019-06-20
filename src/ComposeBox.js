@@ -11,20 +11,17 @@ export default class Compose extends React.Component {
 
         if(this.props.ismax) {
             this.state = {
-                minimize: false,
-                maximize: true,
                 minclass: "row d-none",
                 maxclass: "row d-block",
             };
         } else {
             this.state = {
-                minimize: true,
-                maximize: false,
                 minclass: "row d-block",
                 maxclass: "row d-none",
             };
         }
 
+        this.state["ismax"] = this.props.ismax;
         this.state["name"] = this.props.name;
         this.state["content"] = this.props.content;
         this.state["id"] = this.props.id;
@@ -32,8 +29,7 @@ export default class Compose extends React.Component {
 
     minimize() {
         this.setState((state, props) => ({
-            minimize: true,
-            maximize: false,
+            ismax: false,
             minclass: "row d-block",
             maxclass: "row d-none",
         }));
@@ -41,27 +37,28 @@ export default class Compose extends React.Component {
 
     maximize() {
         this.setState((state, props) => ({
-            minimize: false,
-            maximize: true,
+            ismax: true,
             minclass: "row d-none",
             maxclass: "row d-block",
         }));
     }
 
     updateParent() {
-        this.props.updateArray();
+        this.props.updateParent(this.state);
     }
 
     nameChange(e) {
         this.setState({
             name: e.target.value
         })
+        this.updateParent();
     }
 
     contentChange(e) {
         this.setState({
             content: e.target.value
-        })
+        });
+        this.updateParent();
     }
 
     render() {
