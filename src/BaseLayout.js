@@ -6,44 +6,53 @@ import Options from "./Options";
 import SnippetOptions from "./SnippetOptions";
 import ManageSnippet from "./ManageSnippet";
 import Settings from "./Settings";
-import Compose from "./Compose";
+import ComposeBox from "./ComposeBox";
 
 export class BaseLayout extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             composeboxes: [],
+            number: 0
         };
     }
 
     newCompose() {
-        const newbox = {
-            id: 1,
-            name: "test",
-        };
 
-        this.setState({
-            composeboxes: this.state.composeboxes.concat(newbox),
+        const newbox = {
+            name: "",
+            content: "",
+            ismax: true
+        }
+
+        this.setState((state,props) => { 
+            return {
+                composeboxes: this.state.composeboxes.concat(newbox),
+            }
         });
     }
 
-    // deprecated method, do not use
-    // componentWillUpdate(nextProps, nextState) {
-    //     console.log(this.state.composeboxes);
-    // }
+    onChange() {
+        let newcomposeboxes = this.state.composeboxes;
+        newcomposeboxes[0].name="test"
+        this.setState({composeboxes: newcomposeboxes});
+    }
+
+    updateArray() {
+
+    }
+
 
     render() {
         return (
             <React.Fragment>
                 <Options />
 
-                <Route
-                    exact
-                    path="/"
-                    render={props => (
+                <Route exact path="/" render={props => (
                         <SnippetOptions {...props} onclick={this.newCompose.bind(this)} />
                     )}
                 />
+
                 <Route exact path="/Snippet" component={SnippetOptions} />
 
                 <Switch>
@@ -52,7 +61,16 @@ export class BaseLayout extends React.Component {
                     <Route path="/Setting" component={Settings} />
                 </Switch>
 
-                <Compose boxes={this.state.composeboxes} />
+                <div className="container-fluid position-fixed w-100 h-100 d-flex align-items-end flex-row-reverse light-snippet">
+                    <div className="row">
+                        { 
+                            this.state.composeboxes.map((box, id) => 
+                                <ComposeBox key={id} id={id} name={box.name} content={box.content} ismax={box.ismax}
+                                onchange={this.onChange.bind(this)} updateParent={this.updateArray.bind(this)}/> )}
+                        }
+                    </div>
+                </div>
+
             </React.Fragment>
         );
     }
