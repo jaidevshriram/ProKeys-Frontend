@@ -18,24 +18,18 @@ export default class BaseLayout extends React.Component {
 	}
 
 	newCompose() {
-		
-		console.log("click", this.state.composeboxes);
-
-		let composeboxes = [{
-			"id" : "1",
-			"name" : " ",
-			"content" : " ",
-			"state" : "maximised"
-		}];
-
-		this.setState({ composeboxes : [{
-			"name" : "test",
-			"id" : "2"
-		}] });
-	}
-
-	componentWillUpdate(nextProps, nextState) {
-
+		if(this.state.composeboxes.length <=2 ) {
+			this.setState((state, props) => {
+				return {
+					composeboxes: state.composeboxes.append({
+						name : "",
+						content : "",
+						id : "",
+						ismax: true
+					})
+				}
+			});
+		}
 	}
 
 	render() {
