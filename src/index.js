@@ -1,29 +1,55 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import 'bootstrap/dist/css/bootstrap.css';
-import * as serviceWorker from './serviceWorker';
-import { BrowserRouter, HashRouter } from 'react-router-dom';
+import React from "react";
+import ReactDOM from "react-dom";
+import "./index.css";
+import "bootstrap/dist/css/bootstrap.css";
+import { HashRouter } from "react-router-dom";
 
-//Custom Imports
-import BaseLayout from './BaseLayout';
+// Custom Imports
 
-//Font Awesome Icons
-import { library } from '@fortawesome/fontawesome-svg-core';
-import { faPlus, faQuestion, faCog, faInfo, faSearch, faPen, faTrash, faCopy, faCheck, faExpand, faMinus, faTimes } from '@fortawesome/free-solid-svg-icons';
+// Font Awesome Icons
+import { library } from "@fortawesome/fontawesome-svg-core";
+import {
+    faPlus,
+    faQuestion,
+    faCog,
+    faInfo,
+    faSearch,
+    faPen,
+    faTrash,
+    faCopy,
+    faCheck,
+    faExpand,
+    faMinus,
+    faTimes,
+} from "@fortawesome/free-solid-svg-icons";
+import { BaseLayout } from "./BaseLayout";
+// import BaseLayout from "./BaseLayout";
+import * as serviceWorker from "./serviceWorker";
 
-//Add to Font Awesome Icon Library
-library.add(faPlus, faQuestion, faCog, faInfo, faSearch, faPen, faTrash, faCopy, faCheck, faExpand, faMinus, faTimes);
+// Add to Font Awesome Icon Library
+library.add(
+    faPlus,
+    faQuestion,
+    faCog,
+    faInfo,
+    faSearch,
+    faPen,
+    faTrash,
+    faCopy,
+    faCheck,
+    faExpand,
+    faMinus,
+    faTimes,
+);
 
-const App = () => {
-	return (
-		<HashRouter>
-			<BaseLayout/>
-		</HashRouter>
-	);
-}
+// eslint-disable-next-line no-unused-vars
+const App = () => (
+    <HashRouter>
+        <BaseLayout />
+    </HashRouter>
+);
 
-ReactDOM.render(<App/>, document.getElementById('root'));
+ReactDOM.render(<App />, document.getElementById("root"));
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
