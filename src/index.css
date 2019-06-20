@@ -1,264 +1,280 @@
 body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  background: #ffffff!important;
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans",
+        "Droid Sans", "Helvetica Neue", sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background: #ffffff !important;
 }
 
 light-body {
-	background: #ffffff;
+    background: #ffffff;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
+    font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
 }
 
-.light-btn-circle, .dark-btn-circle {
-  width: 7.5rem;
-  height: 7.5rem;
-  border-radius: 50%!important;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.1);
-  background: #ffffff;
+.light-btn-circle,
+.dark-btn-circle {
+    width: 7.5rem;
+    height: 7.5rem;
+    border-radius: 50% !important;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.1);
+    background: #ffffff;
 }
 
-.light-outer-box, .dark-outer-box {
-	border-radius: 30px;
-	padding: 15px;
-	background: linear-gradient(to right, #07CC8F, #004782);
+.light-outer-box,
+.dark-outer-box {
+    border-radius: 30px;
+    padding: 15px;
+    background: linear-gradient(to right, #07cc8f, #004782);
 }
 
-.light-outer-box-thick, .dark-outer-box-thick {
-	border-radius: 30px;
-	padding: 25px;
-	background: linear-gradient(to right, #07CC8F, #004782);
+.light-outer-box-thick,
+.dark-outer-box-thick {
+    border-radius: 30px;
+    padding: 25px;
+    background: linear-gradient(to right, #07cc8f, #004782);
 }
 
-.light-bg-gradient, .dark-bg-gradient {
-	background: linear-gradient(to bottom right, #07CC8F, #004782);
+.light-bg-gradient,
+.dark-bg-gradient {
+    background: linear-gradient(to bottom right, #07cc8f, #004782);
 }
 
-.light-inner-box, .dark-inner-box {
-	border-radius: 30px;
-	height: 100%;
-	padding: 10px;
-	background: #ffffff;
+.light-inner-box,
+.dark-inner-box {
+    border-radius: 30px;
+    height: 100%;
+    padding: 10px;
+    background: #ffffff;
 }
 
-.light-inner-searchbar, .dark-inner-searchbar {
-	border-radius: 30px;
+.light-inner-searchbar,
+.dark-inner-searchbar {
+    border-radius: 30px;
 }
 
 .light-searchbar {
-	background: #ffffff;
+    background: #ffffff;
 }
 
-.light-search-input, .dark-search-input{
-	color: black;
-	border: 0;
-	outline: 0;
-	background: none;
-	line-height: 40px;
-	width: 80%;
-	padding-left: 20px;
+.light-search-input,
+.dark-search-input {
+    color: black;
+    border: 0;
+    outline: 0;
+    background: none;
+    line-height: 40px;
+    width: 80%;
+    padding-left: 20px;
 }
 
-.light-search-icon, .dark-search-icon{
-	font-size: 125%;
-    color: rgba(0,53,81,1);
+.light-search-icon,
+.dark-search-icon {
+    font-size: 125%;
+    color: rgba(0, 53, 81, 1);
 }
 
-.light-push-input, .dark-push-input {
-	padding: 5px;
-	align-items: center;
-	vertical-align: middle;
+.light-push-input,
+.dark-push-input {
+    padding: 5px;
+    align-items: center;
+    vertical-align: middle;
 }
 
-.light-rounded-30, .dark-rounded-30 {
-	border-radius: 30px;
+.light-rounded-30,
+.dark-rounded-30 {
+    border-radius: 30px;
 }
 
-.light-border-grey, .dark-border-grey {
-	border: 1px solid #E3E3E3!important;
+.light-border-grey,
+.dark-border-grey {
+    border: 1px solid #e3e3e3 !important;
 }
 
 .light-border-secondary {
-	border: 1px solid rgba(0, 0, 0, 0.2)!important;
+    border: 1px solid rgba(0, 0, 0, 0.2) !important;
 }
 
 .light-snippet-option:hover.light-border-secondary {
-	border: 1px solid rgba(0,0,0,0.5)!important;
+    border: 1px solid rgba(0, 0, 0, 0.5) !important;
 }
 
 .light-snippet-preview {
-	color: rgba(0,0,0,0.5);
+    color: rgba(0, 0, 0, 0.5);
 }
 
 .remove-button-styling {
-	background: none;
-	border: none;
-	outline: none;
+    background: none;
+    border: none;
+    outline: none;
 }
 
 .w-md-75 {
-	width: 75%!important;
+    width: 75% !important;
 }
 
 .w-md-50 {
-	width: 50%!important;
+    width: 50% !important;
 }
 
 @media screen and (max-width: 992px) {
-	.w-md-75 {
-		width: unset!important;
-	}
+    .w-md-75 {
+        width: unset !important;
+    }
 
-	.w-md-50 {
-		width: unset!important;
-	}
+    .w-md-50 {
+        width: unset !important;
+    }
 }
 
 .w-r-lg-100 {
-	width: 100%!important;
+    width: 100% !important;
 }
 
 @media screen and (min-width: 992px) {
-	.w-r-lg-100 {
-		width: unset!important;
-	}
+    .w-r-lg-100 {
+        width: unset !important;
+    }
 }
 
 .light-bg-inner {
-	background: #ffffff!important;
+    background: #ffffff !important;
 }
 
 .no-border {
-	border: none!important;
+    border: none !important;
 }
 
 .no-outline {
-	outline: none!important;
+    outline: none !important;
 }
 
-.light-compose, .dark-compose {
-	border-top-left-radius: 20px;
-	border-top-right-radius: 20px;
+.light-compose,
+.dark-compose {
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
 }
 
 .light-compose {
-	background: rgba(0, 71, 130, 0.8)!important;
+    background: rgba(0, 71, 130, 0.8) !important;
 }
 
-.light-compose-mini, .dark-compose-mini {
-	border-top-right-radius: 20px;
-	border-top-left-radius: 20px;
+.light-compose-mini,
+.dark-compose-mini {
+    border-top-right-radius: 20px;
+    border-top-left-radius: 20px;
 }
 
 .light-icons > button {
-	color: #ffffff!important;
+    color: #ffffff !important;
 }
 
-.light-compose-title, .dark-compose-title {
-	font-weight: bold;
+.light-compose-title,
+.dark-compose-title {
+    font-weight: bold;
 }
 
 .light-compose-title {
-	color: #ffffff;
+    color: #ffffff;
 }
 
 .w-33 {
-	width: 33%!important;
+    width: 33% !important;
 }
 
 .w-10 {
-	width: 10%!important;
+    width: 10% !important;
 }
 
 .w-130 {
-	width: 120%!important;
+    width: 120% !important;
 }
 
 .light-compose-button {
-	background: #FFCA2A!important;
+    background: #ffca2a !important;
 }
 
 .light-compose-button.btn {
-	color: #004782!important;
-	font-weight: bold;
+    color: #004782 !important;
+    font-weight: bold;
 }
 
-.light-switch, .dark-switch {
-	position: relative;
-	display: inline-block;
-	width: 40px;
-	height: 20px;
+.light-switch,
+.dark-switch {
+    position: relative;
+    display: inline-block;
+    width: 40px;
+    height: 20px;
 }
 
-.light-switch input, .dark-switch input { 
-	opacity: 0;
-	width: 0;
-	height: 0;
+.light-switch input,
+.dark-switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
 }
 
-.light-slider, .dark-slider {
-	position: absolute;
-	cursor: pointer;
-	top: 0;
-	left: 0;
-	right: 0;
-	bottom: 0;
-	background-color: #ccc;
-	-webkit-transition: .2s;
-	transition: .2s;
+.light-slider,
+.dark-slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: 0.2s;
+    transition: 0.2s;
 }
 
 .light-slider:before {
-	position: absolute;
-	content: "";
-	height: 16px;
-	width: 16px;
-	left: 4px;
-	bottom: 2px;
-	background-color: white;
-	-webkit-transition: .2s;
-	transition: .2s;
+    position: absolute;
+    content: "";
+    height: 16px;
+    width: 16px;
+    left: 4px;
+    bottom: 2px;
+    background-color: white;
+    -webkit-transition: 0.2s;
+    transition: 0.2s;
 }
 
 input:checked + .light-slider {
-	background-color: #07CC8F;
+    background-color: #07cc8f;
 }
 
 input:focus + .light-slider {
-	box-shadow: 0 0 1px #07CC8F;
+    box-shadow: 0 0 1px #07cc8f;
 }
 
 input:checked + .light-slider:before {
-	-webkit-transform: translateX(16px);
-	-ms-transform: translateX(16px);
-	transform: translateX(16px);
+    -webkit-transform: translateX(16px);
+    -ms-transform: translateX(16px);
+    transform: translateX(16px);
 }
 
 /* Rounded sliders */
 .light-slider.round {
-	border-radius: 34px;
+    border-radius: 34px;
 }
 
 .light-slider.round:before {
-	border-radius: 50%;
+    border-radius: 50%;
 }
 
 textarea {
-  resize: none;
+    resize: none;
 }
 
-.light-snippet, .dark-snippet {
-	bottom: 0;
-	pointer-events: none;
+.light-snippet,
+.dark-snippet {
+    bottom: 0;
+    pointer-events: none;
 }
 
 .renable-pointer {
-	pointer-events: all!important;
+    pointer-events: all !important;
 }

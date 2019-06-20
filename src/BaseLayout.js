@@ -1,54 +1,59 @@
-import React from 'react';
-import { Route, Switch } from 'react-router-dom';
+import React from "react";
+import { Route, Switch } from "react-router-dom";
 
-//Custom Imports
-import Title from './Title';
-import Options from './Options';
-import SnippetOptions from './SnippetOptions';
-import ManageSnippet from './ManageSnippet';
-import Settings from './Settings';
-import Compose from './Compose';
+// Custom Imports
+import Options from "./Options";
+import SnippetOptions from "./SnippetOptions";
+import ManageSnippet from "./ManageSnippet";
+import Settings from "./Settings";
+import Compose from "./Compose";
 
-export default class BaseLayout extends React.Component {
-	constructor(props) {
-		super(props);
-		this.state = {
-			composeboxes : []
-		}
-	}
+export class BaseLayout extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            composeboxes: [],
+        };
+    }
 
-	newCompose() {
-		if(this.state.composeboxes.length <=2 ) {
-			this.setState((state, props) => {
-				return {
-					composeboxes: state.composeboxes.push({
-						name : "",
-						content : "",
-						id : "",
-						ismax: true
-					})
-				}
-			});
-		}
-	}
+    newCompose() {
 
-	render() {
-		return (
-			<React.Fragment>
-				<Options/>
+        this.setState({
+            composeboxes: [
+                {
+                    name: "test",
+                    id: "2",
+                },
+            ],
+        });
+    }
 
-				<Route exact path="/" render={(props) => <SnippetOptions {...props} onclick={this.newCompose.bind(this)} /> }/>
-				<Route exact path="/Snippet" component={SnippetOptions}/>
+    componentWillUpdate(nextProps, nextState) {
+    	console.log(this.state.composeboxes);
+    }
 
-				<Switch>
-					<Route exact path="/" component={ManageSnippet}/>
-					<Route path="/Snippet" component={ManageSnippet}/>
-					<Route path="/Setting" component={Settings}/>
-				</Switch>
+    render() {
+        return (
+            <React.Fragment>
+                <Options />
 
-				<Compose boxes={this.state.composeboxes}/>
+                <Route
+                    exact
+                    path="/"
+                    render={props => (
+                        <SnippetOptions {...props} onclick={this.newCompose.bind(this)} />
+                    )}
+                />
+                <Route exact path="/Snippet" component={SnippetOptions} />
 
-			</React.Fragment>
-		);
-	}
+                <Switch>
+                    <Route exact path="/" component={ManageSnippet} />
+                    <Route path="/Snippet" component={ManageSnippet} />
+                    <Route path="/Setting" component={Settings} />
+                </Switch>
+
+                <Compose boxes={this.state.composeboxes} />
+            </React.Fragment>
+        );
+    }
 }
