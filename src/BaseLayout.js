@@ -17,17 +17,6 @@ export class BaseLayout extends React.Component {
     }
 
     newCompose() {
-        console.log("click", this.state.composeboxes);
-
-        // eslint-disable-next-line no-unused-vars
-        const composeboxes = [
-            {
-                id: "1",
-                name: " ",
-                content: " ",
-                state: "maximised",
-            },
-        ];
 
         this.setState({
             composeboxes: [
@@ -39,7 +28,9 @@ export class BaseLayout extends React.Component {
         });
     }
 
-    // componentWillUpdate(nextProps, nextState) {}
+    componentWillUpdate(nextProps, nextState) {
+    	console.log(this.state.composeboxes);
+    }
 
     render() {
         return (

@@ -9,11 +9,7 @@ export default class Compose extends React.Component {
         return (
             <div className="container-fluid position-fixed w-100 h-100 d-flex align-items-end flex-row-reverse light-snippet">
                 <div className="row">
-                    {this.props.boxes.map(box => (
-                        <ComposeBox key={box.id} />
-                    ))}
-                    <ComposeBox />
-                    <ComposeBox />
+                    { this.props.boxes.map(box => <ComposeBox key={box.id} /> )}
                 </div>
             </div>
         );

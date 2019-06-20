@@ -1,9 +1,6 @@
 /* eslint-disable no-unused-vars */
 import React from "react";
 
-// Font Awesome
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-
 export default class Compose extends React.Component {
     constructor(props) {
         super(props);
