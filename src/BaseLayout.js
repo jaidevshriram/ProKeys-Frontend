@@ -34,7 +34,7 @@ export class BaseLayout extends React.Component {
 
     onChange() {
         let newcomposeboxes = this.state.composeboxes;
-        newcomposeboxes[0].name="test"
+        newcomposeboxes[0].name="test";
         this.setState({composeboxes: newcomposeboxes});
     }
 
@@ -47,6 +47,14 @@ export class BaseLayout extends React.Component {
         }
 
         this.setState({composeboxes : newcomposeboxes});
+    }
+
+    deleteBox = (id) => {
+        let newcomposeboxes = this.state.composeboxes;
+        newcomposeboxes.splice(id,1);
+        this.setState((state, props) => {
+            return { composeboxes: newcomposeboxes }
+        });
     }
 
 
@@ -73,7 +81,8 @@ export class BaseLayout extends React.Component {
                         { 
                             this.state.composeboxes.map((box, id) => 
                                 <ComposeBox key={id} id={id} name={box.name} content={box.content} ismax={box.ismax}
-                                onchange={this.onChange.bind(this)} updateParent={this.updateArray.bind(this)}/> )}
+                                onchange={this.onChange.bind(this)} updateParent={this.updateArray.bind(this)}
+                                deleteBox={this.deleteBox.bind(this)} /> )
                         }
                     </div>
                 </div>
