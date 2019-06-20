@@ -14,7 +14,6 @@ export default class Compose extends React.Component {
 				<div className="row">
 					<ComposeBox/>
 					<ComposeBox/>
-					<ComposeBox/>
 				</div>
 			</div>
 		);

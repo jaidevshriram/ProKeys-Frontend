@@ -10,6 +10,7 @@ import Settings from './Settings';
 import Compose from './Compose';
 
 export default class BaseLayout extends React.Component {
+	
 	render() {
 		return (
 			<React.Fragment>
@@ -22,8 +23,9 @@ export default class BaseLayout extends React.Component {
 					<Route exact path="/" component={ManageSnippet}/>
 					<Route path="/Snippet" component={ManageSnippet}/>
 					<Route path="/Setting" component={Settings}/>
-					<Route path="/Test" component={Compose}/>
 				</Switch>
+
+				<Compose/>
 
 			</React.Fragment>
 		);
