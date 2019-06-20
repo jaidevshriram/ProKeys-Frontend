@@ -19,12 +19,10 @@ export class BaseLayout extends React.Component {
     newCompose() {
 
         this.setState({
-            composeboxes: [
-                {
-                    name: "test",
-                    id: "2",
-                },
-            ],
+            composeboxes: this.state.composeboxes.push({
+                "id" : "1",
+                "name" : "2"
+            })
         });
     }
 
