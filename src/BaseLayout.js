@@ -46,7 +46,7 @@ export class BaseLayout extends React.Component {
         this.setState({ composeboxes: newcomposeboxes });
     }
 
-    deleteBox(id) {
+    closeBox(id) {
         // create a copy
         const newcomposeboxes = this.state.composeboxes.slice(0);
         newcomposeboxes.splice(id, 1);
@@ -77,7 +77,7 @@ export class BaseLayout extends React.Component {
                         {
                             this.state.composeboxes.map((box, id) => <ComposeBox key={id} id={id} name={box.name} content={box.content} ismax={box.ismax}
                                 onchange={this.onChange.bind(this)} updateParent={this.updateArray.bind(this)}
-                                deleteBox={this.deleteBox.bind(this)} />)
+                                closeBox={this.closeBox.bind(this)} />)
                         }
                     </div>
                 </div>

@@ -62,8 +62,8 @@ export default class Compose extends React.Component {
         this.updateParent();
     }
 
-    delete(e) {
-        this.props.deleteBox(this.props.id);
+    close(e) {
+        this.props.closeBox(this.props.id);
     }
 
     render() {
@@ -83,7 +83,7 @@ export default class Compose extends React.Component {
                         <div className="col">
                             <div className="pl-1 pr-1 pb-2 pt-1 w-100">
                                 <div className="light-icons float-right">
-                                    <button type="button" className="close p-2" aria-label="Close" onClick={this.delete.bind(this)}>
+                                    <button type="button" className="close p-2" aria-label="Close" onClick={this.close.bind(this)}>
                                         <span aria-hidden="true"><FontAwesomeIcon icon="times" /></span>
                                     </button>
                                     <button type="button" className="close p-2" aria-label="expand">
