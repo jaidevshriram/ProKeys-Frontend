@@ -13,48 +13,44 @@ export class BaseLayout extends React.Component {
         super(props);
         this.state = {
             composeboxes: [],
-            number: 0
+            number: 0,
         };
     }
 
     newCompose() {
-
         const newbox = {
             name: "",
             content: "",
-            ismax: true
-        }
+            ismax: true,
+        };
 
-        this.setState((state,props) => { 
-            return {
-                composeboxes: this.state.composeboxes.concat(newbox),
-            }
+        this.setState({
+            composeboxes: this.state.composeboxes.concat(newbox),
         });
     }
 
     onChange() {
-        let newcomposeboxes = this.state.composeboxes;
-        newcomposeboxes[0].name="test";
-        this.setState({composeboxes: newcomposeboxes});
+        const newcomposeboxes = this.state.composeboxes;
+        newcomposeboxes[0].name = "test";
+        this.setState({ composeboxes: newcomposeboxes });
     }
 
-    updateArray = (newvalues) => {
-        let newcomposeboxes = this.state.composeboxes;
+    updateArray(newvalues) {
+        const newcomposeboxes = this.state.composeboxes;
         newcomposeboxes[newvalues.id] = {
             name: newvalues.name,
             content: newvalues.content,
-            ismax: newvalues.ismax
-        }
+            ismax: newvalues.ismax,
+        };
 
-        this.setState({composeboxes : newcomposeboxes});
+        this.setState({ composeboxes: newcomposeboxes });
     }
 
-    deleteBox = (id) => {
-        let newcomposeboxes = this.state.composeboxes;
-        newcomposeboxes.splice(id,1);
-        this.setState((state, props) => {
-            return { composeboxes: newcomposeboxes }
-        });
+    deleteBox(id) {
+        // create a copy
+        const newcomposeboxes = this.state.composeboxes.slice(0);
+        newcomposeboxes.splice(id, 1);
+        this.setState({ composeboxes: newcomposeboxes });
     }
 
 
@@ -64,8 +60,8 @@ export class BaseLayout extends React.Component {
                 <Options />
 
                 <Route exact path="/" render={props => (
-                        <SnippetOptions {...props} onclick={this.newCompose.bind(this)} />
-                    )}
+                    <SnippetOptions {...props} onclick={this.newCompose.bind(this)} />
+                )}
                 />
 
                 <Route exact path="/Snippet" component={SnippetOptions} />
@@ -78,11 +74,10 @@ export class BaseLayout extends React.Component {
 
                 <div className="container-fluid position-fixed w-100 h-100 d-flex align-items-end flex-row-reverse light-snippet">
                     <div className="row">
-                        { 
-                            this.state.composeboxes.map((box, id) => 
-                                <ComposeBox key={id} id={id} name={box.name} content={box.content} ismax={box.ismax}
+                        {
+                            this.state.composeboxes.map((box, id) => <ComposeBox key={id} id={id} name={box.name} content={box.content} ismax={box.ismax}
                                 onchange={this.onChange.bind(this)} updateParent={this.updateArray.bind(this)}
-                                deleteBox={this.deleteBox.bind(this)} /> )
+                                deleteBox={this.deleteBox.bind(this)} />)
                         }
                     </div>
                 </div>
