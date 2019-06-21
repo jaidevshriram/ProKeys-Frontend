@@ -30,13 +30,13 @@ export class BaseLayout extends React.Component {
     }
 
     onChange() {
-        const newcomposeboxes = this.state.composeboxes;
+        const newcomposeboxes = this.state.composeboxes.slice(0);
         newcomposeboxes[0].name = "test";
         this.setState({ composeboxes: newcomposeboxes });
     }
 
     updateArray(newvalues) {
-        const newcomposeboxes = this.state.composeboxes;
+        const newcomposeboxes = this.state.composeboxes.slice(0);
         newcomposeboxes[newvalues.id] = {
             name: newvalues.name,
             content: newvalues.content,

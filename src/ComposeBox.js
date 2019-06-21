@@ -5,7 +5,6 @@ import React from "react";
 // Font Awesome
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-
 export default class Compose extends React.Component {
     constructor(props) {
         super(props);
@@ -22,46 +21,60 @@ export default class Compose extends React.Component {
             };
         }
 
-        this.state.ismax = this.props.ismax;
-        this.state.name = this.props.name;
-        this.state.content = this.props.content;
-        this.state.id = this.props.id;
+        this.value = {}
+
+        for(const key of Object.keys(this.props)){
+            this.value[key] = this.props[key];
+        }
     }
 
     minimize() {
-        this.setState((state, props) => ({
-            ismax: false,
-            minclass: "row d-block",
-            maxclass: "row d-none",
-        }));
+        this.value.ismax = false;
+        this.updateParent();
     }
 
     maximize() {
-        this.setState((state, props) => ({
-            ismax: true,
-            minclass: "row d-none",
-            maxclass: "row d-block",
-        }));
+        this.value.ismax = true;
+        this.updateParent();
     }
 
     updateParent() {
-        this.props.updateParent(this.state);
+        this.props.updateParent(this.value);
     }
 
     nameChange(e) {
-        this.setState({
-            name: e.target.value,
-        }, () => this.updateParent());
+        this.value.name = e.target.value;
+        this.updateParent();
     }
 
     contentChange(e) {
-        this.setState({
-            content: e.target.value,
-        }, () => this.updateParent());
+        this.value.content = e.target.value;
+        this.updateParent();
     }
 
     close(e) {
         this.props.closeBox(this.props.id);
+    }
+
+    componentDidUpdate(prevProps) {
+
+        this.value = {};
+
+        for(const key of Object.keys(this.props)){
+            this.value[key] = this.props[key];
+        }
+
+        if (this.props.ismax !== prevProps.ismax && this.props.ismax) {
+            this.setState({
+                minclass: "row d-none",
+                maxclass: "row d-block",
+            });
+        } else if(this.props.ismax !== prevProps.ismax) {
+            this.setState({
+                minclass: "row d-block",
+                maxclass: "row d-none",
+            });
+        }
     }
 
     render() {
