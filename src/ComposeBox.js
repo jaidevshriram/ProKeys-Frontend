@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
 import React from "react";
 
@@ -9,7 +10,7 @@ export default class Compose extends React.Component {
     constructor(props) {
         super(props);
 
-        if(this.props.ismax) {
+        if (this.props.ismax) {
             this.state = {
                 minclass: "row d-none",
                 maxclass: "row d-block",
@@ -21,10 +22,10 @@ export default class Compose extends React.Component {
             };
         }
 
-        this.state["ismax"] = this.props.ismax;
-        this.state["name"] = this.props.name;
-        this.state["content"] = this.props.content;
-        this.state["id"] = this.props.id;
+        this.state.ismax = this.props.ismax;
+        this.state.name = this.props.name;
+        this.state.content = this.props.content;
+        this.state.id = this.props.id;
     }
 
     minimize() {
@@ -49,14 +50,14 @@ export default class Compose extends React.Component {
 
     nameChange(e) {
         this.setState({
-            name: e.target.value
-        })
+            name: e.target.value,
+        });
         this.updateParent();
     }
 
     contentChange(e) {
         this.setState({
-            content: e.target.value
+            content: e.target.value,
         });
         this.updateParent();
     }
@@ -96,7 +97,7 @@ export default class Compose extends React.Component {
                                 <form className="pt-3">
                                     <div className="form-group">
                                         <label className="light-compose-title">Snippet Name</label>
-                                        <input type="email" className="form-control" placeholder="This will expand into the snippet" value={this.state.name} onChange={this.nameChange.bind(this)}/>
+                                        <input type="email" className="form-control" placeholder="This will expand into the snippet" value={this.state.name} onChange={this.nameChange.bind(this)} />
                                     </div>
                                     <div className="form-group">
                                         <label className="light-compose-title d-inline">Snippet Content</label>
