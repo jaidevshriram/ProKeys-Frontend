@@ -17,6 +17,16 @@ export default class ManageSnippet extends React.Component {
                                 <Snippet />
                                 <Snippet />
                                 <Snippet />
+                                <Snippet />
+                                <Snippet />
+                                <Snippet />
+                                <Snippet />
+                                <Snippet />
+                                <Snippet />
+                                <Snippet />
+                                <Snippet />
+                                <Snippet />
+                                <Snippet />
                             </div>
                         </div>
                     </div>

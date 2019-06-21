@@ -45,7 +45,7 @@ export default class Snippet extends React.Component {
                         </div>
                     </div>
                 </div>
-                <hr />
+                <hr className="m-1"/>
             </React.Fragment>
         );
     }
