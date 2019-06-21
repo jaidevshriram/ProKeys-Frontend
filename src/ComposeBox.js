@@ -108,7 +108,7 @@ export default class Compose extends React.Component {
                                 <form className="pt-3">
                                     <div className="form-group">
                                         <label className="light-compose-title">Snippet Name</label>
-                                        <input type="email" className="form-control" placeholder="This will expand into the snippet" value={this.state.name} onChange={this.nameChange.bind(this)} />
+                                        <input type="email" className="form-control" placeholder="This will expand into the snippet" value={this.value.name} onChange={this.nameChange.bind(this)} />
                                     </div>
                                     <div className="form-group">
                                         <label className="light-compose-title d-inline">Snippet Content</label>
@@ -119,7 +119,7 @@ export default class Compose extends React.Component {
                                         </label>
                                         <span className="text-white float-right pb-3 pr-2">Rich Text Editor</span>
 
-                                        <textarea className="form-control" rows="15" value={this.state.content} placeholder="This is the content of your snippet. Toggle the button above to switch between edit modes." onChange={this.contentChange.bind(this)}></textarea>
+                                        <textarea className="form-control" rows="15" value={this.value.content} placeholder="This is the content of your snippet. Toggle the button above to switch between edit modes." onChange={this.contentChange.bind(this)}></textarea>
                                     </div>
                                     <div className="form-group">
                                         <button type="button" className="p-2 remove-button-styling btn light-compose-button">
