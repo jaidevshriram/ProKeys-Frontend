@@ -51,15 +51,13 @@ export default class Compose extends React.Component {
     nameChange(e) {
         this.setState({
             name: e.target.value,
-        });
-        this.updateParent();
+        }, () => this.updateParent());
     }
 
     contentChange(e) {
         this.setState({
             content: e.target.value,
-        });
-        this.updateParent();
+        }, () => this.updateParent());
     }
 
     close(e) {
