@@ -10,6 +10,7 @@ export default class Compose extends React.Component {
             composeboxes: [],
             number: 0,
         };
+		this.props.linkToNewSnippet(this.createCompose.bind(this));
     }
 
     createCompose() {
@@ -49,8 +50,6 @@ export default class Compose extends React.Component {
     }
 
 	render() {
-
-		this.props.linkToNewSnippet(this.createCompose.bind(this));
 
 		return (
 	        <div className="container-fluid position-fixed w-100 h-100 d-flex align-items-end flex-row-reverse light-snippet">
