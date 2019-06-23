@@ -17,29 +17,34 @@ export default class Snippet extends React.Component {
                                 No More BrB Gaurang we can get creative.
                             </p>
                             <div className="float-right">
-                                <button className="remove-button-styling">
+                                <button className="remove-button-styling" data-toggle="tooltip" data-placement="top" title="Edit">
+
                                     <FontAwesomeIcon
                                         icon="pen"
                                         size="1x"
                                         style={{ color: "#038D89" }}
                                     />
-                                    <span>&nbsp;&nbsp;Edit</span>
                                 </button>
-                                <button className="remove-button-styling">
+                                <button className="remove-button-styling" data-toggle="tooltip" data-placement="top" title="Delete">
                                     <FontAwesomeIcon
                                         icon="trash"
                                         size="1x"
                                         style={{ color: "#038D89" }}
                                     />
-                                    <span>&nbsp;&nbsp;Delete</span>
                                 </button>
-                                <button className="remove-button-styling">
+                                <button className="remove-button-styling" data-toggle="tooltip" data-placement="top" title="Duplicate">
                                     <FontAwesomeIcon
                                         icon="copy"
                                         size="1x"
                                         style={{ color: "#038D89" }}
                                     />
-                                    <span>&nbsp;&nbsp;Duplicate</span>
+                                </button>
+                                <button className="remove-button-styling" data-toggle="tooltip" data-placement="top" title="Move">
+                                    <FontAwesomeIcon
+                                        icon="sign-out-alt"
+                                        size="1x"
+                                        style={{ color: "#038D89" }}
+                                    />
                                 </button>
                             </div>
                         </div>

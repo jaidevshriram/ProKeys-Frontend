@@ -21,9 +21,9 @@ import {
     faExpand,
     faMinus,
     faTimes,
+    faSignOutAlt
 } from "@fortawesome/free-solid-svg-icons";
 import { BaseLayout } from "./BaseLayout";
-// import BaseLayout from "./BaseLayout";
 import * as serviceWorker from "./serviceWorker";
 
 // Add to Font Awesome Icon Library
@@ -40,6 +40,7 @@ library.add(
     faExpand,
     faMinus,
     faTimes,
+    faSignOutAlt
 );
 
 // eslint-disable-next-line no-unused-vars
