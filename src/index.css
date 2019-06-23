@@ -106,6 +106,14 @@ code {
     color: rgba(0, 0, 0, 0.5);
 }
 
+.light-snippet-hover {
+    border-radius: 20px!important;
+}
+
+.light-snippet-hover:hover {
+    background: rgba(0,0,0,0.025)!important;
+}
+
 .remove-button-styling {
     background: none;
     border: none;

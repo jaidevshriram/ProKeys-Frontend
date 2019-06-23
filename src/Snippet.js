@@ -7,7 +7,7 @@ export default class Snippet extends React.Component {
     render() {
         return (
             <React.Fragment>
-                <div className="container p-3 w-100">
+                <div className="container p-3 w-100 light-snippet-hover">
                     <div className="row">
                         <div className="col w-100">
                             <span className="p-2 pr-5 d-inline font-weight-bold h4">
