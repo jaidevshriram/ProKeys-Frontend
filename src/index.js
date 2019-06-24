@@ -5,6 +5,7 @@ import "bootstrap/dist/css/bootstrap.css";
 import { HashRouter } from "react-router-dom";
 
 // Custom Imports
+import Modals from './Modals'
 
 // Font Awesome Icons
 import { library } from "@fortawesome/fontawesome-svg-core";
@@ -56,6 +57,8 @@ ReactDOM.render(
     </React.StrictMode>,
     document.getElementById("root"),
 );
+
+ReactDOM.render(<Modals/>, document.getElementById("modal"));
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
