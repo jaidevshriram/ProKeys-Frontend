@@ -60,8 +60,9 @@ export default class Compose extends React.Component {
         };
 
         if(this.state.number <=2 ) {
+        	this.state.composeboxes.unshift(newbox);
 	        this.setState({
-	            composeboxes: this.state.composeboxes.concat(newbox),
+	            composeboxes: this.state.composeboxes,
 	            number: this.state.number + 1,
 	        });
 	    }
