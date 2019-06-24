@@ -115,7 +115,15 @@ code {
 }
 
 .light-snippet-hover:hover {
-    background: rgba(0,0,0,0.025)!important;
+    background: rgba(0,0,0,0.05)!important;
+}
+
+.light-folder-hover {
+    border-radius: 20px!important;
+}
+
+.light-folder-hover:hover {
+    background: rgba(7, 204, 143, 0.15)!important;
 }
 
 .remove-button-styling {
@@ -191,6 +199,14 @@ code {
 
 .light-compose-title {
     color: #ffffff;
+}
+
+.h-5 {
+    width: 5% !important;
+}
+
+.h-10 {
+    width: 10% !important;
 }
 
 .w-33 {

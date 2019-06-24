@@ -24,6 +24,11 @@ import {
     faTimes,
     faSignOutAlt
 } from "@fortawesome/free-solid-svg-icons";
+
+import {
+    faFolder
+} from "@fortawesome/free-regular-svg-icons";
+
 import { BaseLayout } from "./BaseLayout";
 import * as serviceWorker from "./serviceWorker";
 
@@ -41,7 +46,8 @@ library.add(
     faExpand,
     faMinus,
     faTimes,
-    faSignOutAlt
+    faSignOutAlt,
+    faFolder
 );
 
 // eslint-disable-next-line no-unused-vars

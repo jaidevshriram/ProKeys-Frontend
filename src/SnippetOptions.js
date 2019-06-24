@@ -4,6 +4,10 @@ import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export default class SnippetOptions extends React.Component {
+	newFolder() {
+		window.$("#new-folder").modal('show');
+	}
+
     render() {
         return (
             <React.Fragment>
@@ -24,7 +28,8 @@ export default class SnippetOptions extends React.Component {
                                     </button>
                                 </div>
                                 <div className="d-inline">
-                                    <button className="btn rounded-pill light-border-secondary light-bg-inner light-snippet-option">
+                                    <button className="btn rounded-pill light-border-secondary light-bg-inner light-snippet-option"
+                                    		onClick={this.newFolder}>
                                         <FontAwesomeIcon icon="plus" size="2x" className="pl-2" />
                                         <span className="pl-4 pr-2">
                                             <h4 className="d-inline align-item-center">Folder</h4>
