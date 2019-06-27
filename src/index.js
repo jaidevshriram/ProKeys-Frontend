@@ -22,7 +22,10 @@ import {
     faExpand,
     faMinus,
     faTimes,
-    faSignOutAlt
+    faSignOutAlt,
+    faFileCsv,
+    faFilePdf,
+    faClipboard
 } from "@fortawesome/free-solid-svg-icons";
 
 import {
@@ -47,7 +50,10 @@ library.add(
     faMinus,
     faTimes,
     faSignOutAlt,
-    faFolder
+    faFolder,
+    faFileCsv,
+    faFilePdf,
+    faClipboard
 );
 
 // eslint-disable-next-line no-unused-vars
