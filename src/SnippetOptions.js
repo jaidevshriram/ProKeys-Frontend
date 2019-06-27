@@ -18,7 +18,7 @@ export default class SnippetOptions extends React.Component {
                 <div className="container pt-2" id="options">
                     <div className="row">
                         <div className="col">
-                            <div className="float-left">
+                            <div className="float-left my-auto">
                                 <div className="d-inline pr-3">
                                     <button
                                         className="btn rounded-pill light-border-secondary light-bg-inner light-snippet-option"
@@ -42,8 +42,8 @@ export default class SnippetOptions extends React.Component {
                                 </div>
                             </div>
 
-                            <div className="float-right">
-                                <a href="#" className="d-inline font-italic pr-4">
+                            <div className="float-right d-flex align-items-center h-100">
+                                <a href="#" className="font-italic pr-4">
                                     Import Content
                                 </a>
                                 <a href="#" className="font-italic" onClick={this.Export}>
