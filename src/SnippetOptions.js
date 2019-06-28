@@ -47,10 +47,10 @@ export default class SnippetOptions extends React.Component {
                             </div>
 
                             <div className="float-right d-flex align-items-center h-100">
-                                <a href="#" className="font-italic pr-4" onClick={this.Import}>
+                                <a href="#" className="font-italic pr-4 text-dark" onClick={this.Import}>
                                     Import Content
                                 </a>
-                                <a href="#" className="font-italic" onClick={this.Export}>
+                                <a href="#" className="font-italic text-dark" onClick={this.Export}>
                                     Export Content
                                 </a>
                             </div>

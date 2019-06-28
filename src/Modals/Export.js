@@ -22,7 +22,7 @@ export default class TooManyCompose extends React.Component {
 		          			<div className="row">
 		          				<div className="col text-center">
 		          					<h3 className="font-weight-bold">Export Data</h3>
-		          					<i className="text-muted">(Additional Options can be found in Advanced Settings)</i>
+		          					<i className="text-muted">Data of this folder and child folders will be exported</i>
 		          					<img className="img-fluid h-50 mx-auto" src={exportimg}/>
 		          					
 		          					<br/><br/>
