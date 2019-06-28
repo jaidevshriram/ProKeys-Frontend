@@ -4,6 +4,7 @@ import React from 'react';
 import TooManyCompose from './Modals/TooManyCompose';
 import NewFolder from './Modals/NewFolder';
 import Export from './Modals/Export';
+import Import from './Modals/Import';
 
 export default class Modals extends React.Component {
 	render() {
@@ -12,6 +13,7 @@ export default class Modals extends React.Component {
 				<TooManyCompose />
 				<NewFolder />
 				<Export />
+				<Import />
 			</React.Fragment>
 		)
 	}

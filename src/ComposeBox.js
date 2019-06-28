@@ -79,7 +79,7 @@ export default class Compose extends React.Component {
 
     render() {
         return (
-            <div className="light-snippet renable-pointer w-33 align-self-end px-5" id={this.props.id}>
+            <div className="light-snippet renable-pointer w-33 align-self-end px-1 px-lg-5" id={this.props.id}>
                 <div className="container-fluid w-100 light-compose float-right">
                     <div className={this.state.minclass} onClick={this.maximize.bind(this)}>
                         <div className="col d-flex align-items-end">

@@ -12,6 +12,10 @@ export default class SnippetOptions extends React.Component {
         window.$("#export").modal('show');
     }
 
+    Import() {
+        window.$("#import").modal('show');
+    }
+
     render() {
         return (
             <React.Fragment>
@@ -43,7 +47,7 @@ export default class SnippetOptions extends React.Component {
                             </div>
 
                             <div className="float-right d-flex align-items-center h-100">
-                                <a href="#" className="font-italic pr-4">
+                                <a href="#" className="font-italic pr-4" onClick={this.Import}>
                                     Import Content
                                 </a>
                                 <a href="#" className="font-italic" onClick={this.Export}>
