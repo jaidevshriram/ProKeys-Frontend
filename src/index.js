@@ -25,7 +25,8 @@ import {
     faSignOutAlt,
     faFileCsv,
     faFilePdf,
-    faClipboard
+    faClipboard,
+    faServer
 } from "@fortawesome/free-solid-svg-icons";
 
 import {
@@ -53,7 +54,8 @@ library.add(
     faFolder,
     faFileCsv,
     faFilePdf,
-    faClipboard
+    faClipboard,
+    faServer
 );
 
 // eslint-disable-next-line no-unused-vars

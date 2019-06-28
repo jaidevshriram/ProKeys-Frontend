@@ -28,8 +28,8 @@ export default class TooManyCompose extends React.Component {
 		          					<br/><br/>
 
       								<button className="btn btn-success w-100">
-      									<span>Data as CSV &nbsp;&nbsp;</span>
-      									<FontAwesomeIcon icon="file-csv"/>
+      									<span>Backup Data &nbsp;&nbsp;</span>
+      									<FontAwesomeIcon icon="server"/>
       								</button>
       								
       								<br/><br/>
@@ -42,8 +42,8 @@ export default class TooManyCompose extends React.Component {
       								<br/><br/>
 
       								<button className="btn btn-info w-100">
-      									<span>Copy to Clipboard &nbsp;&nbsp;</span>
-      									<FontAwesomeIcon icon="clipboard"/>
+      									<span>Data as CSV &nbsp;&nbsp;</span>
+      									<FontAwesomeIcon icon="file-csv"/>
       								</button>
 
 		          				</div>
