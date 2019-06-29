@@ -10,7 +10,7 @@ export default class Compose extends React.Component {
             composeboxes: [],
             number: 0,
         };
-		this.props.linkToNewSnippet(this.createCompose.bind(this));
+		    this.props.linkToNewSnippet(this.createCompose.bind(this));
     }
 
     createCompose() {
