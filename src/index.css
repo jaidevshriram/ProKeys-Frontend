@@ -298,7 +298,7 @@ input:checked + .light-slider:before {
 }
 
 textarea {
-    resize: none;
+    resize: none!important;
 }
 
 .light-snippet,
