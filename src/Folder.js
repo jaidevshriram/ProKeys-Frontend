@@ -30,8 +30,19 @@ export default class Folder extends React.Component {
         }
     }
 
+    stopEditing = (e) => {
+                    console.log(e);
+        if( this.state.isEdit == true && (e.explicitOriginalTarget.localName != "input" ? e.explicitOriginalTarget.title == "folder-name" : e.explicitOriginalTarget.title != "folder-name") ) {
+
+            this.setState({
+                isEdit: false,
+            })
+        }
+    }
+
     componentDidMount() {
         window.addEventListener("keypress", this.doneEditing);
+        window.addEventListener("click", this.stopEditing);
     }
 
 	render () {
@@ -49,7 +60,7 @@ export default class Folder extends React.Component {
             	                           		{this.value.name}
             	                       </span>
                                         
-                                        :    <input className="form-control w-unset d-inline" defaultValue={this.value.name}/>
+                                        :    <input className="form-control w-unset d-inline" defaultValue={this.value.name} title="folder-name"/>
                                         
                                     }
 

@@ -14,17 +14,17 @@ export default class ManageSnippet extends React.Component {
                     <div className="col w-100">
                         <div className="light-outer-box-thick bg-primary">
                             <div className="light-inner-box p-4">
-                                
+
                                 <div className="float-right">
                                     <span>Sort By:&nbsp;&nbsp;</span>
-                                    
-                                    <select class="d-inline w-unset form-control form-control-sm">
+
+                                    <select className="d-inline w-unset form-control form-control-sm">
                                         <option>Name A-Z</option>
                                         <option>Name Z-A</option>
                                         <option>Date Ascending</option>
                                         <option>Date Descending</option>
                                     </select>
-                                    
+
                                 </div>
 
                                 <br/><br/>
