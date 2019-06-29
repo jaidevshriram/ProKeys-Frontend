@@ -77,9 +77,27 @@ export default class Compose extends React.Component {
         }
     }
 
+      updateDimensions() {
+        if(window.innerWidth < 500) {
+          this.setState({ width: 450, height: 102 });
+        } else {
+          let update_width  = window.innerWidth-100;
+          let update_height = Math.round(update_width/4.4);
+          this.setState({ width: update_width, height: update_height });
+        }
+      }
+
+      /**
+       * Add event listener
+       */
+      componentDidMount() {
+        this.updateDimensions();
+        window.addEventListener("resize", this.updateDimensions.bind(this));
+      }
+
     render() {
         return (
-            <div className="light-snippet renable-pointer w-33 align-self-end px-1 px-lg-5" id={this.props.id}>
+            <div className="light-snippet renable-pointer w-33 align-self-end px-1 px-xl-5" id={this.props.id}>
                 <div className="container-fluid w-100 light-compose float-right">
                     <div className={this.state.minclass} onClick={this.maximize.bind(this)}>
                         <div className="col d-flex align-items-end">

@@ -140,6 +140,10 @@ code {
     width: 50% !important;
 }
 
+.w-unset {
+    width: unset!important
+}
+
 @media screen and (max-width: 992px) {
     .w-md-75 {
         width: unset !important;
