@@ -28,9 +28,9 @@ export default class ManageSnippet extends React.Component {
                                 </div>
 
                                 <br/><br/>
-                                <Folder/>
-                                <Folder/>
-                                <Folder/>
+                                <Folder name="Folder Name"/>
+                                <Folder name="Folder Dos"/>
+                                <Folder name="Am I a folder?"/>
                                 <Snippet />
                                 <Snippet />
                                 <Snippet />
