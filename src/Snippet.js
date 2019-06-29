@@ -10,8 +10,15 @@ export default class Snippet extends React.Component {
                 <div className="container p-3 w-100 light-snippet-hover">
                     <div className="row">
                         <div className="col w-100">
-                            <span className="p-2 pr-5 d-inline font-weight-bold h4">
-                                No More BrB
+                            <span className="p-2 d-inline">
+                                <span class="custom-control custom-checkbox d-inline">
+                                    <input type="checkbox" class="custom-control-input my-auto" id="brb"/>
+                                     <label class="custom-control-label" for="brb">
+                                        <span className="p-2 pr-5 d-inline font-weight-bold h4">
+                                            No More BrB
+                                        </span>
+                                    </label>
+                                </span>
                             </span>
                             <p className="d-inline p-2 light-snippet-preview">
                                 No More BrB Gaurang we can get creative.
