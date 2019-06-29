@@ -71,7 +71,7 @@ code {
     outline: 0;
     background: none;
     line-height: 40px;
-    width: 80%;
+    width: 50%!important;
     padding-left: 20px;
 }
 
