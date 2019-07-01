@@ -1,9 +1,15 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-
+import { library } from "@fortawesome/fontawesome-svg-core";
+import {
+    faFile, faFolder,
+} from "@fortawesome/free-solid-svg-icons";
 import { Generic } from "./data";
 import TileFloatButton from "./TileFloatButton";
+
+library.add([faFile, faFolder]);
+
 
 export default class GenericTile extends React.Component {
     constructor(props) {
@@ -21,7 +27,7 @@ export default class GenericTile extends React.Component {
     }
 
     render() {
-        const ICON_NAME = this.props.type === Generic.FOLDER_TYPE ? "folder" : "snip",
+        const ICON_NAME = this.props.type === Generic.FOLDER_TYPE ? "folder" : "file",
             element = this.props.type === Generic.FOLDER_TYPE ? <p className="d-inline light-snippet-preview float-right my-auto">
                 {this.props.count.snip} Snippets. {this.props.count.folder} Folders
             </p> : <p className="d-inline p-2 light-snippet-preview">

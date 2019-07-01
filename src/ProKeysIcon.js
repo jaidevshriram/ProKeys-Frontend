@@ -1,7 +1,13 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import PropTypes from "prop-types";
+import { library } from "@fortawesome/fontawesome-svg-core";
+import {
+    faCopy, faPen, faSignOutAlt, faTrash,
+} from "@fortawesome/free-solid-svg-icons";
 
+
+library.add([faCopy, faPen, faSignOutAlt, faTrash]);
 
 export class ProKeysIcon extends React.Component {
     constructor(props) {
