@@ -6,19 +6,27 @@ import { DATA, Generic } from "./data";
 
 export default class FolderRender extends React.Component {
     getDOM() {
-        const folder = DATA.snippets.getUniqueFolder(this.props.folder);
+        const folder = DATA.snippets.getUniqueFolder(this.props.folder),
+            highlightList = this.props.highlightList || [];
 
         if (folder.length === 0) {
+            if (this.props.isSearchResultFolder) {
+                return <p>No matches found</p>;
+            }
             return <p>Empty folder</p>;
         }
 
         return folder.list.map((object, index) => {
+            const keyVal = object.name + index,
+                shouldHighlight = highlightList.indexOf(object.name) > -1;
+
             if (object.type === Generic.FOLDER_TYPE) {
-                return <FolderTile name={object.name} key={object.name + index}
-                    count={{ folder: object.getFolderCount(), snip: object.getSnippetCount() }} />;
+                return <FolderTile name={object.name} key={keyVal}
+                    count={{ folder: object.getFolderCount(), snip: object.getSnippetCount() }}
+                    shouldHighlight={shouldHighlight} />;
             }
 
-            return <SnippetTile name={object.name} key={object.name + index} body={object.body} />;
+            return <SnippetTile name={object.name} key={keyVal} body={object.body} />;
         });
     }
 
@@ -56,4 +64,6 @@ export default class FolderRender extends React.Component {
 
 FolderRender.propTypes = {
     folder: PropTypes.string,
+    highlightList: PropTypes.arrayOf(PropTypes.string),
+    isSearchResultFolder: PropTypes.bool,
 };
