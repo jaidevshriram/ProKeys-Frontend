@@ -11,9 +11,9 @@ export default class Snippet extends React.Component {
                     <div className="row">
                         <div className="col w-100">
                             <span className="p-2 d-inline">
-                                <span class="custom-control custom-checkbox d-inline">
-                                    <input type="checkbox" class="custom-control-input my-auto" id="brb"/>
-                                     <label class="custom-control-label" for="brb">
+                                <span className="custom-control custom-checkbox d-inline">
+                                    <input type="checkbox" className="custom-control-input my-auto" id="brb" />
+                                    <label className="custom-control-label" htmlFor="brb">
                                         <span className="p-2 pr-5 d-inline font-weight-bold h4">
                                             No More BrB
                                         </span>
@@ -57,7 +57,7 @@ export default class Snippet extends React.Component {
                         </div>
                     </div>
                 </div>
-                <hr className="m-1"/>
+                <hr className="m-1" />
             </React.Fragment>
         );
     }
