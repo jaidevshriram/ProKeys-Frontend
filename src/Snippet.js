@@ -1,7 +1,5 @@
 import React from "react";
 import PropTypes from "prop-types";
-// Font Awesome
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export default class SnippetTile extends React.Component {
     render() {
@@ -25,37 +23,6 @@ export default class SnippetTile extends React.Component {
                             <p className="d-inline p-2 light-snippet-preview">
                                 {this.props.body}
                             </p>
-                            <div className="float-right">
-                                <button className="remove-button-styling" data-toggle="tooltip" data-placement="top" title="Edit">
-
-                                    <FontAwesomeIcon
-                                        icon="pen"
-                                        size="1x"
-                                        style={{ color: "#038D89" }}
-                                    />
-                                </button>
-                                <button className="remove-button-styling" data-toggle="tooltip" data-placement="top" title="Delete">
-                                    <FontAwesomeIcon
-                                        icon="trash"
-                                        size="1x"
-                                        style={{ color: "#038D89" }}
-                                    />
-                                </button>
-                                <button className="remove-button-styling" data-toggle="tooltip" data-placement="top" title="Duplicate">
-                                    <FontAwesomeIcon
-                                        icon="copy"
-                                        size="1x"
-                                        style={{ color: "#038D89" }}
-                                    />
-                                </button>
-                                <button className="remove-button-styling" data-toggle="tooltip" data-placement="top" title="Move">
-                                    <FontAwesomeIcon
-                                        icon="sign-out-alt"
-                                        size="1x"
-                                        style={{ color: "#038D89" }}
-                                    />
-                                </button>
-                            </div>
                         </div>
                     </div>
                 </div>
