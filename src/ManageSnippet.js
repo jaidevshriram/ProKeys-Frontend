@@ -1,11 +1,7 @@
 import React from "react";
-
-// Custom Component
-// import Snippet from "./Snippet";
-// import SnippetOptionsKey from './SnippetOptionsKey';
-// import Folder from "./Folder";
-
-// import DATA from "./data";
+import Snippet from "./Snippet";
+import Folder from "./Folder";
+import { DATA, Generic } from "./data";
 
 export default class ManageSnippet extends React.Component {
     // eslint-disable-next-line class-methods-use-this
@@ -29,6 +25,14 @@ export default class ManageSnippet extends React.Component {
 
                                 </div>
 
+                                {
+                                    DATA.snippets.list.map((object, index) => {
+                                        if (object.type === Generic.FOLDER_TYPE) {
+                                            return <Folder name={object.name} key={object.name + index} />;
+                                        }
+                                        return <Snippet name={object.name} key={object.name + index} body={object.body} />;
+                                    })
+                                }
                             </div>
                         </div>
                     </div>

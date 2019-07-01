@@ -1,5 +1,5 @@
 import React from "react";
-
+import PropTypes from "prop-types";
 // Font Awesome
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
@@ -15,13 +15,15 @@ export default class Snippet extends React.Component {
                                     <input type="checkbox" className="custom-control-input my-auto" id="brb" />
                                     <label className="custom-control-label" htmlFor="brb">
                                         <span className="p-2 pr-5 d-inline font-weight-bold h4">
-                                            No More BrB
+                                            <span className="notranslate">
+                                                {this.props.name}
+                                            </span>
                                         </span>
                                     </label>
                                 </span>
                             </span>
                             <p className="d-inline p-2 light-snippet-preview">
-                                No More BrB Gaurang we can get creative.
+                                {this.props.body}
                             </p>
                             <div className="float-right">
                                 <button className="remove-button-styling" data-toggle="tooltip" data-placement="top" title="Edit">
@@ -62,3 +64,8 @@ export default class Snippet extends React.Component {
         );
     }
 }
+
+Snippet.propTypes = {
+    name: PropTypes.string,
+    body: PropTypes.string,
+};
