@@ -1,14 +1,18 @@
 import React from "react";
+import { PropTypes } from "prop-types";
 import SnippetTile from "./Snippet";
 import FolderTile from "./Folder";
 import { DATA, Generic } from "./data";
 
 export default class FolderRender extends React.Component {
     getDOM() {
-        if (DATA.snippets.list.length === 0) {
+        const folder = DATA.snippets.getUniqueFolder(this.props.folder);
+
+        if (folder.length === 0) {
             return <p>Empty folder</p>;
         }
-        return DATA.snippets.list.map((object, index) => {
+
+        return folder.list.map((object, index) => {
             if (object.type === Generic.FOLDER_TYPE) {
                 return <FolderTile name={object.name} key={object.name + index}
                     count={{ folder: object.getFolderCount(), snip: object.getSnippetCount() }} />;
@@ -48,3 +52,8 @@ export default class FolderRender extends React.Component {
         );
     }
 }
+
+
+FolderRender.propTypes = {
+    folder: PropTypes.string,
+};

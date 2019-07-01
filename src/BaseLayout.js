@@ -30,8 +30,13 @@ export class BaseLayout extends React.Component {
                 <Route exact path="/Snippet" component={SnippetOptions} />
 
                 <Switch>
-                    <Route exact path="/" component={FolderRender} />
-                    <Route path="/Snippet" component={FolderRender} />
+                    <Route exact path="/"
+                        render={routeProps => (
+                            <FolderRender {...routeProps} folder="Snippets" />
+                        )} />
+                    <Route path="/Snippet" render={routeProps => (
+                        <FolderRender {...routeProps} folder="Snippets" />
+                    )} />
                     <Route path="/Setting" component={Settings} />
                 </Switch>
 

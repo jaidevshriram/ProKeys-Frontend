@@ -1,5 +1,4 @@
 /* eslint-disable */
-// this file is just for reference, temporaro;y
 
 // functions common to Snip and Folder
 function Generic() {
@@ -24,7 +23,7 @@ function Generic() {
 
     // deletes `this` from parent folder
     this.remove = function () {
-        const index = Data.snippets.getUniqueObjectIndex(this.name, this.type),
+        const index = DATA.snippets.getUniqueObjectIndex(this.name, this.type),
             thisIndex = index[index.length - 1];
 
         this.getParentFolder().list.splice(thisIndex, 1);
@@ -32,8 +31,8 @@ function Generic() {
     };
 
     this.getParentFolder = function () {
-        let index = Data.snippets.getUniqueObjectIndex(this.name, this.type),
-            parent = Data.snippets;
+        let index = DATA.snippets.getUniqueObjectIndex(this.name, this.type),
+            parent = DATA.snippets;
 
         // last element is `this` index, we want parent so -1
         for (let i = 0, lim = index.length - 1; i < lim; i++) {
@@ -95,7 +94,7 @@ function Generic() {
                 newName = `${name} (${++counter})`;
                 // we are only concerned whether the object exists
                 // and NOT what its index is
-                found = Data.snippets.getUniqueObjectIndex(newName, type);
+                found = DATA.snippets.getUniqueObjectIndex(newName, type);
             }
 
             return newName;
@@ -158,7 +157,7 @@ function Generic() {
     this.insertAdjacent = function (newObject, stepValue, insertBeforeFlag) {
         const thisName = this.name,
             thisType = this.type,
-            thisIndexArray = Data.snippets.getUniqueObjectIndex(thisName, thisType),
+            thisIndexArray = DATA.snippets.getUniqueObjectIndex(thisName, thisType),
             thisIndex = thisIndexArray[thisIndexArray.length - 1],
             parentFolderList = this.getParentFolder().list,
             posToInsertObject = thisIndex + (stepValue ? +stepValue : 1) * (insertBeforeFlag ? 0 : 1);
@@ -254,15 +253,9 @@ Generic.isValidName = function (name, type) {
         return `Name cannot be greater than ${OBJECT_NAME_LIMIT} characters. Current name has ${name.length
             - OBJECT_NAME_LIMIT} more characters.`;
     }
-
-    // error may occur during no-db-restore
-    try {
-        const dupeExists = Data.snippets.getUniqueObject(name, type);
-        if (dupeExists) { return Generic.getDuplicateObjectsText(name, type); }
-        return "true";
-    } catch (e) {
-        return "true";
-    }
+    return DATA.snippets.getUniqueObject(name, type)
+        ? Generic.getDuplicateObjectsText(name, type)
+        : "true";
 };
 
 /**
@@ -274,7 +267,7 @@ Generic.getObjectThroughDOMListElm = function (listElm) {
         type = isSnip ? Generic.SNIP_TYPE : Generic.FOLDER_TYPE,
         { name } = listElm.qClsSingle("name").dataset;
 
-    return Data.snippets.getUniqueObject(name, type);
+    return DATA.snippets.getUniqueObject(name, type);
 };
 
 Generic.FOLDER_TYPE = "folder";
@@ -295,7 +288,7 @@ function Snip(name, body, timestamp) {
         this.body = newBody;
     };
 
-    // "index" is index of this snip in Data.snippets
+    // "index" is index of this snip in DATA.snippets
     this.getDOMElement = function (objectNamesToHighlight) {
         const divMain = Generic.getDOMElement.call(this, objectNamesToHighlight),
             divName = divMain.qClsSingle("name"),
@@ -373,6 +366,189 @@ function Snip(name, body, timestamp) {
             timestamp: this.timestamp,
         };
     };
+
+    this.formatMacros = function (callback) {
+        const embeddedSnippetsList = [this.name],
+            // optimization for more than one embeds of the same snippet
+            embeddingResultsCached = {};
+
+        function embedSnippets(snipBody) {
+            return snipBody.replace(/\[\[%s\((.*?)\)\]\]/g, (wholeMatch, snipName) => {
+                // to avoid circular referencing
+                if (embeddedSnippetsList.indexOf(snipName) > -1) {
+                    return wholeMatch;
+                }
+
+                const matchedSnip = DATA.snippets.getUniqueSnip(snipName),
+                    matchedSnipName = matchedSnip && matchedSnip.name;
+
+                if (matchedSnip) {
+                    embeddedSnippetsList.push(matchedSnipName);
+                    if (embeddingResultsCached[matchedSnipName]) {
+                        return embeddingResultsCached[matchedSnipName];
+                    }
+                    embeddingResultsCached[matchedSnipName] = embedSnippets(matchedSnip.body);
+                    return embeddingResultsCached[matchedSnipName];
+                }
+                return wholeMatch;
+            });
+        }
+
+        const MAX_LENGTH = 100;
+
+        function getListTillN(string, delimiter, length, startReplacement) {
+            string = string.replace(new RegExp(`^\\${startReplacement}`), "");
+
+            const array = string.split(new RegExp(`\\${delimiter}`, "g")),
+                usefulArray = array.slice(0, length),
+                output = usefulArray.join(delimiter);
+
+            return output ? startReplacement + output : "";
+        }
+
+        function getExactlyNthItem(string, delimiter, index, startReplacement) {
+            return string.replace(new RegExp(`^\\${startReplacement}`), "").split(delimiter)[
+                index - 1
+            ];
+        }
+
+        // snippet embedding shuold be performed first, so that if the newly embedded
+        // snippet body has some macros, they would be evaluated in the below replacements
+        let snipBody = embedSnippets(this.body);
+
+        // Date/Time macro replacement
+        // sameTimeFlag: indicates whether all calculations will be dependent (true)
+        // on each other or independent (false) of each other
+        snipBody = snipBody.replace(
+            /\[\[%d\((!?)(.*?)\)\]\]/g,
+            (wholeMatch, sameTimeFlag, userInputMacroText) => {
+                let macro,
+                    macroRegex,
+                    macroRegexString,
+                    macroFunc,
+                    dateArithmeticChange,
+                    date = new Date(),
+                    operableDate,
+                    // `text` was earlier modifying itself
+                    // due to this, numbers which became shown after
+                    // replacement got involved in dateTime arithmetic
+                    // to avoid it; we take a substitute
+                    replacedOutput = userInputMacroText;
+
+                function dateReplacer(match, dateArithmeticMatch) {
+                    let timeChange = 0;
+
+                    if (dateArithmeticMatch) {
+                        dateArithmeticMatch = parseInt(dateArithmeticMatch, 10);
+
+                        // if the macro is a month, we need to account for the deviation days being changed
+                        if (/M/.test(macroRegexString)) {
+                            timeChange
+                                += getTotalDeviationFrom30DaysMonth(dateArithmeticMatch)
+                                * MILLISECONDS_IN_A_DAY;
+                        }
+
+                        timeChange += dateArithmeticChange * dateArithmeticMatch;
+                    } else {
+                        macroRegexString = macroRegexString
+                            .replace(/[^a-zA-Z\\/]/g, "")
+                            .replace("\\d", "");
+                    }
+
+                    if (sameTimeFlag) {
+                        date.setTime(date.getTime() + timeChange);
+                    }
+
+                    operableDate = sameTimeFlag ? date : new Date(Date.now() + timeChange);
+
+                    replacedOutput = replacedOutput.replace(
+                        new RegExp(macroRegexString),
+                        macroFunc(operableDate),
+                    );
+                }
+
+                sameTimeFlag = !!sameTimeFlag;
+
+                // operate on text (it is the one inside brackets of %d)
+                for (const macroItem of DATE_MACROS) {
+                    macro = macroItem;
+                    [macroRegexString, [macroFunc, dateArithmeticChange]] = macro;
+                    macroRegex = new RegExp(macroRegexString, "g");
+
+                    userInputMacroText.replace(macroRegex, dateReplacer);
+                }
+
+                return replacedOutput;
+            },
+        );
+
+        // browser URL macros
+        snipBody = snipBody.replace(/\[\[%u\((.*?)\)\]\]/g, (wholeMatch, query) => {
+            let output = "",
+                pathLength = query.match(/(q?)\d+/),
+                searchParamLength = query.match(/q(\d+)/);
+
+            pathLength = !pathLength ? MAX_LENGTH : pathLength[1] ? 0 : +pathLength[0];
+            searchParamLength = !searchParamLength
+                ? 0
+                : !searchParamLength[1]
+                    ? MAX_LENGTH
+                    : +searchParamLength[1];
+
+            if (/p/i.test(query)) {
+                output += `${window.location.protocol}//`;
+            }
+            if (/w/i.test(query)) {
+                output += "www.";
+            }
+
+            output += window.location.host;
+
+            output += getListTillN(window.location.pathname, "/", pathLength, "/");
+
+            output += getListTillN(window.location.search, "&", searchParamLength, "?");
+
+            if (/h/i.test(query)) {
+                output += window.location.hash;
+            }
+
+            return output;
+        });
+
+        snipBody = snipBody.replace(/\[\[%u\{(\w|\d+|q\d+)\}\]\]/g, (wholeMatch, query) => {
+            let hash;
+
+            if (Number.isInteger(+query)) {
+                return getExactlyNthItem(window.location.pathname, "/", +query, "/");
+            }
+            if (query === "p") {
+                return window.location.protocol.replace(/:$/, "");
+            }
+            if (query === "w") {
+                return "www";
+            }
+            if (query === "h") {
+                ({ hash } = window.location);
+                return (hash && hash.substring(1)) || "";
+            }
+            if (query[0] === "q") {
+                return getExactlyNthItem(window.location.search, "&", +query.substring(1), "?");
+            }
+
+            return "";
+        });
+
+        if (Snip.PASTE_MACRO_REGEX.test(snipBody)) {
+            chrome.runtime.sendMessage(
+                "givePasteData",
+                chromeAPICallWrapper((pasteData) => {
+                    callback(snipBody.replace(Snip.PASTE_MACRO_REGEX, pasteData));
+                }),
+            );
+        } else {
+            callback(snipBody);
+        }
+    };
 }
 Snip.prototype = new Generic();
 Snip.MAX_COLLAPSED_CHARACTERS_DISPLAYED = 200; // issues#67
@@ -397,26 +573,573 @@ Snip.fromObject = function (snip) {
 
     return nSnip;
 };
-/**
-* @param: timestamp: optional
-*/
-function getFormattedDate(timestamp) {
-    const d = (timestamp ? new Date(timestamp) : new Date()).toString();
+Snip.isValidName = function (name) {
+    const vld = Generic.isValidName(name, Generic.SNIP_TYPE);
 
-    // sample date would be:
-    // "Sat Feb 20 2016 09:17:23 GMT+0530 (India Standard Time)"
-    return d.substring(4, 15);
-}
+    return /^%.+%$/.test(name) ? "Name cannot be of the form '%abc%'" : vld;
+};
+Snip.isValidBody = function (body) {
+    return body.length ? "true" : "Empty body field";
+};
 Snip.getTimestampString = function (snip) {
     return `Created on ${getFormattedDate(snip.timestamp)}`;
 };
+/*
+1. removes and replaces the spammy p nodes with \n
+2. leaves pre, blockquote, u, etc. as it is (since they're useful in markdown)
+3. replaces br element with \n
+*/
+Snip.makeHTMLSuitableForTextareaThroughString = function (html) {
+    const htmlNode = q.new("DIV");
+    function preProcessTopLevelElement(tle) {
+        let tgN = tle.tagName,
+            replaced;
 
+        switch (tgN) {
+            case "PRE":
+            case "BLOCKQUOTE":
+            case "P":
+                break;
+            case "OL":
+            case "UL":
+                formatOLULInListParentForCEnode(tle);
+                break;
+            // these top-level elements are inserted by user
+            default:
+                replaced = q.new("P");
+                // issues#156
+                if (tgN === "A") {
+                    tle.href = Snip.defaultLinkSanitize(tle.href);
+                }
+
+                replaced.innerHTML = tle.outerHTML;
+                htmlNode.replaceChild(replaced, tle);
+        }
+    }
+    function preProcessTopLevelElements() {
+        // top-level elements can only be p, pre, blockquote, ul, ol
+        // which `makeHTMLSuitableForTextarea` expects
+        // our top-level elements might be textnodes or <a> elements
+        let children = htmlNode.childNodes,
+            child,
+            childText,
+            replaced;
+
+        for (let i = 0, len = children.length; i < len; i++) {
+            child = children[i];
+
+            if (child.nodeType !== 3) {
+                preProcessTopLevelElement(child);
+                continue;
+            }
+
+            // deal with textnodes here
+            // presence of ONE newline is automated by the presence of
+            // separate top-level elements
+            childText = child.textContent.replace(/\n/, "").replace(/\n/, "<br>");
+            replaced = q.new("P").html(child.textContent);
+
+            if (childText.length !== 0) {
+                htmlNode.replaceChild(replaced, child);
+            } else {
+                htmlNode.removeChild(child);
+                len--;
+                i--;
+            }
+        }
+    }
+
+    htmlNode.innerHTML = html;
+
+    if (Snip.isSuitableForPastingInTextareaAsIs(html)) {
+        htmlNode.Q("ol, ul").forEach(Snip.formatOLULInListParentForTextarea);
+
+        return htmlNode.innerHTML;
+    }
+    preProcessTopLevelElements();
+
+    return Snip.makeHTMLSuitableForTextarea(htmlNode);
+};
+Snip.makeHTMLSuitableForTextarea = function (htmlNode) {
+    const DELETE_NEWLINE_SYMBOL = "<!!>";
+
+    function getProperTagPair(elm) {
+        const tag = elm.tagName.toLowerCase(),
+            returnArray = [`<${tag}>`, `</${tag}>`];
+
+        if (tag === "a") {
+            returnArray[0] = `<a href='${elm.href}'>`;
+        }
+
+        // span is used for font family, sizes, color
+        // and is therefore not shown
+        return tag !== "span" ? returnArray : ["", ""];
+    }
+
+    // sanitizes elements (starting from top-level and then recursize)
+    function elementSanitize(node) {
+        /*
+        WORKING of container:
+        Consecutive structures like this can be achieved:
+        <strong><em><s><u>aati</u></s></em></strong>
+        -----
+        A <p> element can at max contain the following:
+        1. text nodes
+        2. strong,em,u,strike,sub,sup elm nodes
+        3. span elements with classes for size, font, color
+        -----
+        Alignment classes are applied on the <p> element only
+        */
+
+        if (isTextNode(node)) {
+            // if textnode already contains ONE NEWLINE,
+            // then remove it as caller is going to add one
+            return node.textContent;
+        }
+
+        let { tagName } = node,
+            resultString = "",
+            elm,
+            tags,
+            children = node.childNodes, // returns [] for no nodes
+            i = 0,
+            childrenCount = children.length,
+            content,
+            firstChild,
+            firstChildText;
+
+        if (tagName === "PRE") {
+            // can't use outerHTML since it includes atributes
+            // (like spellcheck=false)
+            tags = getProperTagPair(node);
+            return tags[0] + node.innerHTML + tags[1];
+        }
+
+        if (tagName === "P" && childrenCount === 1) {
+            firstChild = children[0];
+            firstChildText = firstChild.innerText || firstChild.textContent;
+
+            if (firstChild.tagName === "BR") {
+                return "";
+            }
+            // issues#55
+            if (firstChildText.length === 0) {
+                return "";
+            }
+        }
+
+        for (; i < childrenCount; i++) {
+            elm = children[i];
+
+            if (elm.nodeType === 1) {
+                tags = getProperTagPair(elm);
+
+                content = tags[0] + elementSanitize(elm) + tags[1];
+
+                if (elm.tagName === "LI") {
+                    resultString += `    ${content}\n`;
+                } else {
+                    resultString += content;
+                }
+            } else {
+                resultString += elm.textContent;
+            }
+        }
+
+        switch (tagName) {
+            case "BLOCKQUOTE":
+                return `<blockquote>${resultString}</blockquote>`;
+            case "OL":
+                return `<ol>\n${resultString}</ol>`;
+            case "UL":
+                return `<ul>\n${resultString}</ul>`;
+            default:
+                return resultString;
+        }
+    }
+
+    let children = htmlNode.childNodes,
+        finalString = "",
+        /*
+            the container consists of top-level elements - p, pre, blockquote, ul, ol (more?)
+            hence, we keep looping while there exist top-level children of container
+            at each iteration, we understand that it is a new line so add the html content
+            of the top-level htmlNode (after a pElementSanitization) along with a `\n`
+            -----
+            single new line is represented by beginning of a new `p`, pre, bq element
+            -----
+            in this editor, mutliple consecutive new lines are done as:
+            <p><br></p>
+            <p><br></p>
+            <p><br></p>
+            each sanitize calls returns "" since br has no childnodes and after each call
+            a "\n" is appended by this method
+            -----
+            inside pre element, absolutely NO formatting is allowed. hence, it is copied as it is.
+            */
+
+        len = children.length,
+        i = 0,
+        elm,
+        sanitizedText;
+
+    while (i < len) {
+        elm = children[i];
+        sanitizedText = elementSanitize(elm);
+        finalString += sanitizedText === DELETE_NEWLINE_SYMBOL ? "" : `${sanitizedText}\n`;
+        i++;
+    }
+
+    finalString = finalString.replace(/&nbsp;/g, " ");
+    // quilljs auto inserts a \n in the end; remove it
+    finalString = finalString.substring(0, finalString.length - 1);
+    return finalString;
+};
+/**
+ * replaces all the "ql-size-huge" types of classes with
+ * proper tags that render as expected in external websites
+ */
+Snip.makeHTMLValidForExternalEmbed = function (html, isListingSnippets) {
+    const $container = q.new("div");
+
+    let cls,
+        elms;
+
+    // when both class name and property value share diff text
+    // as in font size
+    function replacer(className, prop, val) {
+        elms = $container.qCls(className);
+
+        if (elms.length) {
+            elms.removeClass(className);
+            elms.forEach((elm) => {
+                elm.style[prop] = val;
+            });
+        }
+    }
+
+    // when both class name and property value share same text
+    // as in align and font family
+    function replacerThroughArray(clsList, clsPrefix, prop) {
+        for (let i = 0, len = clsList.length; i < len; i++) {
+            replacer(clsPrefix + clsList[i], prop, clsList[i]);
+        }
+    }
+
+    // only called when NOT listing snippets
+    function processPElm(pElm) {
+        let content;
+        // replace pElm with its text node and inline elements
+        // and insert a br in the end
+        // but don't do it if it's an alignment class
+        if (!/text-align:/.test(pElm.attr("style"))) {
+            content = pElm.innerHTML;
+            // <p>Hi</p> becomes Hi<br> (insert <br> only in this case)
+            // <p><br></p> becomes <br>
+            // <p>Hi</p> if is last child remains "Hi"
+            // <p><br></p> if is last child remains <br>
+            if (content !== "<br>" && !(pElm === $container.lastChild)) {
+                content += "<br>";
+            }
+
+            pElm.outerHTML = content;
+        }
+    }
+    /* DETAILS:
+            it should remove the given class names and
+            add corresponding style rule
+        1. .ql-size-(small|huge|large) to style="font-size: 0.75|1.5|2.5em"
+        2. .ql-font-(monospace|serif) to style="font-family: monospace|serif"
+        3. .ql-align-(justify|center|right) to style="text-align: (same)"
+        4. existing 'style="color/background-color: rgb(...);"' remains as is
+
+        Note that these classes aren't necessarily on span elms
+        they might also be present on sub/sup/etc.
+        */
+
+    // messy area; don't use built-in .html() here
+    $container.innerHTML = html;
+    const fontSizesEm = { small: 0.75, large: 1.5, huge: 2.5 },
+        fontFamilies = ["monospace", "serif"],
+        textAligns = ["justify", "center", "right"];
+
+    // problem5 issues#153
+    // remove <p> tags when this method is called by
+    // detector.js; don't remove them when
+    if (!isListingSnippets) {
+        $container.Q("p").forEach(processPElm);
+    }
+
+    // 1. font size
+    for (const fontSize of Object.keys(fontSizesEm)) {
+        cls = `ql-size-${fontSize}`;
+        replacer(cls, "font-size", `${fontSizesEm[fontSize]}em`);
+    }
+
+    // others
+    replacerThroughArray(fontFamilies, "ql-font-", "font-family");
+    replacerThroughArray(textAligns, "ql-align-", "text-align");
+
+    $container.Q("ol, ul").forEach(formatOLULInListParentForCEnode);
+
+    if (window.isGmail) {
+        $container
+            .Q("blockquote")
+            // problem 9 issues#153
+            .addClass("gmail_quote")
+            .attr(
+                "style",
+                "margin: 0px 0px 0px 0.8ex; border-left: 1px solid rgb(204, 204, 204); padding-left: 1ex;",
+            );
+    }
+
+    // issues#161
+    const DEFAULT_EMPTY_QUILL_TEXT = "<p><br></p>";
+    html = $container.innerHTML;
+    if (html === DEFAULT_EMPTY_QUILL_TEXT) {
+        return "";
+    }
+
+    return html;
+};
+
+/**
+ * replace `style`s of font-size, font-family earlier obtained
+ * from `Snip.makeHTMLValidForExternalEmbed` into
+ * required quill classes
+ * WHY? since Quill editor collapses unrecognized span elements
+ * (which we were using to insert font size, family)
+ * NOTE: alignment set on `p` elements = unaffected
+ */
+Snip.makeHTMLSuitableForQuill = function (html) {
+    const $container = q.new("DIV");
+
+    function replacer(sel, prop, cls, val) {
+        const elms = $container.Q(sel);
+
+        if (elms) {
+            elms.forEach((e) => {
+                e.style[prop] = "";
+                e.addClass(`ql-${cls}-${val}`);
+            });
+        }
+    }
+
+    function replacerThroughArray(values, prop) {
+        for (let i = 0, len = values.length; i < len; i++) {
+            replacer(`span[style*="${prop}: ${values[i]}"]`, prop, "font", values[i]);
+        }
+    }
+
+    // problem6 issues#153
+    // substitute <br> for <p><br></p>
+    function replaceTrailingBRsWithPElms() {
+        let lastBR = $container.lastChild,
+            $pContainer;
+        while (lastBR && lastBR.tagName === "BR") {
+            $pContainer = q.new("P");
+            $pContainer.innerHTML = "<br>";
+            $container.replaceChild($pContainer, lastBR);
+            lastBR = $pContainer.previousElementSibling;
+        }
+    }
+
+    $container.innerHTML = html;
+
+    const fontSizesEm = { "0.75em": "small", "1.5em": "large", "2.5em": "huge" },
+        fontFamilies = ["monospace", "serif"];
+
+    for (const fontSize of Object.keys(fontSizesEm)) {
+        replacer(`[style*="font-size: ${fontSize}"]`, "font-size", "size", fontSizesEm[fontSize]);
+    }
+
+    replacerThroughArray(fontFamilies, "font-family");
+    replaceTrailingBRsWithPElms();
+
+    return $container.innerHTML;
+};
+Snip.isSuitableForPastingInTextareaAsIs = function (html) {
+    return !(
+        Snip.hasFormattedLossyContentWoQuillCls(html)
+        // imported snippet body might have no fonts but lots of paragraphs
+        // which make it unsuitable for a textarea
+        || /<p>|<br>/.test(html)
+    );
+};
+Snip.hasFormattedLossyContentWoQuillCls = function (html) {
+    const regElms = [
+        /background-color: /,
+        /color: /,
+        /text-align: /,
+        /font-size: /,
+        /font-family: /,
+    ];
+
+    for (let i = 0, len = regElms.length; i < len; i++) {
+        if (regElms[i].test(html)) {
+            return true;
+        }
+    }
+
+    return false;
+};
+Snip.getQuillClsForFormattedLossyContent = function (html) {
+    const reqElms = [
+        [/ql-font/, "font"],
+        [/ql-align/, "alignment"],
+        [/ql-size/, "size"],
+        [/color: /, "color"],
+        [/background-color: /, "background color"],
+    ];
+
+    for (let i = 0, len = reqElms.length; i < len; i++) {
+        if (reqElms[i][0].test(html)) {
+            return reqElms[i][1];
+        }
+    }
+
+    return null;
+};
+Snip.stripAllTags = function (html, $refDiv) {
+    if (!$refDiv) {
+        $refDiv = q.new("DIV");
+    }
+    if (html) {
+        $refDiv.innerHTML = html;
+    }
+    // otherwise that elm's html is already set (nested calls)
+
+    const { tagName } = $refDiv;
+
+    switch (tagName) {
+        case "DIV": // when not a recursive call
+        case "OL":
+        case "UL":
+            break;
+        // for all other elements
+        default:
+            return $refDiv.innerText || $refDiv.textContent;
+    }
+
+    const children = $refDiv.childNodes,
+        len = children.length;
+    let result = "",
+        i = 0;
+    if (len === 0) {
+        return $refDiv.innerText || $refDiv.textContent;
+    }
+
+    for (; i < len; i++) {
+        result += `${Snip.stripAllTags("", children[i])}\n`;
+    }
+
+    return result;
+};
+Snip.defaultLinkSanitize = function (linkVal) {
+    // remove the default extension protocol just in case it was
+    // prepended by Chrome
+    linkVal = linkVal.replace(/^chrome-extension:\/\/[a-z]+\/html\//, "");
+
+    if (/^\w+:/.test(linkVal)) {
+        // do nothing, since this implies user's already using a custom protocol
+    } else if (!/^https?:/.test(linkVal)) {
+        linkVal = `http:${linkVal}`;
+    }
+
+    return linkVal;
+};
+
+/*
+  main motto here is to leave the text "as is"
+  albeit with some necessary modifications
+1. sanitize links
+2. remove spaces between consecutive <li>s as they're
+    converted into &nbsp; by setHTML
+*/
+Snip.sanitizeTextareaTextForSave = function (text) {
+    const htmlNode = q.new("div");
+    htmlNode.innerHTML = text;
+    // textarea text does not have ANY &nbsp; but adding innerHTML
+    // inserts &nbsp; for some unknown reason
+    // refer problem4 issue#153
+    htmlNode.innerHTML = htmlNode.innerHTML.replace(/&nbsp;/g, " ");
+
+    const aHREFs = htmlNode.Q("a");
+    aHREFs.forEach((a) => {
+        a.href = Snip.defaultLinkSanitize(a.href);
+    });
+
+    const listParents = htmlNode.Q("ol, ul");
+    listParents.forEach(Snip.formatOLULInListParentForTextarea);
+
+    return htmlNode.innerHTML;
+};
+Snip.validate = function (arr, parentFolder, index) {
+    const correctProps = ["name", "body", "timestamp"],
+        expectedPropsLength = correctProps.length,
+        checks = {
+            body: Snip.isValidBody,
+            name: Snip.isValidName,
+        },
+        snippetUnderFolderString = `${index}th snippet under folder ${parentFolder}`;
+    let propVal,
+        snippetVld;
+
+    if (Array.isArray(arr)) {
+        snippetVld = Folder.validate(arr);
+        if (snippetVld !== "true") {
+            return snippetVld;
+        }
+    } else if (!isObject(arr)) {
+        return `${snippetUnderFolderString} is not an object.`;
+    } else {
+        let propCounter = 0;
+
+        // check whether this item has all required properties
+        for (const prop of Object.keys(arr)) {
+            // if invalid property or not of string type
+            if (correctProps.indexOf(prop) === -1) {
+                delete arr[prop];
+                continue;
+            } else {
+                propCounter++;
+            }
+
+            propVal = arr[prop];
+            const checkFunc = checks[prop];
+
+            if (!checkFunc) {
+                continue;
+            }
+            snippetVld = checkFunc(propVal);
+            if (
+                snippetVld !== "true"
+                && Generic.getDuplicateObjectsText(propVal, Generic.SNIP_TYPE) !== snippetVld
+            ) {
+                return `Invalid value for property ${prop} in ${snippetUnderFolderString}; received error: ${snippetVld}`;
+            }
+        }
+
+        if (propCounter !== expectedPropsLength) {
+            return `${snippetUnderFolderString} is missing one of the properties: ${JSON.stringify(
+                correctProps,
+            )}`;
+        }
+    }
+
+    return "true";
+};
 function Folder(orgName, list, orgTimestamp, isSearchResultFolder) {
     this.name = orgName;
     this.type = Generic.FOLDER_TYPE;
     this.timestamp = orgTimestamp || Date.now();
     this.list = (list || []).slice(0);
     this.isSearchResultFolder = !!isSearchResultFolder;
+
+    // only options page mutates list
+    if (window.IN_OPTIONS_PAGE) {
+        observeList(this.list);
+    }
 
     function getObjectCount(type) {
         return function () {
@@ -460,7 +1183,7 @@ function Folder(orgName, list, orgTimestamp, isSearchResultFolder) {
 
     function editer(type) {
         return function (oldName, newName, body) {
-            const object = Data.snippets.getUniqueObject(oldName, type);
+            const object = DATA.snippets.getUniqueObject(oldName, type);
 
             object.edit(newName, body);
             window.latestRevisionLabel = `edited ${type} "${oldName}"`;
@@ -655,8 +1378,8 @@ function Folder(orgName, list, orgTimestamp, isSearchResultFolder) {
 
         insertPathPartDivs(Folder.MAIN_SNIPPETS_NAME);
 
-        let index = Data.snippets.getUniqueFolderIndex(this.name),
-            folder = Data.snippets;
+        let index = DATA.snippets.getUniqueFolderIndex(this.name),
+            folder = DATA.snippets;
 
         for (const idx of index) {
             folder = folder.list[idx];
@@ -774,11 +1497,11 @@ function Folder(orgName, list, orgTimestamp, isSearchResultFolder) {
             snip = this.getUniqueSnip(stringToCheck);
 
             const snipNameDelimiterListRegex = new RegExp(
-                `[${escapeRegExp(Data.snipNameDelimiterList)}]`,
+                `[${escapeRegExp(DATA.snipNameDelimiterList)}]`,
             );
 
             if (snip) {
-                if (Data.matchDelimitedWord && snipNameDelimiterListRegex) {
+                if (DATA.matchDelimitedWord && snipNameDelimiterListRegex) {
                     // delimiter char may not exist if snip name
                     // is at the beginning of the textbox
                     if (
@@ -893,13 +1616,226 @@ Folder.fromArray = function (arr) {
 
     return folder;
 };
+Folder.isValidName = function (name) {
+    return Generic.isValidName(name, Generic.FOLDER_TYPE);
+};
 Folder.isFolder = function (elm) {
     return elm && elm.type === Generic.FOLDER_TYPE;
+};
+Folder.makeFolderIfList = function (data) {
+    if (data && Array.isArray(data.snippets)) {
+        data.snippets = Folder.fromArray(data.snippets);
+    }
+};
+Folder.makeListIfFolder = function (data) {
+    if (Folder.isFolder(data.snippets)) {
+        data.snippets = data.snippets.toArray();
+    }
 };
 Folder.MAIN_SNIPPETS_NAME = "Snippets";
 Folder.SEARCH_RESULTS_NAME = "Search Results in ";
 Folder.CHEVRON_TEXT = "<<";
+Folder.setIndices = function () {
+    // indexArray is an array denoting nested levels inside folders
+    function set(type, name, indexArray) {
+        Folder.indices[type][name.toLowerCase()] = indexArray;
+    }
 
+    // mainIndexArray - denotes indexArray of parent folder
+    // currIndexArray - denotes indexArray of current object
+    function repeat(folder, mainIndexArray) {
+        let indexCounter = 0,
+            currIndexArray;
+
+        set(folder.type, folder.name, mainIndexArray);
+
+        folder.list.forEach((elm) => {
+            // using concat to clone arrays and hence avoid mutation
+            currIndexArray = mainIndexArray.concat(indexCounter);
+
+            if (Folder.isFolder(elm)) {
+                repeat(elm, currIndexArray);
+            } else {
+                set(elm.type, elm.name, currIndexArray);
+            }
+
+            indexCounter++;
+        });
+    }
+
+    // reset
+    Folder.indices = {};
+    Folder.indices[Generic.FOLDER_TYPE] = {};
+    Folder.indices[Generic.SNIP_TYPE] = {};
+    if (DATA.snippets !== false) {
+        repeat(DATA.snippets, []);
+    }
+};
+Folder.copyContents = function (fromFolder, toFolder) {
+    const { list } = fromFolder,
+        len = list.length;
+
+    // loop in reverse order, so that they are inserted in the correct order
+    for (let i = len - 1; i >= 0; i--) {
+        Folder.insertObject(list[i].getDuplicatedObject(), toFolder);
+    }
+};
+Folder.insertObject = function (object, folder) {
+    if (Folder.isFolder(object)) {
+        folder.list.unshift(object);
+    } else {
+        folder.list.splice(folder.getLastFolderIndex() + 1, 0, object);
+    }
+};
+Folder.insertBulkActionDOM = function (listedFolder) {
+    const $container = q.new("div");
+
+    listedFolder.list.forEach((listElm) => {
+        const $generic = q.new("div").addClass("generic"),
+            $checkbox = q.new("input"),
+            $img = q.new("img"),
+            $div = q
+                .new("div")
+                .addClass("name")
+                .html(gTranlateImmune(listElm.name));
+        $div.dataset.name = listElm.name;
+        $checkbox.type = "checkbox";
+        $img.src = `../imgs/${listElm.type}.svg`;
+
+        $generic.appendChild($checkbox);
+        $generic.appendChild($img);
+        $generic.appendChild($div);
+        $container.appendChild($generic);
+    });
+
+    $containerSnippets
+        .html("") // first remove previous content
+        .appendChild($container);
+
+    return $container;
+};
+Folder.getSelectedFolderInSelectList = function (selectList) {
+    const selectFolderName = selectList.qClsSingle("selected").dataset.name;
+
+    return DATA.snippets.getUniqueFolder(selectFolderName);
+};
+Folder.refreshSelectList = function (selectList) {
+    selectList.html("").appendChild(DATA.snippets.getFolderSelectList());
+
+    // select top-most "Snippets" folder; do not use fistChild as it may
+    // count text nodes
+    selectList.children[0].children[0].addClass("selected");
+};
+// do not remove newly inserted chevron as it will again exceed
+// width causing recursion
+Folder.implementChevronInFolderPath = function (notRemoveChevron) {
+    const ACTUAL_ARROW_WIDTH = 15;
+
+    function computeTotalWidth() {
+        let arrowCount = 0,
+            totalWidth = [].slice.call($containerFolderPath.children, 0).reduce((sum, elm) => {
+                const isArrow = elm.hasClass("right_arrow");
+                return isArrow ? (arrowCount++ , sum) : sum + elm.offsetWidth;
+            }, 0);
+
+        // arrows, being titled, actually take up less space (half their width)
+        totalWidth += arrowCount * ACTUAL_ARROW_WIDTH;
+
+        return totalWidth;
+    }
+
+    const width = $containerFolderPath.offsetWidth,
+        totalWidth = computeTotalWidth(),
+        lastPathPart = $containerFolderPath.lastChild.previousElementSibling,
+        folderObj = Folder.getListedFolder();
+
+    if (totalWidth > width) {
+        const pathPart = $containerFolderPath.q(".path_part:not(.chevron)");
+
+        if (pathPart === lastPathPart) {
+            pathPart.style.width = `${
+                $containerFolderPath.offsetWidth - ACTUAL_ARROW_WIDTH - 50 // for the chevron
+                }px`;
+            pathPart.addClass("ellipsized");
+        } else {
+            const doesChevronExist = !!$containerFolderPath.qClsSingle("chevron");
+
+            // remove the right arrow
+            $containerFolderPath.removeChild(pathPart.nextElementSibling);
+
+            // only one chevron allowed
+            if (doesChevronExist) {
+                $containerFolderPath.removeChild(pathPart);
+            } else {
+                pathPart.addClass("chevron").html(Folder.CHEVRON_TEXT);
+            }
+
+            // recheck if width fits correctly now
+            Folder.implementChevronInFolderPath(true);
+        }
+    } else if (!notRemoveChevron && $containerFolderPath.qClsSingle("chevron")) {
+        // clear previous chevrons
+        folderObj.insertFolderPathDOM();
+    }
+};
+Folder.getListedFolderName = function () {
+    return $containerFolderPath.q(":nth-last-child(2)").dataset.name;
+};
+Folder.getListedFolder = function () {
+    let name = Folder.getListedFolderName(),
+        idx = name.indexOf(Folder.SEARCH_RESULTS_NAME);
+
+    if (idx !== -1) {
+        name = name.substring(Folder.SEARCH_RESULTS_NAME.length);
+    }
+
+    return DATA.snippets.getUniqueFolder(name);
+};
+Folder.validate = function (arr) {
+    if (typeof arr[0] !== "string") {
+        // possibly before 300 version
+        arr.unshift(Date.now());
+        arr.unshift(Folder.MAIN_SNIPPETS_NAME);
+    }
+
+    /* Note: Generic.getDuplicateObjectsText is being used below
+        to suppress duplicate snippets warnings. They will NOT be checked.
+        If a user creates duplicate folders, it's his own fault. */
+    const folderName = arr[0],
+        folderTimestamp = arr[1],
+        snippets = arr.slice(2),
+        folderMsg = `Folder ${folderName}`;
+    let snippetVld;
+
+    if (typeof folderName !== "string") {
+        return `Name of ${folderMsg} is not a string.`;
+    }
+
+    const folderVld = Folder.isValidName(folderName);
+
+    if (
+        folderVld !== "true"
+        && Generic.getDuplicateObjectsText(folderName, Generic.FOLDER_TYPE) !== folderVld
+    ) {
+        return `Name of ${folderMsg} is invalid because: ${folderVld}`;
+    }
+
+    if (typeof folderTimestamp !== "number") {
+        return `Timestamp for ${folderMsg} is not a number`;
+    }
+
+    for (let i = 0, len = snippets.length, elm; i < len; i++) {
+        elm = snippets[i];
+
+        snippetVld = Snip.validate(elm, folderName, i);
+
+        if (snippetVld !== "true") {
+            return snippetVld;
+        }
+    }
+
+    return "true";
+};
 Folder.getDefaultSnippetData = function () {
     const name1 = "README-New_UI_Details",
         // using + operator avoids the inadvertently introduced tab characters
@@ -968,6 +1904,269 @@ Folder.getDefaultSnippetData = function () {
 
     return snips;
 };
+// inserts a combo rich (quill) and plain (textarea) textbox (default)
+// inside of the $container argument with options to swap b/w the two,
+// get rich/plain contents, etc.
+/* "transferContents" - in case user switches from rich to plain view, he'll
+lose all his formatting, so show alert box for a warning and then accordingly transfer contents
+to the new shown box */
+function DualTextbox($container, isTryItEditor) {
+    // contants/flags
+    const RICH_EDITOR_CONTAINER_CLASS = "rich_editor_container",
+        RICH_EDITOR_CLASS = isTryItEditor ? "normal-editor" : "ql-editor",
+        transferContentsToShownEditor = !isTryItEditor,
+        // create navbar
+        $nav = q.new("DIV").addClass("nav"),
+        $span = q.new("SPAN").text("Swap editor mode: "),
+        $pTextarea = q
+            .new("P")
+            .text("Textarea")
+            .addClass(SHOW_CLASS),
+        $pRich = q.new("P").text("Styled textbox");
+    let isCurrModePlain = true; // default is textarea
+    $pTextarea.dataset.containerSelector = "textarea";
+    $pRich.dataset.containerSelector = `.${RICH_EDITOR_CONTAINER_CLASS}`;
+    $pTextarea.dataset.editorSelector = "textarea";
+    $pRich.dataset.editorSelector = `.${RICH_EDITOR_CLASS}`;
+
+    $nav.appendChild($span);
+    $nav.appendChild($pTextarea);
+    $nav.appendChild($pRich);
+    $container.appendChild($nav);
+    $container.addClass("dualBoxContainer"); // for css styling
+
+    // create rich/plain boxes
+    // (textarea doesn't need a container; so assume itself to be the container)
+    let $textarea = q.new("TEXTAREA").addClass([SHOW_CLASS, $pTextarea.dataset.containerSelector]),
+        $richEditorContainer = q.new("DIV").addClass(RICH_EDITOR_CONTAINER_CLASS),
+        $richEditor = q.new("DIV"),
+        quillObj;
+
+    $container.appendChild($textarea);
+    $richEditorContainer.appendChild($richEditor);
+    $container.appendChild($richEditorContainer);
+
+    // issues#115
+    if (isTryItEditor) {
+        $richEditor.addClass(RICH_EDITOR_CLASS).attr("contenteditable", "true");
+    } else {
+        quillObj = initializeQuill($richEditor, $richEditorContainer);
+        $richEditor = $container.q($pRich.dataset.editorSelector);
+    }
+
+    function initializeQuill($editor, $containerGiven) {
+        const toolbarOptions = [
+            ["bold", "italic", "underline", "strike"], // toggled buttons
+            ["blockquote", "code-block", "link"],
+
+            [{ list: "ordered" }, { list: "bullet" }],
+            [{ script: "sub" }, { script: "super" }], // superscript/subscript
+
+            [{ size: ["small", false, "large", "huge"] }], // custom dropdown
+
+            [{ color: [] }, { background: [] }], // dropdown with defaults from theme
+            [{ font: [] }],
+            [{ align: [] }],
+
+            ["clean"], // remove formatting button
+        ],
+            Link = Quill.import("formats/link"),
+            builtInFunc = Link.sanitize;
+        Link.sanitize = function sanitizeLinkInput(linkValueInput) {
+            return builtInFunc.call(this, Snip.defaultLinkSanitize(linkValueInput));
+        };
+
+        return new Quill($editor, {
+            modules: {
+                toolbar: toolbarOptions,
+                history: true,
+                clipboard: true,
+            },
+            placeholder: "Expansion text goes here...",
+            theme: "snow",
+            bounds: $containerGiven,
+        });
+
+        // cannot modify dangerouslyPasteHTML to have custom matcher
+        // for font-size/-family. It's as much work as making Snip.makeHTMLSuitableForQuill
+    }
+    // replaces string's `\n` with `<br>` or reverse
+    // `convertForHTML` - true => convert text for display in html div (`.innerHTML`)
+    // false => convrt text for dislplay in text area (`.value`)
+    function convertBetweenHTMLTags(string, convertForHTML) {
+        const map = [["<br>", "\\n"], [" &nbsp;", "  "]],
+            regexIndex = +convertForHTML,
+            replacerIdx = +!convertForHTML,
+            len = map.length;
+        let elm,
+            i = 0;
+
+        for (; i < len; i++) {
+            elm = map[i];
+            string = string.replace(new RegExp(elm[regexIndex], "g"), elm[replacerIdx]);
+        }
+
+        const container = q.new("div").html(string),
+            selector = "pre + br, blockquote + br, li + br, ol > br, ol + br, ul + br, ul > br",
+            unnecessaryBRs = container.Q(selector),
+            count = unnecessaryBRs.length;
+
+        for (i = 0; i < count; i++) {
+            elm = unnecessaryBRs[i];
+            elm.parentNode.removeChild(elm);
+        }
+
+        return container.innerHTML.replace(/&nbsp; ?&nbsp;<li>/g, "<li>");
+    }
+
+    // implement swapping of textbox and richEditor
+    $nav.on("click", (e) => {
+        const node = (e.detail && e.detail.target) || e.target; // event delegation
+
+        if (
+            !(node.tagName === "P")
+            // only show if not already shown
+            || node.hasClass(SHOW_CLASS)
+        ) {
+            return true;
+        }
+
+        // from rte to textarea
+        if (
+            transferContentsToShownEditor
+            && !isCurrModePlain
+            && !this.userAllowsToLoseFormattingOnSwapToTextarea()
+        ) {
+            return false;
+        }
+
+        let currShown = $container.qCls(SHOW_CLASS),
+            currShownEditor = currShown[1],
+            $newlyShownContainer,
+            $newlyShownEditor;
+        currShown.removeClass(SHOW_CLASS);
+        currShownEditor.removeAttribute("tab-index");
+
+        // add show class to `p` and corresponding box
+        node.addClass(SHOW_CLASS);
+        $newlyShownContainer = $container.q(node.dataset.containerSelector);
+        $newlyShownEditor = $container.q(node.dataset.editorSelector);
+        $newlyShownContainer.addClass(SHOW_CLASS);
+        $newlyShownEditor.attr("tab-index", 20).focus();
+
+        isCurrModePlain = !isCurrModePlain; // reverse
+
+        if (transferContentsToShownEditor) {
+            // <b> tags get converted to bold formatted text (and vc-vs)
+            if (isCurrModePlain) {
+                this.setPlainText(this.getRichText());
+            } else {
+                this.setRichText(convertBetweenHTMLTags(this.getPlainText(), true));
+            }
+        }
+
+        return true;
+    });
+
+    // if user did NOT set alignment, font color, size, family, returns true
+    // else gives a confirm box
+    this.userAllowsToLoseFormattingOnSwapToTextarea = function () {
+        const detected = Snip.getQuillClsForFormattedLossyContent($richEditor.innerHTML);
+
+        if (
+            detected
+            && !window.confirm(
+                `We detected formatted text ${detected} in your expansion. You will lose it after this swap. Are you sure you wish to continue?`,
+            )
+        ) {
+            return false;
+        }
+        return true;
+    };
+
+    this.switchToDefaultView = function (textToSet) {
+        $nav.trigger("click", {
+            target: Snip.isSuitableForPastingInTextareaAsIs(textToSet) ? $pTextarea : $pRich,
+        });
+
+        return this;
+    };
+
+    this.setPlainText = function (text) {
+        $textarea.text(text);
+        return this;
+    };
+
+    this.setRichText = function (html) {
+        // NOTE: also used by Tryit editor which does not have Quill
+        if (quillObj) {
+            quillObj.clipboard.dangerouslyPasteHTML(Snip.makeHTMLSuitableForQuill(html));
+        } else {
+            $richEditor.innerHTML = html;
+        }
+        return this;
+    };
+
+    /**
+     * PRECONDITION: default view has been decided beforehand
+     * and has been switched to
+     */
+    this.setShownText = function (text) {
+        // NOTE: do not use .html() since it loses
+        // the custom styles for font-size/-family
+        if (isCurrModePlain) {
+            // since we've switched to default view
+            // we're already in textarea and saving a textarea suitable snippet
+            // no need to preprocess or do anything to it.
+            // BUT BUT BUT we need to format the OL and UL with indentation
+            $textarea.value = Snip.makeHTMLSuitableForTextareaThroughString(text);
+        } else {
+            // without dangerouslyPasteHTML we end up having lots
+            // of <p> elements at unwarranted locations
+            quillObj.clipboard.dangerouslyPasteHTML(Snip.makeHTMLSuitableForQuill(text));
+        }
+
+        return this;
+    };
+
+    this.getPlainText = function () {
+        return $textarea.value;
+    };
+
+    this.getRichText = function () {
+        return Snip.makeHTMLSuitableForTextarea($richEditor);
+    };
+
+    this.getShownTextForSaving = function () {
+        // calling makeHTMLSuitableForTextareaThroughString for
+        // making the string well-formatted for display in website textareas
+        if (isCurrModePlain) {
+            return Snip.sanitizeTextareaTextForSave(this.getPlainText());
+        }
+        return Snip.makeHTMLValidForExternalEmbed($richEditor.innerHTML, true);
+    };
+}
+
+function observeList(list) {
+    const watchProperties = ["push", "pop", "shift", "unshift", "splice"];
+
+    for (const prop of watchProperties) {
+        Object.defineProperty(list, prop, {
+            configurable: false,
+            enumerable: false,
+            writable: false,
+            value: (function (property) {
+                return function (...args) {
+                    // do not use list[prop] because it is already overwritten
+                    // and so will lead to inifinite recursion
+                    const ret = [][property].apply(list, args);
+                    Folder.setIndices();
+                    return ret;
+                };
+            }(prop)),
+        });
+    }
+}
 
 const DATA = {
     snippets: Folder.fromArray(Folder.getDefaultSnippetData()),
@@ -985,6 +2184,8 @@ const DATA = {
     ctxEnabled: true,
 };
 
+Folder.setIndices();
 
-export { DATA, Generic, Snip, Folder };
-
+export {
+    DATA, Generic, Snip, Folder,
+};
