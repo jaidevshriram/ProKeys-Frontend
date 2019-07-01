@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 // Font Awesome
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-export default class Snippet extends React.Component {
+export default class SnippetTile extends React.Component {
     render() {
         return (
             <React.Fragment>
@@ -65,7 +65,7 @@ export default class Snippet extends React.Component {
     }
 }
 
-Snippet.propTypes = {
+SnippetTile.propTypes = {
     name: PropTypes.string,
     body: PropTypes.string,
 };

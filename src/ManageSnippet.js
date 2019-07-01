@@ -1,10 +1,23 @@
 import React from "react";
-import Snippet from "./Snippet";
-import Folder from "./Folder";
+import SnippetTile from "./Snippet";
+import FolderTile from "./Folder";
 import { DATA, Generic } from "./data";
 
-export default class ManageSnippet extends React.Component {
-    // eslint-disable-next-line class-methods-use-this
+export default class FolderRender extends React.Component {
+    getDOM() {
+        if (DATA.snippets.list.length === 0) {
+            return <p>Empty folder</p>;
+        }
+        return DATA.snippets.list.map((object, index) => {
+            if (object.type === Generic.FOLDER_TYPE) {
+                return <FolderTile name={object.name} key={object.name + index}
+                    count={{ folder: object.getFolderCount(), snip: object.getSnippetCount() }} />;
+            }
+
+            return <SnippetTile name={object.name} key={object.name + index} body={object.body} />;
+        });
+    }
+
     render() {
         return (
             <div className="container">
@@ -24,14 +37,8 @@ export default class ManageSnippet extends React.Component {
                                     </select>
 
                                 </div>
-
                                 {
-                                    DATA.snippets.list.map((object, index) => {
-                                        if (object.type === Generic.FOLDER_TYPE) {
-                                            return <Folder name={object.name} key={object.name + index} />;
-                                        }
-                                        return <Snippet name={object.name} key={object.name + index} body={object.body} />;
-                                    })
+                                    this.getDOM()
                                 }
                             </div>
                         </div>

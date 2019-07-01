@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 // Font Awesome
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-export default class Folder extends React.Component {
+export default class FolderTile extends React.Component {
     render() {
         return (
             <React.Fragment>
@@ -17,7 +17,7 @@ export default class Folder extends React.Component {
                                     {this.props.name}
                                 </span>
                                 <p className="d-inline light-snippet-preview float-right my-auto">
-                                    2 Snippets. 0 Folders
+                                    {this.props.count.snip} Snippets. {this.props.count.folder} Folders
                                 </p>
                             </span>
                         </div>
@@ -29,6 +29,7 @@ export default class Folder extends React.Component {
     }
 }
 
-Folder.propTypes = {
+FolderTile.propTypes = {
     name: PropTypes.string,
+    count: PropTypes.objectOf(PropTypes.number),
 };
