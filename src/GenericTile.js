@@ -1,9 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
-
-// Font Awesome
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 import { Generic } from "./data";
+import TileFloatButton from "./TileFloatButton";
 
 export default class GenericTile extends React.Component {
     constructor(props) {
@@ -45,35 +45,10 @@ export default class GenericTile extends React.Component {
                             {element}
 
                             <div className="float-right">
-                                <button className="remove-button-styling" data-toggle="tooltip" data-placement="top" title="Edit">
-
-                                    <FontAwesomeIcon
-                                        icon="pen"
-                                        size="1x"
-                                        style={{ color: "#038D89" }}
-                                    />
-                                </button>
-                                <button className="remove-button-styling" data-toggle="tooltip" data-placement="top" title="Delete">
-                                    <FontAwesomeIcon
-                                        icon="trash"
-                                        size="1x"
-                                        style={{ color: "#038D89" }}
-                                    />
-                                </button>
-                                <button className="remove-button-styling" data-toggle="tooltip" data-placement="top" title="Duplicate">
-                                    <FontAwesomeIcon
-                                        icon="copy"
-                                        size="1x"
-                                        style={{ color: "#038D89" }}
-                                    />
-                                </button>
-                                <button className="remove-button-styling" data-toggle="tooltip" data-placement="top" title="Move">
-                                    <FontAwesomeIcon
-                                        icon="sign-out-alt"
-                                        size="1x"
-                                        style={{ color: "#038D89" }}
-                                    />
-                                </button>
+                                <TileFloatButton type="Edit" />
+                                <TileFloatButton type="Delete" />
+                                <TileFloatButton type="Duplicate" />
+                                <TileFloatButton type="Move" />
                             </div>
                         </div>
                     </div>
