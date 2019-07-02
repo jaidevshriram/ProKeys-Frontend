@@ -54,7 +54,7 @@ export default class GenericTile extends React.Component {
                 </div>,
             DOM = (
                 <React.Fragment>
-                    <div className="container-fluid w-100 light-folder-hover" ref={this.folderTileDIV}>
+                    <div className="container-fluid w-100 light-folder-hover py-2" ref={this.folderTileDIV}>
                         <div className="row">
                             <div className="col w-100">
                                 <div className="ml-3 h-100">

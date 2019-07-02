@@ -35,7 +35,7 @@ export default class FolderRender extends React.Component {
 
     render() {
         return (
-            <div className="container">
+            <div className="container pt-3">
                 <div className="row">
                     <div className="col w-100">
                         <div className="light-outer-box-thick bg-primary">

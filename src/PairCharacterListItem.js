@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export default class PairCharacterListItem extends React.Component {
     render() {
+        console.log(this.props)
         return (
             <React.Fragment>
                 <span className="p-4 font-weight-bold">{this.props.firstcharacter}</span>
