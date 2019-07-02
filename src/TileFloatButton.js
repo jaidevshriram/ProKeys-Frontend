@@ -14,8 +14,10 @@ export default class TileFloatButton extends React.Component {
     }
 
     render() {
+        const faIcon = this.iconMap[this.props.type];
+        console.log(faIcon);
         return <button className="remove-button-styling" data-toggle="tooltip" data-placement="top" title={this.props.type}>
-            <ProKeysIcon icon={this.iconMap[this.props.type]} />
+            <ProKeysIcon icon={faIcon} />
         </button>;
     }
 }
