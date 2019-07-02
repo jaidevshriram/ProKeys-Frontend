@@ -6,8 +6,8 @@ export class ProKeysIcon extends React.Component {
     constructor(props) {
         super(props);
         this.colorMap = {
-            light: "#038D89",
-            dark: "#000000",
+            light: { light: "#038D89" },
+            dark: { dark: "#000000" },
         };
         this.defaultTheme = "light";
     }
@@ -16,7 +16,7 @@ export class ProKeysIcon extends React.Component {
         return <FontAwesomeIcon
             icon={this.props.icon}
             size="1x"
-            style={this.colorMap[this.props.theme] || this.defaultTheme}
+            style={this.colorMap[this.props.theme || this.defaultTheme]}
         />;
     }
 }
