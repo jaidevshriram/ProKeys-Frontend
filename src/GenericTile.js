@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import TextTruncate from "react-text-truncate";
 import { Generic } from "./data";
 import TileFloatButton from "./TileFloatButton";
 
@@ -19,29 +20,52 @@ export default class GenericTile extends React.Component {
         }
     }
 
+    componentDidUpdate() {
+        window.addEventListener("resize", this.forceUpdate);
+    }
+
     render() {
         const ICON_NAME = this.props.type === Generic.FOLDER_TYPE ? "folder" : "file",
-            element = this.props.type === Generic.FOLDER_TYPE ? <div className="d-inline ,y-2 light-snippet-preview">
-                {this.props.count.snip} Snippets. {this.props.count.folder} Folders
-            </div> : <div className="d-inline my-2 light-snippet-preview">
-                {this.props.body}
-            </div>,
+            element = this.props.type === Generic.FOLDER_TYPE ? <div className="d-inline-flex h-100 w-80 align-items-center light-snippet-preview">
+                <span className="d-inline-flex align-items-center font-weight-bold h-100 mx-2 text-black">
+                    {this.props.name}
+                </span>
+                <span className="w-100 d-inline-flex align-items-center h-100">
+                    <TextTruncate
+                        line={2}
+                        element="span"
+                        truncateText="..."
+                        text={`${this.props.count.snip} Snippets. ${this.props.count.folder} Folders`}
+                    />
+                </span>
+            </div>
+
+                : <div className="d-inline-flex h-100 w-80 align-items-center light-snippet-preview" style={{ width: "800px" }}>
+                    <span className="d-inline-flex align-items-center font-weight-bold h-100 mx-2 text-black">
+                        {this.props.name}
+                    </span>
+                    <TextTruncate
+                        line={2}
+                        element="span"
+                        truncateText="..."
+                        text={this.props.body}
+                        className="w-100"
+                    />
+                </div>,
             DOM = (
                 <React.Fragment>
                     <div className="container-fluid w-100 light-folder-hover" ref={this.folderTileDIV}>
                         <div className="row">
                             <div className="col w-100">
-                                <span className="h-100 ml-3">
-                                    <input type="checkbox" className="custom-control-input my-auto pr-5 my-2" id={this.props.name}/>
-                                    <label className="custom-control-label" htmlFor={this.props.name}>
+                                <div className="ml-3 h-100">
+                                    <input type="checkbox" className="custom-control-input my-auto h-100" id={this.props.name}/>
+
+                                    <label className="d-inline custom-control-label h-100" htmlFor={this.props.name}>
                                         {
                                             this.props.type === Generic.FOLDER_TYPE
-                                                ? <FontAwesomeIcon icon={["far", ICON_NAME]} size="1x" className=" my-auto" />
+                                                ? <FontAwesomeIcon icon={["far", ICON_NAME]} size="2x" className="d-inline-flex h-100 align-items-center ml-2" />
                                                 : <React.Fragment></React.Fragment>
                                         }
-                                        <span className="d-inline font-weight-bold my-auto h-100 my-2">
-                                            {this.props.name}
-                                        </span>
                                     </label>
 
                                     {element}
@@ -52,7 +76,7 @@ export default class GenericTile extends React.Component {
                                         <TileFloatButton type="Duplicate" />
                                         <TileFloatButton type="Move" />
                                     </div>
-                                </span>
+                                </div>
                             </div>
 
 

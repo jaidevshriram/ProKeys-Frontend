@@ -41,7 +41,7 @@ export default class FolderRender extends React.Component {
                         <div className="light-outer-box-thick bg-primary">
                             <div className="light-inner-box p-4">
 
-                                <div className="my-auto h-100 w-100 d-inline-block">
+                                <div className="my-auto h-100 w-100 d-inline-block pb-3">
                                     <div className="h-100 pl-3 w-50 d-inline">
                                         <FontAwesomeIcon
                                             icon="search"

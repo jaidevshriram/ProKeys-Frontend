@@ -310,3 +310,7 @@ textarea {
 .renable-pointer {
     pointer-events: all !important;
 }
+
+.text-black {
+    color: #000!important;
+}
