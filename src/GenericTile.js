@@ -21,34 +21,41 @@ export default class GenericTile extends React.Component {
 
     render() {
         const ICON_NAME = this.props.type === Generic.FOLDER_TYPE ? "folder" : "file",
-            element = this.props.type === Generic.FOLDER_TYPE ? <p className="d-inline light-snippet-preview float-right my-auto">
+            element = this.props.type === Generic.FOLDER_TYPE ? <div className="d-inline ,y-2 light-snippet-preview">
                 {this.props.count.snip} Snippets. {this.props.count.folder} Folders
-            </p> : <p className="d-inline p-2 light-snippet-preview">
+            </div> : <div className="d-inline my-2 light-snippet-preview">
                 {this.props.body}
-            </p>,
+            </div>,
             DOM = (
                 <React.Fragment>
-                    <div className="container p-3 w-100 light-folder-hover" ref={this.folderTileDIV}>
+                    <div className="container-fluid w-100 light-folder-hover" ref={this.folderTileDIV}>
                         <div className="row">
                             <div className="col w-100">
-                                <FontAwesomeIcon icon={["far", ICON_NAME]} size="2x" className="my-auto" />
-                                <span className="pl-5 my-auto">
-                                    <input type="checkbox" className="custom-control-input my-auto" id="selectCheck" />
-                                    <label className="custom-control-label" htmlFor="selectCheck"></label>
-                                    <span className="pr-5 d-inline font-weight-bold h4 my-auto">
-                                        {this.props.name}
-                                    </span>
+                                <span className="h-100 ml-3">
+                                    <input type="checkbox" className="custom-control-input my-auto pr-5 my-2" id={this.props.name}/>
+                                    <label className="custom-control-label" htmlFor={this.props.name}>
+                                        {
+                                            this.props.type === Generic.FOLDER_TYPE
+                                                ? <FontAwesomeIcon icon={["far", ICON_NAME]} size="1x" className=" my-auto" />
+                                                : <React.Fragment></React.Fragment>
+                                        }
+                                        <span className="d-inline font-weight-bold my-auto h-100 my-2">
+                                            {this.props.name}
+                                        </span>
+                                    </label>
+
+                                    {element}
+
+                                    <div className="float-right my-2">
+                                        <TileFloatButton type="Edit" />
+                                        <TileFloatButton type="Delete" />
+                                        <TileFloatButton type="Duplicate" />
+                                        <TileFloatButton type="Move" />
+                                    </div>
                                 </span>
                             </div>
 
-                            {element}
 
-                            <div className="float-right">
-                                <TileFloatButton type="Edit" />
-                                <TileFloatButton type="Delete" />
-                                <TileFloatButton type="Duplicate" />
-                                <TileFloatButton type="Move" />
-                            </div>
                         </div>
                     </div>
                     <hr className="m-1" />

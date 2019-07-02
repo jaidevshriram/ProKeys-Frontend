@@ -11,4 +11,5 @@ export default class SnippetTile extends React.Component {
 SnippetTile.propTypes = {
     name: PropTypes.string,
     body: PropTypes.string,
+    id: PropTypes.string,
 };
