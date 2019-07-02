@@ -4,16 +4,16 @@ import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export default class SnippetOptions extends React.Component {
-	newFolder() {
-		window.$("#new-folder").modal('show');
-	}
+    newFolder() {
+        window.$("#new-folder").modal("show");
+    }
 
     Export() {
-        window.$("#export").modal('show');
+        window.$("#export").modal("show");
     }
 
     Import() {
-        window.$("#import").modal('show');
+        window.$("#import").modal("show");
     }
 
     render() {

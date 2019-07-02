@@ -82,7 +82,7 @@ export default class GenericTile extends React.Component {
 
                         </div>
                     </div>
-                    <hr className="m-1" />
+                    <hr className="m-1 text-dark" style={{ borderTop: '1px solid #ccc'}}/>
                 </React.Fragment>
             );
 
