@@ -1,15 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { library } from "@fortawesome/fontawesome-svg-core";
-import {
-    faFile, faFolder,
-} from "@fortawesome/free-solid-svg-icons";
 import { Generic } from "./data";
 import TileFloatButton from "./TileFloatButton";
-
-library.add([faFile, faFolder]);
-
 
 export default class GenericTile extends React.Component {
     constructor(props) {
