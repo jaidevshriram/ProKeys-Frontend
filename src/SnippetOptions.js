@@ -57,25 +57,7 @@ export default class SnippetOptions extends React.Component {
                         </div>
                     </div>
 
-                    <div className="row py-3">
-                        <div className="col">
-                            <div className="light-outer-box">
-                                <div className="light-inner-searchbar light-searchbar mx-auto my-auto h-100 w-100">
-                                    <div className="h-100 pl-3 light-push-input">
-                                        <FontAwesomeIcon
-                                            icon="search"
-                                            className="light-search-icon"
-                                        />
-                                        <input
-                                            className="light-search-input"
-                                            type="text"
-                                            placeholder="Search Snippets"
-                                        />
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+
                 </div>
             </React.Fragment>
         );
