@@ -9,6 +9,9 @@ export default class GenericTile extends React.Component {
     constructor(props) {
         super(props);
         this.mainTileDIV = React.createRef();
+        this.state = {
+            isClick: false,
+        }
     }
 
     checkHighlight() {
@@ -20,7 +23,13 @@ export default class GenericTile extends React.Component {
         }
     }
 
-    componentDidUpdate() {
+    onClick = () => {
+            this.setState({
+                isClick: !this.state.isClick,
+            })
+    }
+
+    componentDidMount() {
         window.addEventListener("resize", this.forceUpdate);
     }
 
@@ -54,19 +63,18 @@ export default class GenericTile extends React.Component {
                 </div>,
             DOM = (
                 <React.Fragment>
-                    <div className="container-fluid w-100 light-folder-hover py-2" ref={this.folderTileDIV}>
+                    <div className="container-fluid w-100 light-folder-hover py-2" ref={this.folderTileDIV} onClick={this.onClick}>
                         <div className="row">
                             <div className="col w-100">
-                                <div className="ml-3 h-100">
-                                    <input type="checkbox" className="custom-control-input my-auto h-100" id={this.props.name}/>
+                                {
+                                    this.state.isClick ? 
+                                            <FontAwesomeIcon icon="check-square" color="#004782"/>
+                                            : <span></span>
+                                }
+                                
+                                <div className=" d-inline ml-3 h-100">
 
-                                    <label className="d-inline custom-control-label h-100" htmlFor={this.props.name}>
-                                        {
-                                            this.props.type === Generic.FOLDER_TYPE
-                                                ? <FontAwesomeIcon icon={["far", ICON_NAME]} size="2x" className="d-inline-flex h-100 align-items-center ml-2" />
-                                                : <React.Fragment></React.Fragment>
-                                        }
-                                    </label>
+                                    <FontAwesomeIcon icon={["far", ICON_NAME]} size="2x" className="h-100 align-items-center ml-2" />
 
                                     {element}
 
@@ -82,7 +90,7 @@ export default class GenericTile extends React.Component {
 
                         </div>
                     </div>
-                    <hr className="m-1 text-dark" style={{ borderTop: '1px solid #ccc'}}/>
+                    <hr className="m-1 text-dark" style={{ borderTop: "1px solid #ccc" }}/>
                 </React.Fragment>
             );
 

@@ -1,8 +1,8 @@
 import React from "react";
 import { PropTypes } from "prop-types";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import SnippetTile from "./Snippet";
-import FolderTile from "./Folder";
+import SnippetTile from "./Snippet/Snippet";
+import FolderTile from "./Snippet/Folder";
 import { DATA, Generic } from "./data";
 
 // Font Awesome

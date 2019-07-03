@@ -16,7 +16,7 @@ export class ProKeysIcon extends React.Component {
         return <FontAwesomeIcon
             icon={this.props.icon}
             size="1x"
-            style={{ color: this.colorMap[this.props.theme || this.defaultTheme]}}
+            style={{ color: this.colorMap[this.props.theme || this.defaultTheme] }}
         />;
     }
 }
