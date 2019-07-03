@@ -51,7 +51,6 @@ code {
 .dark-inner-box {
     border-radius: 30px;
     height: 100%;
-    padding: 10px;
     background: #ffffff;
 }
 
@@ -111,7 +110,7 @@ code {
 }
 
 .light-snippet-hover {
-    border-radius: 20px!important;
+    border-radius: 10px!important;
 }
 
 .light-snippet-hover:hover {
@@ -119,7 +118,7 @@ code {
 }
 
 .light-folder-hover {
-    border-radius: 20px!important;
+    border-radius: 10px!important;
 }
 
 .light-folder-hover:hover {
@@ -313,4 +312,15 @@ textarea {
 
 .text-black {
     color: #000!important;
+}
+
+.light-advanced-box,
+.dark-advanced-box {
+    border-radius: 10px;
+    height: 100%;
+    background: #ffffff;
+}
+
+.collapsible {
+    cursor: pointer;
 }

@@ -58,7 +58,7 @@ export default class GenericTile extends React.Component {
                                             : <span></span>
                                 }
                                 
-                                <div className="d-inline ml-3 h-100">
+                                <div className="d-inline h-100">
                                     <input type="checkbox" className="custom-control-input my-auto h-100" id={this.props.name} />
 
                                     <FontAwesomeIcon icon={["far", ICON_NAME]} size="2x" className="h-100 align-items-center ml-2" />

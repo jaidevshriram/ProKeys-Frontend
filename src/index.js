@@ -28,6 +28,8 @@ import {
     faServer,
     faFile,
     faCheckSquare,
+    faAngleDown,
+    faAngleUp,
 } from "@fortawesome/free-solid-svg-icons";
 
 import {
@@ -60,6 +62,8 @@ library.add(
     faServer,
     faFile,
     faCheckSquare,
+    faAngleDown,
+    faAngleUp,
 );
 
 // eslint-disable-next-line no-unused-vars
