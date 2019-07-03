@@ -4,7 +4,7 @@ import GenericTile from "./GenericTile";
 
 export default class SnippetTile extends React.Component {
     render() {
-        return <GenericTile {...this.props} />;
+        return <GenericTile {...this.props} longText={this.props.body} />;
     }
 }
 

@@ -5,7 +5,7 @@ import { Generic } from "./data";
 
 export default class FolderTile extends React.Component {
     render() {
-        return <GenericTile {...this.props} type={Generic.FOLDER_TYPE} />;
+        return <GenericTile {...this.props} type={Generic.FOLDER_TYPE} longText={`${this.props.count.snip} Snippets. ${this.props.count.folder} Folders`} />;
     }
 }
 
