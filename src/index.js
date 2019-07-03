@@ -27,7 +27,7 @@ import {
     faClipboard,
     faServer,
     faFile,
-    faCheckSquare
+    faCheckSquare,
 } from "@fortawesome/free-solid-svg-icons";
 
 import {
@@ -59,7 +59,7 @@ library.add(
     faClipboard,
     faServer,
     faFile,
-    faCheckSquare
+    faCheckSquare,
 );
 
 // eslint-disable-next-line no-unused-vars
