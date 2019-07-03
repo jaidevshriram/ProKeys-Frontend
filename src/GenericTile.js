@@ -8,7 +8,7 @@ import TileFloatButton from "./TileFloatButton";
 export default class GenericTile extends React.Component {
     constructor(props) {
         super(props);
-        this.mainTileDIV = React.createRef();
+        this.folderTileDIV = React.createRef();
     }
 
     checkHighlight() {
