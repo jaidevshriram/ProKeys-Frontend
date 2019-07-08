@@ -21,9 +21,9 @@ export default class Compose extends React.Component {
             };
         }
 
-        this.value = {}
+        this.value = {};
 
-        for(const key of Object.keys(this.props)){
+        for (const key of Object.keys(this.props)) {
             this.value[key] = this.props[key];
         }
     }
@@ -34,7 +34,7 @@ export default class Compose extends React.Component {
     }
 
     maximize() {
-        if(window.innerWidth < 1000) {
+        if (window.innerWidth < 1000) {
             alert("Window Size too small!");
             return;
         }
@@ -61,10 +61,9 @@ export default class Compose extends React.Component {
     }
 
     componentDidUpdate(prevProps) {
-
         this.value = {};
 
-        for(const key of Object.keys(this.props)){
+        for (const key of Object.keys(this.props)) {
             this.value[key] = this.props[key];
         }
 
@@ -73,7 +72,7 @@ export default class Compose extends React.Component {
                 minclass: "row d-none",
                 maxclass: "row d-block",
             });
-        } else if(this.props.ismax !== prevProps.ismax) {
+        } else if (this.props.ismax !== prevProps.ismax) {
             this.setState({
                 minclass: "row d-block",
                 maxclass: "row d-none",
@@ -82,7 +81,7 @@ export default class Compose extends React.Component {
     }
 
     updateDimensions() {
-        if(window.innerWidth < 1000) {
+        if (window.innerWidth < 1000) {
             this.value.ismax = false;
             this.updateParent();
         }
@@ -96,7 +95,7 @@ export default class Compose extends React.Component {
 
     render() {
         return (
-            <div className="light-snippet renable-pointer w-33 align-self-end px-1 px-xl-5" id={this.props.id}>
+            <div className="light-snippet renable-pointer w-33 align-self-end px-1" id={this.props.id}>
                 <div className="container-fluid w-100 light-compose float-right">
                     <div className={this.state.minclass} onClick={this.maximize.bind(this)}>
                         <div className="col d-flex align-items-end">

@@ -4,16 +4,16 @@ import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export default class SnippetOptions extends React.Component {
-	newFolder() {
-		window.$("#new-folder").modal('show');
-	}
+    newFolder() {
+        window.$("#new-folder").modal("show");
+    }
 
     Export() {
-        window.$("#export").modal('show');
+        window.$("#export").modal("show");
     }
 
     Import() {
-        window.$("#import").modal('show');
+        window.$("#import").modal("show");
     }
 
     render() {
@@ -28,19 +28,20 @@ export default class SnippetOptions extends React.Component {
                                         className="btn rounded-pill light-border-secondary light-bg-inner light-snippet-option"
                                         // eslint-disable-next-line react/prop-types
                                         onClick={this.props.onclick}>
-                                        
-                                        <FontAwesomeIcon icon="plus" size="2x" className="pl-2" />
+                                        <span className="pr-2">&nbsp;</span>
+                                        <FontAwesomeIcon icon="plus" size="1x" />
                                         <span className="pl-4 pr-2">
-                                            <h4 className="d-inline align-item-center">Snippet</h4>
+                                            <h5 className="d-inline align-item-center">Snippet</h5>
                                         </span>
                                     </button>
                                 </div>
                                 <div className="d-inline">
                                     <button className="btn rounded-pill light-border-secondary light-bg-inner light-snippet-option"
                                     		onClick={this.newFolder}>
-                                        <FontAwesomeIcon icon="plus" size="2x" className="pl-2" />
+                                        <span className="pr-2">&nbsp;</span>
+                                        <FontAwesomeIcon icon="plus" size="1x"/>
                                         <span className="pl-4 pr-2">
-                                            <h4 className="d-inline align-item-center">Folder</h4>
+                                            <h5 className="d-inline align-item-center">Folder</h5>
                                         </span>
                                     </button>
                                 </div>
@@ -57,25 +58,7 @@ export default class SnippetOptions extends React.Component {
                         </div>
                     </div>
 
-                    <div className="row py-3">
-                        <div className="col">
-                            <div className="light-outer-box">
-                                <div className="light-inner-searchbar light-searchbar mx-auto my-auto h-100 w-100">
-                                    <div className="h-100 pl-3 light-push-input">
-                                        <FontAwesomeIcon
-                                            icon="search"
-                                            className="light-search-icon"
-                                        />
-                                        <input
-                                            className="light-search-input"
-                                            type="text"
-                                            placeholder="Search Snippets"
-                                        />
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+
                 </div>
             </React.Fragment>
         );

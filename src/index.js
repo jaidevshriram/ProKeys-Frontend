@@ -5,7 +5,6 @@ import "bootstrap/dist/css/bootstrap.css";
 import { HashRouter } from "react-router-dom";
 
 // Custom Imports
-import Modals from './Modals'
 
 // Font Awesome Icons
 import { library } from "@fortawesome/fontawesome-svg-core";
@@ -26,12 +25,17 @@ import {
     faFileCsv,
     faFilePdf,
     faClipboard,
-    faServer
+    faServer,
+    faFile,
+    faCheckSquare,
+    faAngleDown,
+    faAngleUp,
 } from "@fortawesome/free-solid-svg-icons";
 
 import {
-    faFolder
+    faFolder,
 } from "@fortawesome/free-regular-svg-icons";
+import Modals from "./Modals";
 
 import { BaseLayout } from "./BaseLayout";
 import * as serviceWorker from "./serviceWorker";
@@ -55,7 +59,11 @@ library.add(
     faFileCsv,
     faFilePdf,
     faClipboard,
-    faServer
+    faServer,
+    faFile,
+    faCheckSquare,
+    faAngleDown,
+    faAngleUp,
 );
 
 // eslint-disable-next-line no-unused-vars

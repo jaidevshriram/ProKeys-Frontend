@@ -1,0 +1,5 @@
+.light-btn-circle {
+    /* overriding default style */
+    height: 5rem !important;
+    width: 5rem !important;
+}

@@ -4,17 +4,32 @@ import React from "react";
 // Font Awesome
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-// // Custom Imports
+// Custom Imports
 import PairCharacterListItem from "./PairCharacterListItem";
+import AdvancedSettings from './AdvancedSettings';
 
 export default class SnippetOptions extends React.Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            isAdvanced: false,
+        }
+    }
+
+    displayAdvanced = () => {
+        this.setState({
+            isAdvanced: !this.state.isAdvanced,
+        })
+    }
+
     render() {
         return (
             <div className="container pt-2">
                 <div className="row">
-                    <div className="col w-">
-                        <div className="light-outer-box-thick bg-primary">
-                            <div className="light-inner-box p-4">
+                    <div className="col">
+                        <div className="light-outer-box-thick">
+                            <div className="light-inner-box px-3 pt-3">
                                 <div className="container-fluid">
                                     <span className="h3 font-weight-bold">HotKey Options</span>
                                     <div className="row">
@@ -121,6 +136,34 @@ export default class SnippetOptions extends React.Component {
                                         <div className="col-12 col-md-6">
                                             <p className="text-muted float-right text-right">On typing the first character, the second is automatically inserted and your cursor/caret is placed in-between automatically!</p>
                                         </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div className="pt-1">&nbsp;</div>
+
+                            <div className="light-advanced-box container-fluid">
+                                <div className="row">
+                                    <div className="col">
+                                        <div className="w-100 collapsible py-2" onClick={this.displayAdvanced}>
+                                            <span className="h3 font-weight-bold">Advanced Settings</span>
+                                            {
+                                                !this.state.isAdvanced ?
+                                                <FontAwesomeIcon icon="angle-down" size="2x" className="float-right"/>
+                                                : <FontAwesomeIcon icon="angle-up" size="2x" className="float-right"/>
+                                            }
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="row">
+                                    <div className="col">
+                                        {
+                                            this.state.isAdvanced ? 
+                                            <AdvancedSettings />
+                                            : <React.Fragment></React.Fragment> 
+                                        }
                                     </div>
                                 </div>
                             </div>
