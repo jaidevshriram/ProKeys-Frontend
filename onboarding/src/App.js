@@ -11,13 +11,13 @@ export default class App extends React.Component {
     }
   }
 
-  next() {
+  next = () => {
     this.setState({
       progress: this.state.progress + 1,
     })
   }
 
-  previous() {
+  previous = () => {
     this.setState({
       progress: this.setState.progress - 1,
     })
@@ -46,12 +46,12 @@ export default class App extends React.Component {
                                 <Intro />
                                 <div className="d-flex mt-5 px-3">
                                   <div className="p-2">
-                                    <button className="btn btn-warning">
+                                    <button className="btn btn-warning" onClick={this.previous}>
                                       Previous
                                     </button>
                                   </div>
                                   <div className="ml-auto p-2">
-                                    <button className="btn btn-success">
+                                    <button className="btn btn-success" onClick={this.next}>
                                       Next
                                     </button>
                                   </div>
