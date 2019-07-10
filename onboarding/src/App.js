@@ -39,9 +39,9 @@ export default class App extends React.Component {
                   <div className="col">
                     <div className="light-outer-box h-100">
                       <div className="light-inner-box p-4">
-                        <div className="d-flex h-100 w-100 align-items-center justify-content-center">
+                        <div className="d-flex h-100 w-100 pt-5 justify-content-center">
                           <div className="container-fluid">
-                            <div className="row">
+                            <div className="row h-100">
                               <div className="col text-center">
                                 <Intro />
                               </div>
