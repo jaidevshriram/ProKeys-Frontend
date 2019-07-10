@@ -7,22 +7,24 @@ export default class Intro extends React.Component {
 		        <h2>Thanks for downloading the extension!</h2>
 		        <h5 className="pb-3">Use this brief tutorial to become a power user in no time!</h5>
 		        
-		        <hr className="w-75 text-dark py-2"/>
+				<div className="progress w-75 mx-auto">
+				  <div className="progress-bar" Role="progressbar" style={{ width: "25%"}} aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
+				</div>
 		        
-		        <div className="container-fluid h-75">
+		        <div className="container-fluid h-75 pt-4">
 		        	<div className="row h-100">
 		        		<div className="col-5 text-left">
-							<div class="card text-center h-100">
-							  <div class="card-header">
+							<div className="card text-center h-100">
+							  <div className="card-header">
 							    <span className="h5 font-weight-bold">1.&nbsp;&nbsp;</span> This is your abbreviation or <span className="font-weight-bold">Snippet</span>
 							  </div>
-							  <div class="card-body d-flex align-items-center">
+							  <div className="card-body d-flex align-items-center">
 							  	<div>
-							    <h5 class="card-title">Snippet Name: <span class="font-weight-bold"><mark>Demo</mark></span></h5>
-							    <p class="card-text pt-4"><i>Snippet names expand into the text you want it to!</i></p>
+							    <h5 className="card-title">Snippet Name: <span className="font-weight-bold"><mark>Demo</mark></span></h5>
+							    <p className="card-text pt-4"><i>Snippet names expand into the text you want it to!</i></p>
 							  	</div>
 							  </div>
-							  <div class="card-footer text-muted">
+							  <div className="card-footer text-muted">
 							    Snippet names are case insensitive!
 							  </div>
 							</div>
@@ -35,11 +37,11 @@ export default class Intro extends React.Component {
 		        			</span>
 		        		</div>
 		        		<div className="col-5 text-left">
-							<div class="card text-center h-100">
-							  <div class="card-header">
+							<div className="card text-center h-100">
+							  <div className="card-header">
 							    <span className="h5 font-weight-bold">3.&nbsp;&nbsp;</span> You now expand your snippet!
 							  </div>
-							  <div class="card-body align-items-center">
+							  <div className="card-body align-items-center">
 							  	Type <mark>Demo</mark> and hit <kbd>Tab</kbd> in the box to below to see the magic happen!
 							  	<form className="pt-5">
 								  	<div className="form-group">
@@ -48,7 +50,7 @@ export default class Intro extends React.Component {
 								  	</div>
 							  	</form>
 							  </div>
-							  <div class="card-footer text-muted">
+							  <div className="card-footer text-muted">
 							    You can change the Tab key to any combination in <i>Settings</i>
 							  </div>
 							</div>
