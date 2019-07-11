@@ -6,7 +6,7 @@ export default class Placeholders extends React.Component {
 			<React.Fragment>
 	        
 				<div className="progress w-75 mx-auto" style={{height: "5%"}}>
-				  <div className="progress-bar" Role="progressbar" style={{ width: "25%"}} aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
+				  <div className="progress-bar" Role="progressbar" style={{ width: "50%"}} aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">50%</div>
 				</div>
 
 		        <div className="container-fluid h-75 pt-5">
@@ -36,10 +36,10 @@ export default class Placeholders extends React.Component {
 									<li class="list-group-item">To:&nbsp;&nbsp;<span className="text-muted">email@fancy.email.com</span></li>
 									<li class="list-group-item">Subject:&nbsp;&nbsp;<span className="text-muted">ProKeys Placeholder Demo</span></li>
 									<div class="card-body">
-										<h5 class="card-title font-weight-bold py-2">Try it out here!</h5>
+										<h5 class="card-title font-weight-bold">Try it out here!</h5>
 										<p class="card-text">Use the snippet <mark>form</mark></p>
 										<div className="form-group">
-											<textarea className="form-control" rows="5" placeholder="Type text here">
+											<textarea className="form-control" rows="6" placeholder="Type text here">
 											</textarea>
 										</div>
 									</div>

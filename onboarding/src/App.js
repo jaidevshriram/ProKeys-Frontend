@@ -2,13 +2,15 @@ import React from 'react';
 
 import Intro from './Intro';
 import Placeholders from './Placeholders';
+import Folders from './Folders';
+import ControlData from './ControlData';
 
 export default class App extends React.Component {
 
   constructor(props) {
     super(props);
     this.state = {
-      progress: 2,
+      progress: 3,
     }
   }
 
@@ -32,6 +34,9 @@ export default class App extends React.Component {
       case 0: 
       case 1: component = <Intro />; break;
       case 2: component = <Placeholders />; break;
+      case 3: component = <Folders />; break;
+      case 4: component = <ControlData />; break;
+      default: break;
     }
 
     return (
