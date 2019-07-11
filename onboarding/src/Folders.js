@@ -25,6 +25,7 @@ export default class Folders extends React.Component {
 		        						<br/><br/>
 
 		        						<p>Note: Different cannot have snippets of the same name.</p>
+		        						<p className="h5 font-weight-bold text-success">Pro Tip: The current folder is displayed in the search bar!</p>
 		        					</div>
 		        				</div>
 		        			</div>
