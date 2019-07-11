@@ -57,7 +57,7 @@ export default class App extends React.Component {
                         <div className="d-flex h-100 w-100 pt-3 justify-content-center">
                           <div className="container-fluid">
                             <div className="row h-100">
-                              <div className="col text-center">
+                              <div className="col text-center pointer-all">
                                 {component}
                                 <div className="d-flex mt-5 px-3">
                                   <div className="p-2">

@@ -30,14 +30,14 @@ export default class Placeholders extends React.Component {
 		        			</div>
 		        		</div>
 						<div className="col">
-							<div class="card w-100">
-									<ul class="list-group list-group-flush text-left">
-									<li class="list-group-item bg-danger text-right text-white font-weight-bold">Compose Mail</li>
-									<li class="list-group-item">To:&nbsp;&nbsp;<span className="text-muted">email@fancy.email.com</span></li>
-									<li class="list-group-item">Subject:&nbsp;&nbsp;<span className="text-muted">ProKeys Placeholder Demo</span></li>
-									<div class="card-body">
-										<h5 class="card-title font-weight-bold">Try it out here!</h5>
-										<p class="card-text">Use the snippet <mark>form</mark></p>
+							<div className="card w-100">
+									<ul className="list-group list-group-flush text-left">
+									<li className="list-group-item bg-danger text-right text-white font-weight-bold">Compose Mail</li>
+									<li className="list-group-item">To:&nbsp;&nbsp;<span className="text-muted">email@fancy.email.com</span></li>
+									<li className="list-group-item">Subject:&nbsp;&nbsp;<span className="text-muted">ProKeys Placeholder Demo</span></li>
+									<div className="card-body">
+										<h5 className="card-title font-weight-bold">Try it out here!</h5>
+										<p className="card-text">Use the snippet <mark>form</mark></p>
 										<div className="form-group">
 											<textarea className="form-control" rows="6" placeholder="Type text here">
 											</textarea>

@@ -14,8 +14,12 @@ html, body {
     background: linear-gradient(to right, #07cc8f, #004782);
 }
 
-.light-inner-box {
+.light-inner-box	 {
     border-radius: 30px;
     height: 100%;
     background: #ffffff;
+}
+
+.pointer-all {
+	pointer-events: all!important;
 }
