@@ -12,7 +12,7 @@ export default class Folders extends React.Component {
 				</div>
 
 		        <div className="container-fluid h-75 pt-5">
-		        	<div className="row h-75">
+		        	<div className="row h-100">
 		        		<div className="col d-flex align-self-center justify-content-center">
 		        			<div className="container-fluid ">
 		        				<div className="row ">

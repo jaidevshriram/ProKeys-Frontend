@@ -17,7 +17,7 @@ export default class ControlData extends React.Component {
 		        		</div>
 		        	</div>
 		        	<div className="py-3">&nbsp;</div>
-		        	<div className="row h-100">
+		        	<div className="row h-75">
 		        		<div className="col">
 							<ul className="list-group text-left">
 							  <li className="list-group-item list-group-item-success font-weight-bold h4 text-center">Import</li>
