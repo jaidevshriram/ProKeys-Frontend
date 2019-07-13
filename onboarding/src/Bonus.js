@@ -7,7 +7,7 @@ export default class Bonus extends React.Component {
 	render() {
 		return (
 			<React.Fragment>
-	        
+
 				<ProgressBar {...this.props} />
 
 		        <div className="container-fluid h-75 pt-5">
