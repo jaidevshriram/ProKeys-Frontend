@@ -7,6 +7,7 @@ import ControlData from './ControlData';
 import Sync from './Sync';
 import Bonus from './Bonus';
 import Welcome from './Welcome';
+import End from './End';
 
 export default class App extends React.Component {
 
@@ -39,9 +40,10 @@ export default class App extends React.Component {
       case 1: component = <Intro value={100 - 6*100/6}/>; break;
       case 2: component = <Placeholders value={100 - 5*100/6}/>; break;
       case 3: component = <Folders value={100 - 4*100/6}/>; break;
-      case 4: component = <ControlData value={100 - 3*100/6}/>; break;
-      case 5: component = <Sync value={100 - 2*100/6}/>; break;
+      case 4: component = <Sync value={100 - 3*100/6}/>; break;
+      case 5: component = <ControlData value={100 - 2*100/6}/>; break;
       case 6: component = <Bonus value={100 - 1*100/6}/>; break;
+      case 7: component = <End />; break;
       default: break;
     }
 
@@ -63,7 +65,7 @@ export default class App extends React.Component {
                                 <div className="d-flex mt-5 px-3">
                                   <div className="p-2">
                                     {
-                                      this.state.progress != 0 ?
+                                      this.state.progress !== 0 ?
                                        ( <button className="btn btn-warning" onClick={this.previous}>
                                           Previous
                                         </button> )
@@ -73,13 +75,13 @@ export default class App extends React.Component {
                                   </div>
                                   <div className="ml-auto p-2">
                                     {
-                                      this.state.progress != 0 && this.state.progress != 7 ?
+                                      this.state.progress !== 0 && this.state.progress !== 7 ?
                                        ( <button className="btn btn-success" onClick={this.next}>
                                           Next
                                         </button> )
 
                                        : 
-                                            this.state.progress == 0 ? 
+                                            this.state.progress === 0 ? 
                                             ( <button className="btn btn-success" onClick={this.next}>
                                               Start !
                                             </button> )

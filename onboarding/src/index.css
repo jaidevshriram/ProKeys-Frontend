@@ -38,3 +38,11 @@ html, body {
 .progress-bar {
     background: #90d5fb!important;
 }
+
+mark {
+    background: rgba(40,205,193,.47)!important;
+}
+
+kbd {
+    border: 5px solid black!important;
+}

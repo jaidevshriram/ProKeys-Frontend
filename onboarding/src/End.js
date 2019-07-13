@@ -1,10 +1,12 @@
 import React from 'react';
 import Typed from 'typed.js';
 
-export default class Welcome extends React.Component {
+import end from './img/end.png'
+
+export default class End extends React.Component {
 	componentDidMount() {
 		const options = {
-		  strings: ["ProKeys Text Expander!"],
+		  strings: ["You Did It!"],
 		  typeSpeed: 60,
 		}
 
@@ -21,10 +23,13 @@ export default class Welcome extends React.Component {
 		        					<div className="col">
 									
 										<h1 className="font-weight-bold">Welcome to <span className="welcome-title" ref={(el) => {this.el = el; }} /></h1>
-										<p className="h4 pb-5 text-muted"><i>The ultimate typing utility for all your needs!</i></p>
+										<p className="h4 pb-5 text-muted"><i>Congrats on becoming a pro</i></p>
 
-										<p className="h5">This is a quick start guide to make you a pro user in just 2 minutes!</p>
-										<p className="h4 font-weight-bold pt-4">Snippets are represented as <mark>Snippet</mark></p>
+										<p className="h5">Step into the world and unleash your words. Let ProKeys help your productivity soar.</p>
+										<p className="h4 font-weight-bold pt-4">If you have any further queries, contact us at <a href="mailto:prokeys.feedback@gmail.com">our email address</a></p>
+		        					</div>
+		        					<div className="col">
+		        						<img src={end} className="img-fluid"/>
 		        					</div>
 		        				</div>
 		        			</div>
