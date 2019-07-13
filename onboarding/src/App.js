@@ -6,13 +6,15 @@ import Folders from './Folders';
 import ControlData from './ControlData';
 import Sync from './Sync';
 import Bonus from './Bonus';
+import Welcome from './Welcome';
 
 export default class App extends React.Component {
 
   constructor(props) {
     super(props);
     this.state = {
-      progress: 6,
+      progress: 0,
+      states: 6,
     }
   }
 
@@ -33,13 +35,13 @@ export default class App extends React.Component {
     let component = <React.Fragment></React.Fragment>;
 
     switch(this.state.progress) {
-      case 0: 
-      case 1: component = <Intro />; break;
-      case 2: component = <Placeholders />; break;
-      case 3: component = <Folders />; break;
-      case 4: component = <ControlData />; break;
-      case 5: component = <Sync />; break;
-      case 6: component = <Bonus />; break;
+      case 0: component = <Welcome/>; break;
+      case 1: component = <Intro value={100 - 6*100/6}/>; break;
+      case 2: component = <Placeholders value={100 - 5*100/6}/>; break;
+      case 3: component = <Folders value={100 - 4*100/6}/>; break;
+      case 4: component = <ControlData value={100 - 3*100/6}/>; break;
+      case 5: component = <Sync value={100 - 2*100/6}/>; break;
+      case 6: component = <Bonus value={100 - 1*100/6}/>; break;
       default: break;
     }
 
@@ -47,13 +49,8 @@ export default class App extends React.Component {
       <React.Fragment>
         <div className="container-fluid h-100">
           <div className="row h-100">
-            <div className="col">
-
-              <div className="d-inline-flex justify-content-center w-100 py-5">
-                <h1 className="font-weight-bold">Welcome to ProKeys!</h1>
-              </div>
-
-              <div className="container h-75">
+            <div className="col d-flex align-items-center">
+              <div className="container align-items-center h-75">
                 <div className="row h-100">
                   <div className="col">
                     <div className="light-outer-box h-100">
@@ -65,14 +62,31 @@ export default class App extends React.Component {
                                 {component}
                                 <div className="d-flex mt-5 px-3">
                                   <div className="p-2">
-                                    <button className="btn btn-warning" onClick={this.previous}>
-                                      Previous
-                                    </button>
+                                    {
+                                      this.state.progress != 0 ?
+                                       ( <button className="btn btn-warning" onClick={this.previous}>
+                                          Previous
+                                        </button> )
+
+                                       : <div></div>
+                                    }
                                   </div>
                                   <div className="ml-auto p-2">
-                                    <button className="btn btn-success" onClick={this.next}>
-                                      Next
-                                    </button>
+                                    {
+                                      this.state.progress != 0 && this.state.progress != 7 ?
+                                       ( <button className="btn btn-success" onClick={this.next}>
+                                          Next
+                                        </button> )
+
+                                       : 
+                                            this.state.progress == 0 ? 
+                                            ( <button className="btn btn-success" onClick={this.next}>
+                                              Start !
+                                            </button> )
+
+                                            : <div/> 
+                                       
+                                    }
                                   </div>
                                 </div>
                               </div>

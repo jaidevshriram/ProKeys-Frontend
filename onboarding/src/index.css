@@ -1,6 +1,7 @@
 html, body {
 	height: 100%;
 	width: 100%;
+    background: rgba(0,51,81,1)!important;
 }
 
 #root {
@@ -11,7 +12,7 @@ html, body {
 .light-outer-box {
     border-radius: 30px;
     padding: 15px;
-    background: linear-gradient(to right, #07cc8f, #004782);
+    background: #07cc8f;
 }
 
 .light-inner-box	 {
@@ -22,4 +23,18 @@ html, body {
 
 .pointer-all {
 	pointer-events: all!important;
+}
+
+.btn-success {
+    background: #07cc8f!important;
+    border: none!important;
+}
+
+.btn-success:hover {
+    background: #07dd9f!important;
+    border: none!important;
+}
+
+.progress-bar {
+    background: #90d5fb!important;
 }

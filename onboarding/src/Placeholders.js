@@ -1,13 +1,12 @@
 import React from 'react';
+import ProgressBar from './ProgressBar'
 
 export default class Placeholders extends React.Component {
 	render() {
 		return (
 			<React.Fragment>
 	        
-				<div className="progress w-75 mx-auto" style={{height: "5%"}}>
-				  <div className="progress-bar" Role="progressbar" style={{ width: "50%"}} aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">50%</div>
-				</div>
+				<ProgressBar {...this.props} />
 
 		        <div className="container-fluid h-75 pt-5">
 		        	<div className="row h-100">
