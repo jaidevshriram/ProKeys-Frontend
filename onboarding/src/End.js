@@ -22,14 +22,14 @@ export default class End extends React.Component {
 		        				<div className="row ">
 		        					<div className="col">
 									
-										<h1 className="font-weight-bold">Welcome to <span className="welcome-title" ref={(el) => {this.el = el; }} /></h1>
+										<h1 className="font-weight-bold"><span className="welcome-title" ref={(el) => {this.el = el; }} /></h1>
 										<p className="h4 pb-5 text-muted"><i>Congrats on becoming a pro</i></p>
 
 										<p className="h5">Step into the world and unleash your words. Let ProKeys help your productivity soar.</p>
 										<p className="h4 font-weight-bold pt-4">If you have any further queries, contact us at <a href="mailto:prokeys.feedback@gmail.com">our email address</a></p>
 		        					</div>
 		        					<div className="col">
-		        						<img src={end} className="img-fluid"/>
+		        						<img src={end} className="img-fluid" alt="high-five"/>
 		        					</div>
 		        				</div>
 		        			</div>
