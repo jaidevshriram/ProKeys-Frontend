@@ -1,5 +1,58 @@
 import React from 'react';
 import ProgressBar from './ProgressBar';
+import KeyMap from './KeyMap';
+
+// BEGIN TEST AREA
+let activeKeys = [],
+    sequence = [],
+    pressedKeyCount = 0,
+    sequenceClearInterval,
+    map = new KeyMap();
+
+const main = () => {
+    map.bind(["Tab"], () => { console.log("THIS SHOULD EXPAND SOME STUFF") })
+    document.body.addEventListener("keydown", register);
+    document.body.addEventListener("keyup", unRegister);
+}
+
+const register = e => {
+    let key = e.key;
+
+    e.stopPropagation();
+
+    if(activeKeys.indexOf(key) < 0) {
+        activeKeys.push(key);
+        pressedKeyCount++;
+    }
+
+    clearTimeout(sequenceClearInterval);
+    sequenceClearInterval = setTimeout(() => {
+        console.log("exec", sequence);
+
+        let bind = map.getBind(sequence);
+        if(bind)
+            bind();
+
+        sequence = [];
+        activeKeys = [];
+    }, 500);
+
+    console.log(activeKeys, pressedKeyCount);
+}
+
+const unRegister = e => {
+    pressedKeyCount--;
+
+    if(pressedKeyCount === 0) {
+        sequence.push(activeKeys.join('+'));
+        activeKeys = [];
+    }
+}
+
+console.log(activeKeys, pressedKeyCount);
+
+main();
+// END TEST AREA
 
 export default class Intro extends React.Component {
 	render() {
