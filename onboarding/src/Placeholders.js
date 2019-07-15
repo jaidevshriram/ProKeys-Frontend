@@ -5,32 +5,32 @@ export default class Placeholders extends React.Component {
 	render() {
 		return (
 			<React.Fragment>
-	        
+
 				<ProgressBar {...this.props} />
 
-		        <div className="container-fluid h-75 pt-5">
-		        	<div className="row h-100">
-		        		<div className="col d-flex align-self-center justify-content-center">
-		        			<div className="container-fluid ">
-		        				<div className="row ">
-		        					<div className="col">
-		        						<h1 className="font-weight-bold">Dynamic Forms!</h1>
-		        						<p className="pt-2 pb-3">Want to send the same mail with a personalised name tag and more? ProKeys lets you do that!</p>
+				<div className="container-fluid h-75 pt-5">
+					<div className="row h-100">
+						<div className="col d-flex align-self-center justify-content-center">
+							<div className="container-fluid ">
+								<div className="row ">
+									<div className="col">
+										<h1 className="font-weight-bold">Dynamic Forms!</h1>
+										<p className="pt-2 pb-3">Want to send the same mail with a personalised name tag and more? ProKeys lets you do that!</p>
 
-		        						<i className="text-muted">For example:</i> <mark>form</mark> expands to <code>Dear | _&nbsp;_&nbsp;_&nbsp;,</code>
+										<i className="text-muted">For example:</i> <mark>form</mark> expands to <code>Dear | _&nbsp;_&nbsp;_&nbsp;,</code>
 
-		        						<br/><br/>
+										<br /><br />
 
-		        						The cursor is placed at the desired location AUTOMATICALLY!. <br/><br/>
+										The cursor is placed at the desired location AUTOMATICALLY!<br /><br />
 
-		        						Press <kbd>Tab</kbd> to cycle among the placeholders. 
+										Press <kbd>Tab</kbd> to cycle among the placeholders.
 		        					</div>
-		        				</div>
-		        			</div>
-		        		</div>
+								</div>
+							</div>
+						</div>
 						<div className="col">
 							<div className="card w-100">
-									<ul className="list-group list-group-flush text-left">
+								<ul className="list-group list-group-flush text-left">
 									<li className="list-group-item bg-danger text-right text-white font-weight-bold">Compose Mail</li>
 									<li className="list-group-item">To:&nbsp;&nbsp;<span className="text-muted">email@fancy.email.com</span></li>
 									<li className="list-group-item">Subject:&nbsp;&nbsp;<span className="text-muted">ProKeys Placeholder Demo</span></li>
@@ -45,9 +45,9 @@ export default class Placeholders extends React.Component {
 								</ul>
 							</div>
 						</div>
-		        	</div>
-		        </div>
-	        </React.Fragment>
+					</div>
+				</div>
+			</React.Fragment>
 		);
 	}
 }
