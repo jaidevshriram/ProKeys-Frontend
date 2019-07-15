@@ -16,7 +16,17 @@ export default class App extends React.Component {
     this.state = {
       progress: 0,
       states: 6,
-    }
+    };
+    this.componentsInOrder = [
+      Welcome,
+      Intro,
+      Placeholders,
+      Folders,
+      Sync,
+      ControlData,
+      Bonus,
+      End,
+    ];
   }
 
   next = () => {
@@ -32,20 +42,8 @@ export default class App extends React.Component {
   }
 
   render() {
-
-    let component = <React.Fragment></React.Fragment>;
-
-    switch(this.state.progress) {
-      case 0: component = <Welcome/>; break;
-      case 1: component = <Intro value={100 - 6*100/6}/>; break;
-      case 2: component = <Placeholders value={100 - 5*100/6}/>; break;
-      case 3: component = <Folders value={100 - 4*100/6}/>; break;
-      case 4: component = <Sync value={100 - 3*100/6}/>; break;
-      case 5: component = <ControlData value={100 - 2*100/6}/>; break;
-      case 6: component = <Bonus value={100 - 1*100/6}/>; break;
-      case 7: component = <End />; break;
-      default: break;
-    }
+    let ComponentName = this.componentsInOrder[this.state.progress],
+      component = <ComponentName value={100 - (7 - this.state.progress) * 100 / 6} />;
 
     return (
       <React.Fragment>
@@ -66,28 +64,28 @@ export default class App extends React.Component {
                                   <div className="p-2">
                                     {
                                       this.state.progress !== 0 ?
-                                       ( <button className="btn btn-warning" onClick={this.previous}>
+                                        (<button className="btn btn-warning" onClick={this.previous}>
                                           Previous
-                                        </button> )
+                                        </button>)
 
-                                       : <div></div>
+                                        : <div></div>
                                     }
                                   </div>
                                   <div className="ml-auto p-2">
                                     {
                                       this.state.progress !== 0 && this.state.progress !== 7 ?
-                                       ( <button className="btn btn-success" onClick={this.next}>
+                                        (<button className="btn btn-success" onClick={this.next}>
                                           Next
-                                        </button> )
+                                        </button>)
 
-                                       : 
-                                            this.state.progress === 0 ? 
-                                            ( <button className="btn btn-success" onClick={this.next}>
-                                              Start !
-                                            </button> )
+                                        :
+                                        this.state.progress === 0 ?
+                                          (<button className="btn btn-success" onClick={this.next}>
+                                            Start!
+                                            </button>)
 
-                                            : <div/> 
-                                       
+                                          : <div />
+
                                     }
                                   </div>
                                 </div>
