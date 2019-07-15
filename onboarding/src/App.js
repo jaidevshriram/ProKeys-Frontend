@@ -43,7 +43,7 @@ export default class App extends React.Component {
 
   render() {
     let ComponentName = this.componentsInOrder[this.state.progress],
-      component = <ComponentName value={100 - (7 - this.state.progress) * 100 / 6} />;
+      component = <ComponentName progress={this.state.progress} />;
 
     return (
       <React.Fragment>
