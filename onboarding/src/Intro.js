@@ -3,26 +3,6 @@ import ProgressBar from './ProgressBar';
 
 
 export default class Intro extends React.Component {
-	/**
-	 * @param {Event} e
-	 */
-	onkeydown(e) {
-		const node = e.target;
-		// replacer logic here
-		if (node && /snippet-input/.test(node.className) && e.key === "Tab") {
-			const nss = node.selectionStart;
-			node.value = node.value.replace(/demo/i, "Your snippet worked!");
-			node.selectionEnd = node.selectionStart = nss + "Your snippet worked!".length - "demo".length;
-			e.preventDefault();
-			e.stopPropagation();
-			return false;
-		}
-	}
-
-	componentDidMount() {
-		document.body.addEventListener("keydown", this.onkeydown);
-	}
-
 	render() {
 		return (
 			<React.Fragment>
@@ -63,7 +43,7 @@ export default class Intro extends React.Component {
 									Type <mark>Demo</mark> and hit <kbd>Tab</kbd> in the box to below to see the magic happen!
 							  	<form className="pt-5">
 										<div className="form-group">
-											<textarea className="form-control snippet-input" rows="5">
+											<textarea className="form-control" rows="5">
 											</textarea>
 										</div>
 									</form>
