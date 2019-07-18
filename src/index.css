@@ -1,13 +1,14 @@
-body {
+html,body {
     margin: 0;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans",
         "Droid Sans", "Helvetica Neue", sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    background: #ffffff !important;
+    height: 100%!important;
+    width: 100%!important;
 }
 
-light-body {
+.light-body {
     background: #ffffff;
 }
 
@@ -30,9 +31,8 @@ code {
 
 .light-outer-box,
 .dark-outer-box {
-    border-radius: 30px;
     padding: 15px;
-    background: linear-gradient(to right, #07cc8f, #004782);
+    background: linear-gradient(to right, #004782, #07cc8f);
 }
 
 .light-outer-box-thick,
@@ -323,4 +323,8 @@ textarea {
 
 .collapsible {
     cursor: pointer;
+}
+
+.light-sidebar-background {
+    background: #004782!important;
 }
