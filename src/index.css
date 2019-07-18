@@ -31,7 +31,8 @@ code {
 
 .light-outer-box,
 .dark-outer-box {
-    padding: 15px;
+    padding-top: 1.25em;
+    padding-bottom: 1.25em;
     background: linear-gradient(to right, #004782, #07cc8f);
 }
 
@@ -49,8 +50,7 @@ code {
 
 .light-inner-box,
 .dark-inner-box {
-    border-radius: 30px;
-    height: 100%;
+    border-radius: 20px;
     background: #ffffff;
 }
 
@@ -302,8 +302,10 @@ textarea {
 
 .light-snippet,
 .dark-snippet {
-    bottom: 0;
-    pointer-events: none;
+    padding: 10px 5px 10px 5px;
+    background: rgba(0,0,0,0.05)!important;
+    margin-top: 10px;
+    border-radius: 5px!important;
 }
 
 .renable-pointer {
@@ -327,4 +329,9 @@ textarea {
 
 .light-sidebar-background {
     background: #004782!important;
+}
+
+.overflow-hide {
+    white-space:nowrap;
+    overflow:hidden;
 }

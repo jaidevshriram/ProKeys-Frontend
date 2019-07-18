@@ -1,7 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import TextTruncate from "react-text-truncate";
 import { Generic } from "./data";
 import TileFloatButton from "./TileFloatButton";
 
@@ -29,23 +28,13 @@ export default class GenericTile extends React.Component {
             })
     }
 
-    componentDidMount() {
-        window.addEventListener("resize", this.forceUpdate);
-    }
-
     render() {
         const ICON_NAME = this.props.type === Generic.FOLDER_TYPE ? "folder" : "file",
             element = <div className="d-inline-flex h-100 w-80 align-items-center light-snippet-preview" style={{ width: "800px" }}>
                 <span className="d-inline-flex align-items-center font-weight-bold h-100 mx-2 text-black">
                     {this.props.name}
                 </span>
-                <TextTruncate
-                    line={2}
-                    element="span"
-                    truncateText="..."
-                    text={this.props.longText}
-                    className="w-100"
-                />
+                {this.props.longText}
             </div>,
             DOM = (
                 <React.Fragment>
