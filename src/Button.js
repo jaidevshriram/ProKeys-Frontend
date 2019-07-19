@@ -24,7 +24,6 @@ export default class Button extends React.Component {
 
 Button.propTypes = {
     link: PropTypes.string,
-	icon: PropTypes.string,
-	option: PropTypes.string,
+    icon: PropTypes.string,
+    option: PropTypes.string,
 };
-

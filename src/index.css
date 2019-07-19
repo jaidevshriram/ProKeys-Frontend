@@ -369,7 +369,7 @@ textarea {
 
 .option:hover {
     background: #3986C8 !important;
-    transition: 0.15s;
+    transition: 0.1s;
 }
 
 .option-text {
