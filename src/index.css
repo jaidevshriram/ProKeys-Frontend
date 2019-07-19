@@ -361,7 +361,17 @@ textarea {
 
 .option {
     padding: 10px 5px 10px 5px;
+    margin-left: -1em!important;
     margin-top: 15px;
     border-radius: 5px;
-    background: rgb(222, 252, 253) !important;
+    background: #1A588D!important;
+}
+
+.option:hover {
+    background: #3986C8 !important;
+    transition: 0.15s;
+}
+
+.option-text {
+    color: white!important;
 }

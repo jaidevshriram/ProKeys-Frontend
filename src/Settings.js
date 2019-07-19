@@ -25,7 +25,7 @@ export default class SnippetOptions extends React.Component {
 
     render() {
         return (
-        <div className="h-100 bg-primary overflow-y-scroll">
+        <div className="h-100 overflow-y-scroll">
                 <div className="container-fluid">
                     <span className="h3 font-weight-bold">HotKey Options</span>
                     <div className="row">
