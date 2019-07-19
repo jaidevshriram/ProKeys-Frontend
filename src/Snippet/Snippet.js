@@ -1,6 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
 
+import TileFloatButton from './TileFloatButton';
+
 export default class Snippet extends React.Component {
     render() {
         return (
@@ -15,8 +17,11 @@ export default class Snippet extends React.Component {
         			<div className="col-7 overflow-hide">
         				{this.props.body}
         			</div>
-        			<div className="col">
-
+        			<div className="col text-right">
+	                    <TileFloatButton type="Edit" />
+	                    <TileFloatButton type="Delete" />
+	                    <TileFloatButton type="Duplicate" />
+	                    <TileFloatButton type="Move" />
         			</div>
         		</div>
         	</div>

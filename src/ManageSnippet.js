@@ -2,7 +2,7 @@ import React from "react";
 import { PropTypes } from "prop-types";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Snippet from "./Snippet/Snippet";
-import FolderTile from "./Snippet/Folder";
+import Folder from "./Snippet/Folder";
 import { DATA, Generic } from "./data";
 
 // Font Awesome
@@ -24,7 +24,7 @@ export default class ManageSnippet extends React.Component {
                 shouldHighlight = highlightList.indexOf(object.name) > -1;
 
             if (object.type === Generic.FOLDER_TYPE) {
-                return <FolderTile name={object.name} key={keyVal}
+                return <Folder name={object.name} key={keyVal}
                     count={{ folder: object.getFolderCount(), snip: object.getSnippetCount() }}
                     shouldHighlight={shouldHighlight} id={object.name}/>;
             }

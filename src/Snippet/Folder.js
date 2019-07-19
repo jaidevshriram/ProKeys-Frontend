@@ -1,15 +1,40 @@
 import React from "react";
 import PropTypes from "prop-types";
-import GenericTile from "./GenericTile";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Generic } from "./data";
 
-export default class FolderTile extends React.Component {
+import TileFloatButton from './TileFloatButton';
+
+export default class Folder extends React.Component {
     render() {
-        return <GenericTile {...this.props} type={Generic.FOLDER_TYPE} longText={`${this.props.count.snip} Snippets. ${this.props.count.folder} Folders`} />;
+        return (
+        	<div className="container-fluid light-folder">
+        		<div className="row">
+        			<div className="col-1 d-flex align-items-center justify-content-center">
+        				[&nbsp;&nbsp;&nbsp;]
+        			</div>
+        			<div className="col-1">
+                        <FontAwesomeIcon icon={["far", "folder"]} size="2x" className="h-100 align-items-center ml-2" />
+        			</div>
+        			<div className="col-1 font-weight-bold d-flex align-items-center justify-content-center">
+        				{this.props.name}
+        			</div>
+        			<div className="col-7 overflow-hide d-flex align-items-center justify-content-center">
+        				{this.props.count.folder} folders and {this.props.count.snip} snippets
+        			</div>
+        			<div className="col text-right">
+	                    <TileFloatButton type="Edit" />
+	                    <TileFloatButton type="Delete" />
+	                    <TileFloatButton type="Duplicate" />
+	                    <TileFloatButton type="Move" />
+        			</div>
+        		</div>
+        	</div>
+        );
     }
 }
 
-FolderTile.propTypes = {
+Folder.propTypes = {
     name: PropTypes.string,
     count: PropTypes.objectOf(PropTypes.number),
     shouldHighlight: PropTypes.bool,

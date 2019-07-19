@@ -26,7 +26,7 @@ export class BaseLayout extends React.Component {
                             <div className="container-fluid">
                                 <div className="row h-100">
                                     <div className="col d-flex align-items-center justify-content-center">
-                                        <span className="display-3 text-white">proKeys</span>
+                                        <span className="display-3 text-white pt-3">proKeys</span>
                                     </div>
                                 </div>
                             </div>
@@ -34,7 +34,7 @@ export class BaseLayout extends React.Component {
                         <div className="col-9 light-outer-box">
                             <div className="container-fluid light-inner-box h-100">
                                 <div className="row h-100">
-                                    <div className="col">
+                                    <div className="col px-4">
                                         <Switch>
                                             <Route exact path="/"
                                                 render={routeProps => (
@@ -43,7 +43,7 @@ export class BaseLayout extends React.Component {
                                             <Route path="/Snippet" render={routeProps => (
                                                 <ManageSnippet {...routeProps} folder="Snippets" />
                                             )} />
-                                            <Route path="/Setting" component={Settings} />
+                                            <Route path="/Setting" component={Settings} className="table-row"/>
                                         </Switch>
                                     </div>
                                 </div>
