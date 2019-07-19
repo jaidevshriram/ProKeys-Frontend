@@ -59,7 +59,7 @@ export default class Compose extends React.Component {
 	render() {
 
 		return (
-	        <div className="container-fluid position-fixed w-100 h-100 d-flex align-items-end flex-row-reverse light-snippet">
+	        <div className="container position-fixed w-100 h-100 d-flex align-items-end flex-row-reverse compose">
             {
                 this.state.composeboxes.map((box, id) => <ComposeBox key={id} id={id} name={box.name} content={box.content} ismax={box.ismax}
                     onchange={this.onChange.bind(this)} updateParent={this.updateArray.bind(this)}

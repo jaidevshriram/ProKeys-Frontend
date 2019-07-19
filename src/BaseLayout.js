@@ -30,7 +30,7 @@ export class BaseLayout extends React.Component {
                                     </div>
                                 </div>
                                 <div className="row h-75">
-                                    <SnippetOptions/>
+                                    <SnippetOptions onclick={this.newCompose.bind(this)}/>
                                     <Options/>
                                 </div>
                             </div>
@@ -55,6 +55,8 @@ export class BaseLayout extends React.Component {
                         </div>
                     </div>
                 </div>
+
+                <Compose linkToNewSnippet={this.linkToNewSnippet.bind(this)}/>
             </React.Fragment>
         );
     }
