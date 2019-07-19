@@ -24,10 +24,13 @@ export class BaseLayout extends React.Component {
                     <div className="row h-100">
                         <div className="col-3 light-sidebar-background">
                             <div className="container-fluid">
-                                <div className="row h-100">
+                                <div className="row h-25">
                                     <div className="col d-flex align-items-center justify-content-center">
                                         <span className="display-3 text-white pt-3">proKeys</span>
                                     </div>
+                                </div>
+                                <div className="row h-75">
+                                    <Options/>
                                 </div>
                             </div>
                         </div>

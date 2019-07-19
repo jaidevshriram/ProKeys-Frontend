@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Generic } from "./data";
 
-import TileFloatButton from './TileFloatButton';
+import TileFloatButton from "./TileFloatButton";
 
 export default class Folder extends React.Component {
     render() {
