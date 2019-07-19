@@ -4,7 +4,7 @@ import Button from "./Button";
 export default class Options extends React.Component {
     render() {
         return (
-            <div className="w-100 pt-5">
+            <div className="w-100 pt-3">
                 <Button icon="plus" link="/" option="Manage Snippets"/>
                 <Button icon="cog" link="/Setting" option="Settings"/>
                 <Button icon="info" link="/About" option="About"/>

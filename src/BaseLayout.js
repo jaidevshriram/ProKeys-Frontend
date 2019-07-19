@@ -30,6 +30,7 @@ export class BaseLayout extends React.Component {
                                     </div>
                                 </div>
                                 <div className="row h-75">
+                                    <SnippetOptions/>
                                     <Options/>
                                 </div>
                             </div>
