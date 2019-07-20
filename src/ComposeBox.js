@@ -1,5 +1,4 @@
 /* eslint-disable react/prop-types */
-/* eslint-disable no-unused-vars */
 import React from "react";
 
 // Font Awesome
@@ -56,7 +55,7 @@ export default class Compose extends React.Component {
         this.updateParent();
     }
 
-    close(e) {
+    close() {
         this.props.closeBox(this.props.id);
     }
 
