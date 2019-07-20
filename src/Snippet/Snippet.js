@@ -9,7 +9,7 @@ export default class Snippet extends React.Component {
             <div className="container-fluid light-snippet">
                 <div className="row">
                     <div className="col-1 d-flex align-items-center justify-content-center">
-						[&nbsp;&nbsp;&nbsp;]
+                        [&nbsp;&nbsp;&nbsp;]
                     </div>
                     <div className="col-2 font-weight-bold">
                         {this.props.name}
@@ -18,7 +18,7 @@ export default class Snippet extends React.Component {
                         {this.props.body}
                     </div>
                     <div className="col text-right">
-                        <TileFloatButton type="Edit" />
+                        <TileFloatButton type="Edit" onClick={() => this.props.editSnippet(this.props.name)} />
                         <TileFloatButton type="Delete" />
                         <TileFloatButton type="Duplicate" />
                         <TileFloatButton type="Move" />
@@ -33,4 +33,5 @@ Snippet.propTypes = {
     name: PropTypes.string,
     body: PropTypes.string,
     id: PropTypes.string,
+    editSnippet: PropTypes.func,
 };

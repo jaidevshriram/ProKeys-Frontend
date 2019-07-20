@@ -29,7 +29,7 @@ export default class ManageSnippet extends React.Component {
                     shouldHighlight={shouldHighlight} id={object.name} />;
             }
 
-            return <Snippet name={object.name} key={keyVal} body={object.body} id={object.name} />;
+            return <Snippet name={object.name} key={keyVal} body={object.body} id={object.name} handlers={this.props.handlers} />;
         });
     }
 
@@ -78,4 +78,5 @@ ManageSnippet.propTypes = {
     folder: PropTypes.string,
     highlightList: PropTypes.arrayOf(PropTypes.string),
     isSearchResultFolder: PropTypes.bool,
+    handlers: PropTypes.object,
 };

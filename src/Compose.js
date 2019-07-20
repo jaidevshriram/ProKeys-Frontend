@@ -27,9 +27,9 @@ export default class Compose extends React.Component {
         this.props.linkToNewSnippet(this.createCompose.bind(this));
     }
 
-    createCompose() {
+    createCompose(initialValues) {
         if (this.state.composeboxes.length <= 2) {
-            const composeboxes = [new Box(), ...this.state.composeboxes];
+            const composeboxes = [new Box(initialValues), ...this.state.composeboxes];
             this.setState({ composeboxes });
         } else {
             window.$("#too-many-boxes").modal("show");

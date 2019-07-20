@@ -7,19 +7,46 @@ import SnippetOptions from "./SnippetOptions";
 import ManageSnippet from "./ManageSnippet";
 import Settings from "./Settings";
 import Compose from "./Compose";
+import { DATA } from "./Snippet/data";
 
 export class BaseLayout extends React.Component {
-    newCompose() {
-        this.createCompose();
+    /**
+     * @param {Object} initialValues
+     */
+    newCompose(initialValues) {
+        this.createCompose(initialValues);
     }
 
     linkToNewSnippet(realCreateCompose) {
         this.createCompose = realCreateCompose;
     }
 
+    getSnippetHandlers() {
+        const methodsToPass = ["edit", "delete", "clone", "move"],
+            handlers = {};
+
+        for (const method of methodsToPass) {
+            for (const objType of ["Snippet", "Folder"]) {
+                const name = method + objType;
+                handlers[name] = this[name];
+            }
+        }
+
+        return handlers;
+    }
+
+    editSnippet(snipName) {
+        const snip = DATA.snippets.getUniqueSnip(snipName);
+        this.newCompose({ name: snip.name, body: snip.body });
+    }
+
     render() {
+        function snippetRenderFn(routeProps) {
+            return <ManageSnippet {...routeProps} folder="Snippets" handlers={this.getSnippetHandlers()} />;
+        }
+
         return (
-            <React.Fragment>
+            <React.Fragment >
                 <div className="container-fluid h-100 main-container">
                     <div className="row h-100">
                         <div className="col-3 light-sidebar-background">
@@ -40,13 +67,8 @@ export class BaseLayout extends React.Component {
                                 <div className="row h-100 overflow-y-scroll">
                                     <div className="col py-4 base-layout-container">
                                         <Switch>
-                                            <Route exact path="/"
-                                                render={routeProps => (
-                                                    <ManageSnippet {...routeProps} folder="Snippets" />
-                                                )} />
-                                            <Route path="/Snippet" render={routeProps => (
-                                                <ManageSnippet {...routeProps} folder="Snippets" />
-                                            )} />
+                                            <Route exact path="/" render={snippetRenderFn.bind(this)} />
+                                            <Route path="/Snippet" render={snippetRenderFn.bind(this)} />
                                             <Route path="/Setting" component={Settings} className="table-row" />
                                         </Switch>
                                     </div>
@@ -57,7 +79,7 @@ export class BaseLayout extends React.Component {
                 </div>
 
                 <Compose linkToNewSnippet={this.linkToNewSnippet.bind(this)} />
-            </React.Fragment>
+            </React.Fragment >
         );
     }
 }
