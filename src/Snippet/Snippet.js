@@ -18,7 +18,9 @@ export default class Snippet extends React.Component {
                         {this.props.body}
                     </div>
                     <div className="col text-right">
-                        <TileFloatButton type="Edit" onClick={() => this.props.editSnippet(this.props.name)} />
+                        <TileFloatButton type="Edit" onClick={() => {
+                            this.props.handlers.editSnippet(this.props.name);
+                        }} />
                         <TileFloatButton type="Delete" />
                         <TileFloatButton type="Duplicate" />
                         <TileFloatButton type="Move" />
@@ -33,5 +35,5 @@ Snippet.propTypes = {
     name: PropTypes.string,
     body: PropTypes.string,
     id: PropTypes.string,
-    editSnippet: PropTypes.func,
+    handlers: PropTypes.objectOf(PropTypes.func),
 };

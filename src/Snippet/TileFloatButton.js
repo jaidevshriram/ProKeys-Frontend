@@ -15,12 +15,13 @@ export default class TileFloatButton extends React.Component {
 
     render() {
         const faIcon = this.iconMap[this.props.type];
-        return <button className="remove-button-styling" data-toggle="tooltip" data-placement="top" title={this.props.type}>
+        return <button onClick={this.props.onClick} className="remove-button-styling" data-toggle="tooltip" data-placement="top" title={this.props.type}>
             <ProKeysIcon icon={faIcon} />
         </button>;
     }
 }
 
 TileFloatButton.propTypes = {
+    onClick: PropTypes.func,
     type: PropTypes.string,
 };

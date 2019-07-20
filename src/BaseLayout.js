@@ -23,12 +23,13 @@ export class BaseLayout extends React.Component {
 
     getSnippetHandlers() {
         const methodsToPass = ["edit", "delete", "clone", "move"],
-            handlers = {};
+            handlers = {},
+            voidFN = () => undefined;
 
         for (const method of methodsToPass) {
             for (const objType of ["Snippet", "Folder"]) {
                 const name = method + objType;
-                handlers[name] = this[name];
+                handlers[name] = (this[name] || voidFN).bind(this);
             }
         }
 
@@ -37,7 +38,7 @@ export class BaseLayout extends React.Component {
 
     editSnippet(snipName) {
         const snip = DATA.snippets.getUniqueSnip(snipName);
-        this.newCompose({ name: snip.name, body: snip.body });
+        this.newCompose({ name: snip.name, content: snip.body });
     }
 
     render() {
