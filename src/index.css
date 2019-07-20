@@ -388,3 +388,7 @@ a {
 .compose {
     z-index: 100!important;
 }
+
+.base-layout-container{
+    height: fit-content;
+}

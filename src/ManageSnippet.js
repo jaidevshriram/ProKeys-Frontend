@@ -26,16 +26,16 @@ export default class ManageSnippet extends React.Component {
             if (object.type === Generic.FOLDER_TYPE) {
                 return <Folder name={object.name} key={keyVal}
                     count={{ folder: object.getFolderCount(), snip: object.getSnippetCount() }}
-                    shouldHighlight={shouldHighlight} id={object.name}/>;
+                    shouldHighlight={shouldHighlight} id={object.name} />;
             }
 
-            return <Snippet name={object.name} key={keyVal} body={object.body} id={object.name}/>;
+            return <Snippet name={object.name} key={keyVal} body={object.body} id={object.name} />;
         });
     }
 
     render() {
         return (
-            <div className="h-100">
+            <div>
                 <div className="container-fluid py-3">
                     <div className="row">
                         <div className="col">

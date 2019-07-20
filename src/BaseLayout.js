@@ -30,15 +30,15 @@ export class BaseLayout extends React.Component {
                                     </div>
                                 </div>
                                 <div className="row h-75">
-                                    <SnippetOptions onclick={this.newCompose.bind(this)}/>
-                                    <Options/>
+                                    <SnippetOptions onclick={this.newCompose.bind(this)} />
+                                    <Options />
                                 </div>
                             </div>
                         </div>
-                        <div className="col-9 light-outer-box">
+                        <div className="col-9 light-outer-box overflow-y-scroll h-100">
                             <div className="container-fluid light-inner-box h-100">
-                                <div className="row h-100">
-                                    <div className="col px-4">
+                                <div className="row h-100 overflow-y-scroll">
+                                    <div className="col py-4 base-layout-container">
                                         <Switch>
                                             <Route exact path="/"
                                                 render={routeProps => (
@@ -47,7 +47,7 @@ export class BaseLayout extends React.Component {
                                             <Route path="/Snippet" render={routeProps => (
                                                 <ManageSnippet {...routeProps} folder="Snippets" />
                                             )} />
-                                            <Route path="/Setting" component={Settings} className="table-row"/>
+                                            <Route path="/Setting" component={Settings} className="table-row" />
                                         </Switch>
                                     </div>
                                 </div>
@@ -56,7 +56,7 @@ export class BaseLayout extends React.Component {
                     </div>
                 </div>
 
-                <Compose linkToNewSnippet={this.linkToNewSnippet.bind(this)}/>
+                <Compose linkToNewSnippet={this.linkToNewSnippet.bind(this)} />
             </React.Fragment>
         );
     }
