@@ -29,11 +29,8 @@ export default class Compose extends React.Component {
 
     createCompose() {
         if (this.state.composeboxes.length <= 2) {
-            const composeboxesCopy = this.state.composeboxes.slice(0);
-            composeboxesCopy.unshift(new Box());
-            this.setState({
-                composeboxes: composeboxesCopy,
-            });
+            const composeboxes = [new Box(), ...this.state.composeboxes];
+            this.setState({ composeboxes });
         } else {
             window.$("#too-many-boxes").modal("show");
         }

@@ -86,13 +86,15 @@ export default class Compose extends React.Component {
         }
     }
 
-
     componentDidMount() {
         this.updateDimensions();
         window.addEventListener("resize", this.updateDimensions.bind(this));
     }
 
     render() {
+        console.log(this.props.name);
+        console.log(this.props.content);
+        console.log(this.props.ismax);
         return (
             <div className="compose-box light-snippet renable-pointer align-self-end px-1" id={this.props.id}>
                 <div className="container-fluid w-100 light-compose float-right">
