@@ -8,18 +8,6 @@ export default class Compose extends React.Component {
     constructor(props) {
         super(props);
 
-        if (this.props.ismax) {
-            this.state = {
-                minclass: "row d-none",
-                maxclass: "row d-block",
-            };
-        } else {
-            this.state = {
-                minclass: "row d-block",
-                maxclass: "row d-none",
-            };
-        }
-
         this.value = {};
 
         for (const key of Object.keys(this.props)) {
@@ -59,23 +47,11 @@ export default class Compose extends React.Component {
         this.props.closeBox(this.props.id);
     }
 
-    componentDidUpdate(prevProps) {
+    componentDidUpdate() {
         this.value = {};
 
         for (const key of Object.keys(this.props)) {
             this.value[key] = this.props[key];
-        }
-
-        if (this.props.ismax !== prevProps.ismax && this.props.ismax) {
-            this.setState({
-                minclass: "row d-none",
-                maxclass: "row d-block",
-            });
-        } else if (this.props.ismax !== prevProps.ismax) {
-            this.setState({
-                minclass: "row d-block",
-                maxclass: "row d-none",
-            });
         }
     }
 
@@ -92,13 +68,14 @@ export default class Compose extends React.Component {
     }
 
     render() {
-        console.log(this.props.name);
-        console.log(this.props.content);
-        console.log(this.props.ismax);
+        const displayClasses = ["row d-block", "row d-none"],
+            minClass = displayClasses[+this.props.ismax],
+            maxClass = displayClasses[+!this.props.ismax];
+
         return (
             <div className="compose-box light-snippet renable-pointer align-self-end px-1" id={this.props.id}>
                 <div className="container-fluid w-100 light-compose float-right">
-                    <div className={this.state.minclass} onClick={this.maximize.bind(this)}>
+                    <div className={minClass} onClick={this.maximize.bind(this)}>
                         <div className="col d-flex align-items-end">
                             <div className="light-compose-mini maximize">
                                 <div className="py-2 px-2 text-center text-white">
@@ -107,7 +84,8 @@ export default class Compose extends React.Component {
                             </div>
                         </div>
                     </div>
-                    <div className={this.state.maxclass}>
+
+                    <div className={maxClass}>
                         <div className="col">
                             <div className="pl-1 pr-1 pb-2 pt-1 w-100">
                                 <div className="light-icons float-right">
