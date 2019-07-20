@@ -385,8 +385,20 @@ a {
     color: rgba(255,255,255,0.75)!important;
 }
 
+.main-container{
+    z-index: 100;
+}
+
 .compose {
-    z-index: 100!important;
+    bottom: 0;
+    right: 0;
+    height: fit-content !important;
+    width: fit-content !important;
+}
+
+.compose-box{
+    z-index: 100 !important;
+    width: 30vw;
 }
 
 .base-layout-container{

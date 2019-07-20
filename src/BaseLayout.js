@@ -20,7 +20,7 @@ export class BaseLayout extends React.Component {
     render() {
         return (
             <React.Fragment>
-                <div className="container-fluid h-100">
+                <div className="container-fluid h-100 main-container">
                     <div className="row h-100">
                         <div className="col-3 light-sidebar-background">
                             <div className="container-fluid">

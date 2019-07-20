@@ -1,7 +1,8 @@
-import React from 'react';
+import React from "react";
 
-//Custom Imports
-import ComposeBox from './ComposeBox';
+// Custom Imports
+import PropTypes from "prop-types";
+import ComposeBox from "./ComposeBox";
 
 export default class Compose extends React.Component {
     constructor(props) {
@@ -10,7 +11,7 @@ export default class Compose extends React.Component {
             composeboxes: [],
             number: 0,
         };
-		    this.props.linkToNewSnippet(this.createCompose.bind(this));
+        this.props.linkToNewSnippet(this.createCompose.bind(this));
     }
 
     createCompose() {
@@ -20,16 +21,15 @@ export default class Compose extends React.Component {
             ismax: true,
         };
 
-        if(this.state.number <=2 ) {
-        	this.state.composeboxes.unshift(newbox);
-	        this.setState({
-	            composeboxes: this.state.composeboxes,
-	            number: this.state.number + 1,
-	        });
-	    }
-	    else {
-	    	window.$('#too-many-boxes').modal('show');
-	    }
+        if (this.state.number <= 2) {
+            this.state.composeboxes.unshift(newbox);
+            this.setState({
+                composeboxes: this.state.composeboxes,
+                number: this.state.number + 1,
+            });
+        } else {
+            window.$("#too-many-boxes").modal("show");
+        }
     }
 
     onChange() {
@@ -53,19 +53,22 @@ export default class Compose extends React.Component {
         // create a copy
         const newcomposeboxes = this.state.composeboxes.slice(0);
         newcomposeboxes.splice(id, 1);
-        this.setState({ composeboxes: newcomposeboxes, number: this.state.number -1, });
+        this.setState({ composeboxes: newcomposeboxes, number: this.state.number - 1 });
     }
 
-	render() {
-
-		return (
-	        <div className="container position-fixed w-100 h-100 d-flex align-items-end flex-row-reverse compose">
-            {
-                this.state.composeboxes.map((box, id) => <ComposeBox key={id} id={id} name={box.name} content={box.content} ismax={box.ismax}
-                    onchange={this.onChange.bind(this)} updateParent={this.updateArray.bind(this)}
-                    closeBox={this.closeBox.bind(this)} />)
-            }
-	        </div>
-	    );
-	}
+    render() {
+        return (
+            <div className="container position-fixed d-flex align-items-end flex-row-reverse compose">
+                {
+                    this.state.composeboxes.map((box, id) => <ComposeBox key={id} id={id} name={box.name} content={box.content} ismax={box.ismax}
+                        onchange={this.onChange.bind(this)} updateParent={this.updateArray.bind(this)}
+                        closeBox={this.closeBox.bind(this)} />)
+                }
+            </div>
+        );
+    }
 }
+
+Compose.propTypes = {
+    linkToNewSnippet: PropTypes.func,
+};
