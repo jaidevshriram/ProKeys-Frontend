@@ -8,6 +8,7 @@ import ManageSnippet from "./ManageSnippet";
 import Settings from "./Settings";
 import Compose from "./Compose";
 import { DATA } from "./Snippet/data";
+import { Generic } from "./data";
 
 export class BaseLayout extends React.Component {
     /**
@@ -39,6 +40,19 @@ export class BaseLayout extends React.Component {
     editSnippet(snipName) {
         const snip = DATA.snippets.getUniqueSnip(snipName);
         this.newCompose({ name: snip.name, content: snip.body });
+    }
+
+    deleteGeneric(objName, type) {
+        const obj = DATA.snippets.getUniqueObject(objName, type);
+        obj.remove();
+    }
+
+    deleteSnippet(snipName) {
+        this.deleteGeneric(snipName, Generic.SNIP_TYPE);
+    }
+
+    deleteFolder(folderName) {
+        this.deleteGeneric(folderName, Generic.FOLDER_TYPE);
     }
 
     render() {

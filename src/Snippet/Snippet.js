@@ -21,7 +21,9 @@ export default class Snippet extends React.Component {
                         <TileFloatButton type="Edit" onClick={() => {
                             this.props.handlers.editSnippet(this.props.name);
                         }} />
-                        <TileFloatButton type="Delete" />
+                        <TileFloatButton type="Delete" onClick={() => {
+                            this.props.handlers.deleteSnippet(this.props.name);
+                        }} />
                         <TileFloatButton type="Duplicate" />
                         <TileFloatButton type="Move" />
                     </div>
