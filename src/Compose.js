@@ -39,23 +39,14 @@ export default class Compose extends React.Component {
         }
     }
 
-    onChange() {
-        const composeboxesCopy = this.state.composeboxes.slice(0);
-        composeboxesCopy[0].name = "test";
-        this.setState({ composeboxes: composeboxesCopy });
-    }
-
-    updateArray(newvalues) {
-        const newcomposeboxes = this.state.composeboxes.slice(0);
-        newcomposeboxes[newvalues.id] = new Box(newvalues);
-
-        this.setState({ composeboxes: newcomposeboxes });
+    updateParent(boxId, newvalues) {
+        const composeboxes = this.state.composeboxes.slice(0);
+        composeboxes[boxId] = new Box(newvalues);
+        this.setState({ composeboxes });
     }
 
     closeBox(id) {
-        const newcomposeboxes = this.state.composeboxes.slice(0);
-        newcomposeboxes.splice(id, 1);
-        this.setState({ composeboxes: newcomposeboxes });
+        this.setState({ composeboxes: this.state.composeboxes.filter((item, idx) => idx !== id) });
     }
 
     render() {
@@ -63,8 +54,7 @@ export default class Compose extends React.Component {
             <div className="container position-fixed d-flex align-items-end flex-row-reverse compose">
                 {
                     this.state.composeboxes.map((box, id) => <ComposeBox key={id} id={id} {...box}
-                        onchange={this.onChange.bind(this)} updateParent={this.updateArray.bind(this)}
-                        closeBox={this.closeBox.bind(this)} />)
+                        updateParent={this.updateParent.bind(this)} closeBox={this.closeBox.bind(this)} />)
                 }
             </div>
         );

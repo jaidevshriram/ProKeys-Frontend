@@ -42,7 +42,7 @@ export default class Compose extends React.Component {
     }
 
     updateParent() {
-        this.props.updateParent(this.value);
+        this.props.updateParent(this.props.id, this.value);
     }
 
     nameChange(e) {
