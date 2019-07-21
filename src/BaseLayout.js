@@ -42,9 +42,17 @@ export class BaseLayout extends React.Component {
         this.newCompose({ name: snip.name, content: snip.body });
     }
 
+    editFolder(folderName) {
+        // eslint-disable-next-line no-unused-vars
+        const folder = DATA.snippets.getUniqueFolder(folderName);
+        // write some ui jaidev
+    }
+
     deleteGeneric(objName, type) {
-        const obj = DATA.snippets.getUniqueObject(objName, type);
+        const obj = DATA.snippets.getUniqueObject(objName, type),
+            parentObj = obj.parentFolder();
         obj.remove();
+        parentObj.render();
     }
 
     deleteSnippet(snipName) {
@@ -53,6 +61,29 @@ export class BaseLayout extends React.Component {
 
     deleteFolder(folderName) {
         this.deleteGeneric(folderName, Generic.FOLDER_TYPE);
+    }
+
+    duplicateGeneric(objName, type) {
+        const obj = DATA.snippets.getUniqueObject(objName, type),
+            parentObj = obj.parentFolder();
+        obj.clone();
+        parentObj.render();
+    }
+
+    duplicateSnippet(snipName) {
+        this.duplicateGeneric(snipName, Generic.SNIP_TYPE);
+    }
+
+    duplicateFolder(folderName) {
+        this.duplicateGeneric(folderName, Generic.FOLDER_TYPE);
+    }
+
+    moveSnippet() {
+        // jaidev ui
+    }
+
+    moveFolder() {
+        // jaidev ui
     }
 
     render() {

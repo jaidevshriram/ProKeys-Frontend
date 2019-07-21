@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 
 import TileFloatButton from "./TileFloatButton";
+import { gTranlateImmune } from "./helpers";
 
 export default class Snippet extends React.Component {
     render() {
@@ -12,7 +13,7 @@ export default class Snippet extends React.Component {
                         [&nbsp;&nbsp;&nbsp;]
                     </div>
                     <div className="col-2 font-weight-bold">
-                        {this.props.name}
+                        {gTranlateImmune(this.props.name)}
                     </div>
                     <div className="col-7 overflow-hide">
                         {this.props.body}
@@ -24,8 +25,12 @@ export default class Snippet extends React.Component {
                         <TileFloatButton type="Delete" onClick={() => {
                             this.props.handlers.deleteSnippet(this.props.name);
                         }} />
-                        <TileFloatButton type="Duplicate" />
-                        <TileFloatButton type="Move" />
+                        <TileFloatButton type="Duplicate" onClick={() => {
+                            this.props.handlers.duplicateSnippet(this.props.name);
+                        }} />
+                        <TileFloatButton type="Move" onClick={() => {
+                            this.props.handlers.moveSnippet(this.props.name);
+                        }} />
                     </div>
                 </div>
             </div>
