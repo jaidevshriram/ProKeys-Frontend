@@ -22,7 +22,7 @@ export class BaseLayout extends React.Component {
         this.createCompose = realCreateCompose;
     }
 
-    getSnippetHandlers() {
+    getGenericHandlers() {
         const methodsToPass = ["edit", "delete", "clone", "move"],
             handlers = {},
             voidFN = () => undefined;
@@ -88,7 +88,7 @@ export class BaseLayout extends React.Component {
 
     render() {
         function snippetRenderFn(routeProps) {
-            return <ManageSnippet {...routeProps} folder="Snippets" handlers={this.getSnippetHandlers()} />;
+            return <ManageSnippet {...routeProps} folder="Snippets" handlers={this.getGenericHandlers()} />;
         }
 
         return (
