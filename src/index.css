@@ -392,8 +392,7 @@ a {
 .compose {
     bottom: 0;
     right: 0;
-    height: fit-content !important;
-    width: fit-content !important;
+    pointer-events: auto!important;
 }
 
 .compose-box{
