@@ -392,7 +392,7 @@ a {
 .compose {
     bottom: 0;
     right: 0;
-    pointer-events: auto!important;
+    pointer-events: none!important;
 }
 
 .compose-box{
