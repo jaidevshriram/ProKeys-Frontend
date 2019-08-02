@@ -10,7 +10,10 @@ export default class Folder extends React.Component {
             <div className="container-fluid light-folder">
                 <div className="row">
                     <div className="col-1 d-flex align-items-center justify-content-center">
-						[&nbsp;&nbsp;&nbsp;]
+                        <div className="custom-control custom-checkbox">
+                            <input type="checkbox" className="custom-control-input" id={this.props.name}/>
+                            <label className="custom-control-label" htmlFor={this.props.name}></label>
+                        </div>
                     </div>
                     <div className="col-1">
                         <FontAwesomeIcon icon={["far", "folder"]} size="2x" className="h-100 align-items-center ml-2" />
