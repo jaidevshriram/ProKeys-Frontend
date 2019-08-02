@@ -73,7 +73,7 @@ export default class Compose extends React.Component {
             maxClass = displayClasses[+!this.props.ismax];
 
         return (
-            <div className="compose-box light-snippet renable-pointer align-self-end px-1" id={this.props.id}>
+            <div className="compose-box renable-pointer align-self-end px-1" id={this.props.id}>
                 <div className="container-fluid w-100 light-compose float-right">
                     <div className={minClass} onClick={this.maximize.bind(this)}>
                         <div className="col d-flex align-items-end">
