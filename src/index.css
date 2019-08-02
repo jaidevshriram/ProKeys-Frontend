@@ -176,7 +176,7 @@ code {
 }
 
 .light-compose {
-    background: rgba(0, 71, 130, 0.8) !important;
+    background: rgb(7, 38, 97) !important;
 }
 
 .light-compose-mini,
@@ -215,7 +215,7 @@ code {
 }
 
 .w-130 {
-    width: 120% !important;
+    width: 130% !important;
 }
 
 .light-compose-button {
