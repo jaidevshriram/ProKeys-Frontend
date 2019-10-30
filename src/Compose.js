@@ -1,71 +1,63 @@
-import React from 'react';
+import React from "react";
 
-//Custom Imports
-import ComposeBox from './ComposeBox';
+// Custom Imports
+import PropTypes from "prop-types";
+import ComposeBox from "./ComposeBox";
+
+class Box {
+    constructor({ name = "", content = "", ismax = true } = {}) {
+        this.name = name;
+        this.content = content;
+        this.ismax = ismax;
+    }
+
+    valueOf() {
+        return {
+            name: this.name, content: this.content, ismax: this.ismax,
+        };
+    }
+}
 
 export default class Compose extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             composeboxes: [],
-            number: 0,
         };
-		    this.props.linkToNewSnippet(this.createCompose.bind(this));
+        this.props.linkToNewSnippet(this.createCompose.bind(this));
     }
 
-    createCompose() {
-        const newbox = {
-            name: "",
-            content: "",
-            ismax: true,
-        };
-
-        if(this.state.number <=2 ) {
-        	this.state.composeboxes.unshift(newbox);
-	        this.setState({
-	            composeboxes: this.state.composeboxes,
-	            number: this.state.number + 1,
-	        });
-	    }
-	    else {
-	    	window.$('#too-many-boxes').modal('show');
-	    }
+    createCompose(initialValues) {
+        if (this.state.composeboxes.length <= 2) {
+            const composeboxes = [new Box(initialValues), ...this.state.composeboxes];
+            this.setState({ composeboxes });
+        } else {
+            window.$("#too-many-boxes").modal("show");
+        }
     }
 
-    onChange() {
-        const newcomposeboxes = this.state.composeboxes.slice(0);
-        newcomposeboxes[0].name = "test";
-        this.setState({ composeboxes: newcomposeboxes });
-    }
-
-    updateArray(newvalues) {
-        const newcomposeboxes = this.state.composeboxes.slice(0);
-        newcomposeboxes[newvalues.id] = {
-            name: newvalues.name,
-            content: newvalues.content,
-            ismax: newvalues.ismax,
-        };
-
-        this.setState({ composeboxes: newcomposeboxes });
+    updateParent(boxId, newvalues) {
+        const composeboxes = this.state.composeboxes.slice(0);
+        composeboxes[boxId] = new Box(newvalues);
+        this.setState({ composeboxes });
     }
 
     closeBox(id) {
-        // create a copy
-        const newcomposeboxes = this.state.composeboxes.slice(0);
-        newcomposeboxes.splice(id, 1);
-        this.setState({ composeboxes: newcomposeboxes, number: this.state.number -1, });
+        this.setState({ composeboxes: this.state.composeboxes.filter((item, idx) => idx !== id) });
     }
 
-	render() {
-
-		return (
-	        <div className="container-fluid position-fixed w-100 h-100 d-flex align-items-end flex-row-reverse light-snippet">
-            {
-                this.state.composeboxes.map((box, id) => <ComposeBox key={id} id={id} name={box.name} content={box.content} ismax={box.ismax}
-                    onchange={this.onChange.bind(this)} updateParent={this.updateArray.bind(this)}
-                    closeBox={this.closeBox.bind(this)} />)
-            }
-	        </div>
-	    );
-	}
+    render() {
+        return (
+            <div className="container-fluid position-fixed d-flex align-items-end flex-row-reverse compose">
+                {
+                    this.state.composeboxes.map((box, id) => <ComposeBox key={id} id={id} {...box}
+                        updateParent={this.updateParent.bind(this)} closeBox={this.closeBox.bind(this)} />)
+                }
+            </div>
+        );
+    }
 }
+
+Compose.propTypes = {
+    linkToNewSnippet: PropTypes.func,
+};

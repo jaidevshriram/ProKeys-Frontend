@@ -1,26 +1,29 @@
-/* eslint-disable react/prop-types */
 import React from "react";
+import { PropTypes } from "prop-types";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from "react-router-dom";
 
-// Font Awesome
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-
-import "./style/Button.css";
-
-export default class ButtonCircle extends React.Component {
+export default class Button extends React.Component {
     render() {
         return (
-            <div className="pb-3">
+            <div className="container-fluid option mr-5">
                 <Link to={this.props.link}>
-                    <button Type="button" className="btn light-btn-circle light-border-grey">
-                        <FontAwesomeIcon
-                            icon={this.props.icon}
-                            size="2x"
-                            style={{ color: "#038D89" }}
-                        />
-                    </button>
+                    <div className="row">
+                        <div className="col d-flex align-items-center justify-content-end">
+                            <FontAwesomeIcon icon={this.props.icon} size="2x" color="white"/>
+                            <span className="option-text">
+								&nbsp;&nbsp;&nbsp;{this.props.option}
+                            </span>
+                        </div>
+                    </div>
                 </Link>
             </div>
         );
     }
 }
+
+Button.propTypes = {
+    link: PropTypes.string,
+    icon: PropTypes.string,
+    option: PropTypes.string,
+};

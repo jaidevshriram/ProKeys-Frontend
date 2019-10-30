@@ -1,13 +1,24 @@
-body {
-    margin: 0;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans",
-        "Droid Sans", "Helvetica Neue", sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    background: #ffffff !important;
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i&display=swap');
+@font-face {
+    font-family: "Arista";
+    src: url(./fonts/Arista.woff) format("woff");
 }
 
-light-body {
+html,body {
+    margin: 0;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    height: 100%!important;
+    width: 100%!important;
+    font-family: 'Open Sans', sans-serif!important;
+    font-weight: 300!important;
+}
+
+.display-3 {
+    font-family: 'Arista'!important;
+}
+
+.light-body {
     background: #ffffff;
 }
 
@@ -30,9 +41,9 @@ code {
 
 .light-outer-box,
 .dark-outer-box {
-    border-radius: 30px;
-    padding: 15px;
-    background: linear-gradient(to right, #07cc8f, #004782);
+    padding-top: 1.25em;
+    padding-bottom: 1.25em;
+    background: linear-gradient(to right, #004782, #07cc8f);
 }
 
 .light-outer-box-thick,
@@ -49,8 +60,7 @@ code {
 
 .light-inner-box,
 .dark-inner-box {
-    border-radius: 30px;
-    height: 100%;
+    border-radius: 20px;
     background: #ffffff;
 }
 
@@ -97,14 +107,6 @@ code {
     border: 1px solid #e3e3e3 !important;
 }
 
-.light-border-secondary {
-    border: 1px solid rgba(0, 0, 0, 0.2) !important;
-}
-
-.light-snippet-option:hover.light-border-secondary {
-    border: 1px solid rgba(0, 0, 0, 0.5) !important;
-}
-
 .light-snippet-preview {
     color: rgba(0, 0, 0, 0.5);
 }
@@ -115,14 +117,6 @@ code {
 
 .light-snippet-hover:hover {
     background: rgba(0,0,0,0.05)!important;
-}
-
-.light-folder-hover {
-    border-radius: 10px!important;
-}
-
-.light-folder-hover:hover {
-    background: rgba(7, 204, 143, 0.15)!important;
 }
 
 .remove-button-styling {
@@ -177,12 +171,12 @@ code {
 
 .light-compose,
 .dark-compose {
-    border-top-left-radius: 20px;
-    border-top-right-radius: 20px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
 }
 
 .light-compose {
-    background: rgba(0, 71, 130, 0.8) !important;
+    background: rgb(7, 38, 97) !important;
 }
 
 .light-compose-mini,
@@ -221,7 +215,7 @@ code {
 }
 
 .w-130 {
-    width: 120% !important;
+    width: 130% !important;
 }
 
 .light-compose-button {
@@ -300,10 +294,28 @@ textarea {
     resize: none!important;
 }
 
-.light-snippet,
-.dark-snippet {
-    bottom: 0;
-    pointer-events: none;
+.light-snippet {
+    padding: 10px 5px 10px 5px;
+    background: rgba(0,0,0,0.03)!important;
+    margin-top: 15px;
+    border-radius: 5px!important;
+    box-shadow: 0px 2px -4px -1px rgba(0,0,0,1)!important;
+}
+
+.light-snippet:hover{
+    background:  rgba(0,0,0,0.08)!important;
+}
+
+.light-folder {
+    padding: 10px 5px 10px 5px;
+    background: rgba(7, 204, 143, 0.15)!important;
+    margin-top: 15px;
+    border-radius: 5px!important;
+}
+
+.light-folder:hover {
+    background: rgba(7, 204, 143, 0.3)!important;
+    transition: 0.1s;
 }
 
 .renable-pointer {
@@ -317,10 +329,77 @@ textarea {
 .light-advanced-box,
 .dark-advanced-box {
     border-radius: 10px;
-    height: 100%;
     background: #ffffff;
 }
 
 .collapsible {
     cursor: pointer;
+}
+
+.light-sidebar-background {
+    background: #004782!important;
+}
+
+.overflow-hide {
+    white-space:nowrap;
+    overflow-x: hidden;
+    overflow-y: hidden;
+}
+
+.overflow-y-scroll {
+    overflow-y: auto;
+}
+
+.option {
+    padding: 10px 5px 10px 5px;
+    margin-left: -1em!important;
+    margin-top: 15px;
+    border-radius: 5px;
+    background: #1A588D!important;
+}
+
+.option:hover {
+    background: #3986C8 !important;
+    transition: 0.1s;
+}
+
+.option-text {
+    color: white!important;
+}
+
+a {
+    text-decoration: none!important;
+}
+
+.light-snippet-option:hover {
+    background: rgba(255,255,255,0.9)!important;
+}
+
+.light-folder-option {
+    background: rgba(0,0,0,0)!important;
+    color: white!important;
+    border: 3px solid white!important;
+}
+
+.light-folder-option:hover {
+    color: rgba(255,255,255,0.75)!important;
+}
+
+.main-container{
+    z-index: 100;
+}
+
+.compose {
+    bottom: 0;
+    right: 0;
+    pointer-events: none!important;
+}
+
+.compose-box{
+    z-index: 100 !important;
+    width: 30vw;
+}
+
+.base-layout-container{
+    height: fit-content;
 }
